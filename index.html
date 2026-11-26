@@ -157,6 +157,10 @@ textarea.in{min-height:96px;resize:vertical}
 .item .fav.on{color:var(--acc)}
 .item .fav.on .ic{fill:currentColor}
 .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;margin-left:6px;vertical-align:1px}
+.rz{position:absolute;left:8px;top:8px;font-size:10px;font-weight:800;padding:2px 7px;border-radius:6px;color:#fff;letter-spacing:.02em;z-index:1;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.rz-Trend{background:linear-gradient(135deg,#FF5A3C,#FF2D87)}.rz-Sürpriz{background:linear-gradient(135deg,#7C3AED,#C026D3)}.rz-Tam-isabet{background:linear-gradient(135deg,#0EA5E9,#2563EB)}
+.rz-Bütçe-dostu{background:linear-gradient(135deg,#10B981,#059669)}.rz-Deneyim{background:linear-gradient(135deg,#F59E0B,#EA580C)}.rz-El-emeği{background:linear-gradient(135deg,#EC4899,#DB2777)}.rz-Lüks-dokunuş{background:linear-gradient(135deg,#B8860B,#E9B949);color:#1a1200}
+.aci{display:inline-flex;align-items:center;gap:6px;margin:10px 0 0;padding:7px 12px;border-radius:999px;background:var(--acc-soft);color:var(--acc);font-size:13px;font-weight:700}
 .tag.urun{background:var(--acc-soft);color:var(--acc)}.tag.deneyim{background:var(--blue-soft);color:var(--blue)}.tag.kendin{background:var(--green-soft);color:var(--green)}
 .skel{height:90px;border-radius:16px;margin-bottom:10px;background:linear-gradient(90deg,var(--card) 0%,var(--chip) 50%,var(--card) 100%);background-size:200% 100%;animation:sk 1.2s infinite linear;border:1px solid var(--line)}
 @keyframes sk{to{background-position:-200% 0}}
@@ -333,6 +337,8 @@ const YOL = {
   image: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/>',
   link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
   download: '<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>',
+  music: '<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',
+  ball: '<circle cx="12" cy="12" r="9"/><path d="m12 7.5 3.8 2.8-1.4 4.4H9.6l-1.4-4.4zM12 3v4.5M20.5 9.5l-4.7.8M17.5 19.5l-3.1-4.8M6.5 19.5l3.1-4.8M3.5 9.5l4.7.8"/>',
   wallet: '<path d="M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a1 1 0 0 1-1-1zM4 7l11-3v3M16 13.5h.01"/>'
 };
 const ic = n => `<svg class="ic" viewBox="0 0 24 24">${YOL[n]}</svg>`;
@@ -357,8 +363,20 @@ const KOLEKSIYON = [
   { ad: "300 ₺ altı", alt: "Az bütçe, çok anlam", ic: "tag", r: ["#1E4FB8","#4D86F0"], f: { butce: "300" } },
   { ad: "Deneyim hediyeleri", alt: "Eşya değil, anı", ic: "ticket", r: ["#A2306B","#E25C9E"], f: { turler: ["deneyim"] } },
   { ad: "Doğa ve kamp", alt: "Dışarıyı sevenlere", ic: "tent", r: ["#3C5A1E","#7A9E3C"], f: { ilgi: ["Kamp","Doğa yürüyüşü"] } },
-  { ad: "Kendine iyi bak", alt: "Bakım ve rahatlama", ic: "leaf", r: ["#2D6E7E","#56AFC2"], f: { ilgi: ["Cilt bakımı"], tarz: ["Rahatlatıcı"] } }
+  { ad: "Kendine iyi bak", alt: "Bakım ve rahatlama", ic: "leaf", r: ["#2D6E7E","#56AFC2"], f: { ilgi: ["Cilt bakımı"], tarz: ["Rahatlatıcı"] } },
+  { ad: "DJ ve müzik", alt: "Setini kuranlara", ic: "music", r: ["#111827","#7C3AED"], f: { ilgi: ["Müzik"], not: "DJ'lik, müzik prodüksiyonu ve ses ekipmanlarıyla ilgileniyor." } },
+  { ad: "Anime ve manga", alt: "Otaku ruhuna", ic: "spark", r: ["#BE185D","#F472B6"], f: { ilgi: ["Anime"] } },
+  { ad: "Futbol tutkunları", alt: "Tribünden sahaya", ic: "ball", r: ["#065F46","#10B981"], f: { ilgi: ["Futbol"] } },
+  { ad: "Yeni eve taşınanlara", alt: "İlk günün kurtarıcıları", ic: "home", r: ["#9A3412","#F97316"], f: { gun: "Yeni ev" } },
+  { ad: "Romantik sürprizler", alt: "Kalbi hızlandıranlar", ic: "heart", r: ["#9F1239","#F43F5E"], f: { kime: "Sevgili", tarz: ["Romantik"] } },
+  { ad: "Fotoğraf sevenlere", alt: "Anı yakalayanlar", ic: "camera", r: ["#334155","#64748B"], f: { ilgi: ["Fotoğraf"] } },
+  { ad: "Her şeyi olanlara", alt: "En zor kişiler için", ic: "quest", r: ["#3730A3","#6366F1"], f: { tarz: ["Kişiye özel"], not: "Bu kişinin her şeyi var; çok sıra dışı, beklenmedik fikirler lazım." } },
+  { ad: "Teknoloji meraklıları", alt: "Gadget sevenler", ic: "phone", r: ["#0F172A","#0EA5E9"], f: { ilgi: ["Teknoloji"], tarz: ["Teknolojik"] } }
 ];
+// Koleksiyonların sırası her gün değişsin
+function gununSirasi(l) { let s = Math.floor(Date.now() / 864e5); const a = l.map((x, i) => [x, i]); for (let i = a.length - 1; i > 0; i--) { s = (s * 9301 + 49297) % 233280; const j = Math.floor(s / 233280 * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const ORNEK = ["DJ'liğe yeni başlayan 16 yaşında kuzenim", "kamp ve kahve seven babam", "anime izleyen kız kardeşim", "yeni eve taşınan iş arkadaşım", "her şeyi olan dedem", "futbol fanatiği 12 yaşında yeğenim", "plak toplayan öğretmenim", "kedisine aşık en yakın arkadaşım", "spora yeni başlayan annem", "fotoğraf çekmeyi seven ablam", "Lego seven 30 yaşında abim", "500 ₺'ye sevgilime romantik bir şey"];
+let ornekZaman = null;
 const TON = [["duygusal","Duygusal"],["komik","Komik"],["kısa","Kısa"],["şiirsel","Şiirsel"]];
 const RENK = ["#C8324B","#2F5BD3","#2F7D4F","#9A6510","#7A3FC2","#0F7C8C","#C2571A","#5A5F6B"];
 const renk = s => RENK[[...String(s)].reduce((a, c) => a + c.charCodeAt(0), 0) % RENK.length];
@@ -428,7 +446,7 @@ function anaCiz() {
       <div class="hi"><small>${selam()}${kullanici ? "," : ""}</small><b>${kullanici ? esc(kullanici) : "Ne Alsam?"}</b></div>
       <button class="me" style="background:${kullanici ? renk(kullanici) : "var(--chip)"};color:${kullanici ? "#fff" : "var(--sub)"}" data-act="ayarlar" aria-label="Ayarlar">${kullanici ? esc(harf(kullanici)) : ic("gear")}</button></div>
     <h1 class="big">Bugün kimi mutlu ediyoruz?</h1>
-    <form class="search" id="araForm" role="search">${ic("search")}<input id="araIn" maxlength="140" placeholder="ör. kahve seven 30 yaşında ablam" enterkeyhint="search"></form>
+    <form class="search" id="araForm" role="search">${ic("search")}<input id="araIn" maxlength="140" placeholder="ör. ${ORNEK[0]}" enterkeyhint="search"></form>
     <button class="cta" data-act="yeni">${ic("gift")}<div><b>Hediye bul</b><span>Birkaç soruya cevap ver, fikirler gelsin</span></div><svg class="ic go" viewBox="0 0 24 24">${YOL.arrow}</svg></button>
     <div class="qa">
       <button data-act="surpriz"><div class="qi" style="background:var(--acc-soft);color:var(--acc)">${ic("dice")}</div>Sürpriz yap</button>
@@ -438,7 +456,7 @@ function anaCiz() {
     </div>
     ${!bilgiKapali && !(matchMedia("(display-mode: standalone)").matches || navigator.standalone) ? `<div class="note-row">${ic("phone")}<span>Ana ekrana ekle, uygulama gibi açılsın</span><button data-act="yukle">Nasıl?</button><button data-act="bilgiKapat" aria-label="Kapat">${ic("close")}</button></div>` : ""}
     <h2 class="sec">Koleksiyonlar</h2>
-    <div class="hscroll">${KOLEKSIYON.map((c, i) => `<button class="coll" style="background:linear-gradient(135deg,${c.r[0]},${c.r[1]})" data-act="koleksiyon" data-i="${i}">${ic(c.ic)}<div><b>${c.ad}</b><small>${c.alt}</small></div></button>`).join("")}</div>
+    <div class="hscroll">${gununSirasi(KOLEKSIYON).map(([c, i]) => `<button class="coll" style="background:linear-gradient(135deg,${c.r[0]},${c.r[1]})" data-act="koleksiyon" data-i="${i}">${ic(c.ic)}<div><b>${c.ad}</b><small>${c.alt}</small></div></button>`).join("")}</div>
     <h2 class="sec">Yaklaşan günler <button data-act="sekme" data-v="kisi">Doğum günü ekle</button></h2>
     <div class="hscroll">${y.map((g, i) => { const n = gunFarki(g.tarih); return `<button class="day" data-act="gun" data-i="${i}"><div class="d">${tarihYaz(g.tarih)}</div><div class="n">${esc(g.ad)}</div><span class="k ${n <= 14 ? "hot" : ""}">${kalan(n)}</span></button>`; }).join("")}</div>
     <h2 class="sec">${kisiler.length ? "Kişilerin" : "Kime alıyorsun?"}</h2>
@@ -450,6 +468,9 @@ function anaCiz() {
     ${gecmis.length ? `<h2 class="sec">Son aramaların <button data-act="gecmisSil">Temizle</button></h2>
     <div class="list">${gecmis.map((g, i) => `<button class="row" data-act="tekrar" data-i="${i}"><div class="av" style="background:${g.form?.serbest ? "var(--chip)" : renk(g.isim || g.kime)};color:${g.form?.serbest ? "var(--sub)" : "#fff"};width:34px;height:34px;font-size:14px">${g.form?.serbest ? ic("search") : esc(harf(g.isim || g.kime))}</div><div class="t"><b>${g.form?.serbest ? esc(etiketYap(g.form)) : esc(g.isim || g.kime) + (g.gun ? " · " + esc(g.gun) : "")}</b><small>${esc([BUTCE.find(b => b[0] === g.butce)?.[1], ...(g.ilgi || [])].filter(Boolean).join(", ") || "Ayrıntı yok")}</small></div>${ic("chev").replace('class="ic"', 'class="ic chev"')}</button>`).join("")}</div>` : ""}
     <p class="foot">Fiyatlar yaklaşıktır, almadan önce kontrol et.</p>`;
+  clearInterval(ornekZaman); let on = Math.floor(Math.random() * ORNEK.length);
+  const ornekDegis = () => { const i = $("#araIn"); if (!i) return clearInterval(ornekZaman); if (document.activeElement !== i && !i.value) i.placeholder = "ör. " + ORNEK[on++ % ORNEK.length]; };
+  ornekDegis(); ornekZaman = setInterval(ornekDegis, 3200);
   $("#araForm").onsubmit = e => { e.preventDefault(); const q = $("#araIn").value.trim(); if (q.length < 3) { toast("Biraz daha anlat"); return; } serbestAra(q); };
 }
 
@@ -549,7 +570,7 @@ function istekYap(f, haric) {
     f.not.trim()
   ].filter(Boolean).join(" ").slice(0, 300);
   return { kime: f.kime, yas: f.yas, cinsiyet: f.cinsiyet, gun: f.gun, butce: f.butce || "", ilgi: f.ilgi, turler: f.turler, notlar: ek,
-    haric: [...haric, ...(kisi?.alinan || []).map(a => a.ad)].slice(-30) };
+    haric: [...new Set([...haric, ...(kisi?.alinan || []).map(a => a.ad), ...oku("na-gorulen", [])])].slice(0, 40) };
 }
 async function ara(dahaFazla) {
   if (!dahaFazla) {
@@ -565,7 +586,7 @@ async function ara(dahaFazla) {
     if (benim !== sonuc) return;
     const yeni = (j.fikirler || []).filter(f => !sonuc.fikirler.some(x => kucuk(x.ad) === kucuk(f.ad)));
     if (!yeni.length && !dahaFazla) throw new Error("Bu sefer fikir çıkmadı, bir daha dene.");
-    sonuc.fikirler.push(...yeni); sonuc.durum = "tamam"; sonuc.hata = "";
+    sonuc.fikirler.push(...yeni); sonuc.durum = "tamam"; sonuc.hata = ""; if (j.aci) sonuc.aci = j.aci; gorulduEkle(yeni);
   } catch (e) {
     if (benim !== sonuc) return;
     sonuc.durum = dahaFazla ? "tamam" : "hata"; sonuc.hata = e.message;
@@ -578,6 +599,8 @@ function serbestAra(q) {
   w = Object.assign(bosForm(), { kime: "Tarif edilen kişi", serbest: q.slice(0, 140), not: `Aradığım kişi ve durum: ${q.slice(0, 140)}` });
   formKaydet(); git("bul"); ara(false);
 }
+
+const gorulduEkle = l => yaz("na-gorulen", [...l.map(f => f.ad), ...oku("na-gorulen", [])].filter((x, i, a) => a.indexOf(x) === i).slice(0, 40));
 
 /* ---------- sonuçlar ---------- */
 const fiyatSayi = s => { const m = String(s || "").replace(/\./g, "").match(/\d+/); return m ? +m[0] : Infinity; };
@@ -595,15 +618,17 @@ function sonucCiz() {
   const say = t => s.fikirler.filter(f => !t || f.tur === t).length;
   v.innerHTML = ust + `
     <div class="filt">${[["", "Tümü"], ...TUR].map(([t, a]) => `<button class="pill sm ${s.filtre === t ? "on" : ""}" data-act="filtre" data-v="${t}">${a} ${say(t)}</button>`).join("")}</div>
-    ${s.istek.serbest ? `<p class="lead" style="margin-top:12px">"${esc(s.istek.serbest)}"</p>` : ""}<div class="sortline"><span>${l.length} fikir</span><select id="sira" aria-label="Sırala"><option value="">Önerilen</option><option value="artan" ${s.sira === "artan" ? "selected" : ""}>Ucuzdan pahalıya</option><option value="azalan" ${s.sira === "azalan" ? "selected" : ""}>Pahalıdan ucuza</option></select></div>
+    ${s.istek.serbest ? `<p class="lead" style="margin-top:12px">"${esc(s.istek.serbest)}"</p>` : ""}${s.aci ? `<div class="aci">💡 Bu seferki bakış: ${esc(s.aci)}</div>` : ""}<div class="sortline"><span>${l.length} fikir</span><select id="sira" aria-label="Sırala"><option value="">Önerilen</option><option value="artan" ${s.sira === "artan" ? "selected" : ""}>Ucuzdan pahalıya</option><option value="azalan" ${s.sira === "azalan" ? "selected" : ""}>Pahalıdan ucuza</option></select></div>
     ${l.map(({ f, i }) => urunKarti(f, i, "s")).join("") || `<div class="msg">Bu türde fikir yok.</div>`}
     ${s.durum === "dahayukleniyor" ? '<div class="skel"></div><div class="skel"></div>' : `<button class="btn ghost" data-act="daha" ${s.fikirler.length >= 30 ? "disabled" : ""}>${ic("refresh")}Daha fazla fikir</button>`}
     <button class="btn ghost" style="margin-top:8px" data-act="yeni">${ic("gift")}Yeni arama</button>`;
   $("#sira").onchange = e => { sonuc.sira = e.target.value; sonucCiz(); };
 }
+const ROZ = { "Trend": "🔥 Trend", "Sürpriz": "✨ Sürpriz", "Tam isabet": "🎯 Tam isabet", "Bütçe dostu": "💸 Bütçe dostu", "Deneyim": "🎟️ Deneyim", "El emeği": "🧶 El emeği", "Lüks dokunuş": "💎 Lüks" };
+const rozet = f => f.rozet && ROZ[f.rozet] ? `<span class="rz rz-${f.rozet.replace(/ /g, "-")}">${ROZ[f.rozet]}</span>` : "";
 function urunKarti(f, i, k, alt) {
   const ts = turSinif(f.tur);
-  return `<div class="item"><button style="display:flex;gap:13px;flex:1;text-align:left;min-width:0" data-act="detay" data-k="${k}" data-i="${i}">
+  return `<div class="item">${rozet(f)}<button style="display:flex;gap:13px;flex:1;text-align:left;min-width:0;${f.rozet && ROZ[f.rozet] ? "padding-top:14px" : ""}" data-act="detay" data-k="${k}" data-i="${i}">
     <div class="thumb ${ts}">${esc(f.emoji || "🎁")}</div>
     <div class="t"><b>${esc(f.ad)}</b><div class="p">${esc(f.fiyat || "")}<span class="tag ${ts}">${turAd(f.tur)}</span></div><small>${esc(alt || f.neden || "")}</small></div></button>
     <button class="fav ${favMi(f) ? "on" : ""}" data-act="fav" data-k="${k}" data-i="${i}" aria-label="Kaydet">${ic("heart")}</button></div>`;
@@ -685,7 +710,7 @@ function detayAc(k, i) {
   const alindi = kisi?.alinan?.some(a => kucuk(a.ad) === kucuk(f.ad));
   sheetAc(`<div class="shead"><h3>${esc(f.ad)}</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
     <div class="big-thumb thumb ${ts}">${esc(f.emoji || "🎁")}</div>
-    <div class="kv">${f.fiyat ? `<span>${esc(f.fiyat)}</span>` : ""}<span>${turAd(f.tur)}</span>${k === "f" && f.etiket ? `<span>${esc(f.etiket)}</span>` : ""}</div>
+    <div class="kv">${f.rozet && ROZ[f.rozet] ? `<span style="background:var(--acc-soft);color:var(--acc)">${ROZ[f.rozet]}</span>` : ""}${f.fiyat ? `<span>${esc(f.fiyat)}</span>` : ""}<span>${turAd(f.tur)}</span>${k === "f" && f.etiket ? `<span>${esc(f.etiket)}</span>` : ""}</div>
     ${f.neden ? `<p class="txt">${esc(f.neden)}</p>` : ""}
     ${f.dokunus ? `<div class="tip"><b>Küçük bir dokunuş</b>${esc(f.dokunus)}</div>` : ""}
     ${uz.l.length ? `<a class="btn" style="text-decoration:none;margin-bottom:10px" href="${uz.l[0].url}" target="_blank" rel="noopener">${ic("link")}${esc(uz.l[0].ad)} sitesine git</a>
@@ -1092,7 +1117,7 @@ async function surprizCevir() {
       const ist = { kime: form.kime, isim: form.isim, gun: "", kisiId: form.kisiId || "" };
       const once = surpriz?.anahtar === szAnahtar() ? surpriz.fikirler.map(f => f.ad) : [];
       const j = await api("/api/hediye", istekYap(form, once));
-      const l = (j.fikirler || []).map(f => ({ ...f, ist })).sort(() => Math.random() - .5);
+      const l = (j.fikirler || []).map(f => ({ ...f, ist })).sort(() => Math.random() - .5); gorulduEkle(l);
       if (!l.length) throw new Error("Çark boş döndü, bir daha dene.");
       surpriz = { anahtar: szAnahtar(), fikirler: [...(once.length ? surpriz.fikirler : []), ...l], poz: once.length, goster: null };
     }
@@ -1157,7 +1182,7 @@ async function planKisiAra(i) {
   if (pk.pay) form.not = (`Bu kişi için bütçe yaklaşık ${tl(pk.pay)}. ` + form.not).trim();
   const ist = { kime: form.kime, isim: form.isim || pk.ad, gun: plan.gun, kisiId: pk.kisiId };
   for (let deneme = 0; deneme < 4; deneme++) {
-    try { const j = await api("/api/hediye", istekYap(form, [])); pk.fikirler = (j.fikirler || []).map(f => ({ ...f, ist })); pk.durum = pk.fikirler.length ? "tamam" : "hata"; pk.hata = pk.fikirler.length ? "" : "Fikir çıkmadı"; break; }
+    try { const j = await api("/api/hediye", istekYap(form, [])); pk.fikirler = (j.fikirler || []).map(f => ({ ...f, ist })); gorulduEkle(pk.fikirler); pk.durum = pk.fikirler.length ? "tamam" : "hata"; pk.hata = pk.fikirler.length ? "" : "Fikir çıkmadı"; break; }
     catch (e) {
       // dakikalık sınıra takıldıysa biraz bekleyip kendisi tekrar dener (günlük sınırda beklemez)
       if (e.status === 429 && !/Bugünlük/.test(e.message) && deneme < 3) { pk.durum = "bekliyor"; planCiz(); await new Promise(o => setTimeout(o, 20000)); pk.durum = "yukleniyor"; planCiz(); continue; }
