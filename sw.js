@@ -1,7 +1,7 @@
 // Ne Alsam? — service worker
 // Uygulama kabuğunu önbelleğe alır; böylece telefona "yüklenebilir" ve internet yokken de açılır.
 // Kural: her zaman önce internetteki EN YENİ sürüm; internet yoksa son kaydedilen sürüm.
-const CACHE = "na-v5";
+const CACHE = "na-v6";
 const SHELL = ["/", "/index.html", "/manifest.json", "/icon-192.png", "/icon-512.png", "/apple-touch-icon.png"];
 
 self.addEventListener("install", e => {

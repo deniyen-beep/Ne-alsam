@@ -624,8 +624,61 @@ function linkler(f) {
   if (f.tur === "kendin yap") return [["Nasıl yapılır", "▶", "#FF0033", `https://www.youtube.com/results?search_query=${encodeURIComponent((f.arama || f.ad) + " nasıl yapılır")}`], ["Malzemeleri bul", "G", "#4285F4", `https://www.google.com/search?tbm=shop&q=${q}`]];
   return [["Trendyol", "T", "#F27A1A", `https://www.trendyol.com/sr?q=${q}`], ["Hepsiburada", "H", "#FF6000", `https://www.hepsiburada.com/ara?q=${q}`], ["Amazon", "A", "#232F3E", `https://www.amazon.com.tr/s?k=${q}`], ["Fiyat karşılaştır", "G", "#4285F4", `https://www.google.com/search?tbm=shop&q=${q}`]];
 }
+/* ---------- konuya göre uzman mağazalar ---------- */
+// ara: arama sonucuna gider (adres biçimi bilinen mağazalar); ana: mağazanın ana sayfası
+const MAGAZA = {
+  pioneer:   { ad: "Pioneer DJ", h: "P", r: "#1A1A1A", ana: "https://www.pioneerdj.com/" },
+  thomann:   { ad: "Thomann", h: "T", r: "#1F6FB2", ara: q => `https://www.thomann.de/tr/search_dir.html?sw=${q}` },
+  mediamarkt:{ ad: "MediaMarkt", h: "M", r: "#DF0000", ara: q => `https://www.mediamarkt.com.tr/tr/search.html?query=${q}` },
+  teknosa:   { ad: "Teknosa", h: "T", r: "#0B4EA2", ara: q => `https://www.teknosa.com/arama/?s=${q}` },
+  vatan:     { ad: "Vatan", h: "V", r: "#E30613", ara: q => `https://www.vatanbilgisayar.com/arama/${q}/` },
+  apple:     { ad: "Apple", h: "", r: "#111111", ara: q => `https://www.apple.com/tr/search/${q}` },
+  ps:        { ad: "PlayStation Store", h: "P", r: "#003791", ara: q => `https://store.playstation.com/tr-tr/search/${q}` },
+  steam:     { ad: "Steam", h: "S", r: "#1B2838", ara: q => `https://store.steampowered.com/search/?term=${q}` },
+  dr:        { ad: "D&R", h: "D", r: "#E2001A", ara: q => `https://www.dr.com.tr/search?q=${q}` },
+  kitapyurdu:{ ad: "Kitapyurdu", h: "K", r: "#F28C00", ara: q => `https://www.kitapyurdu.com/index.php?route=product/search&filter_name=${q}` },
+  decathlon: { ad: "Decathlon", h: "D", r: "#0082C3", ara: q => `https://www.decathlon.com.tr/search?Ntt=${q}` },
+  nike:      { ad: "Nike", h: "N", r: "#111111", ara: q => `https://www.nike.com/tr/w?q=${q}` },
+  sephora:   { ad: "Sephora", h: "S", r: "#000000", ana: "https://www.sephora.com.tr/" },
+  gratis:    { ad: "Gratis", h: "G", r: "#E5007E", ana: "https://www.gratis.com/" },
+  watsons:   { ad: "Watsons", h: "W", r: "#00A0AF", ana: "https://www.watsons.com.tr/" },
+  ikea:      { ad: "IKEA", h: "I", r: "#0058A3", ana: "https://www.ikea.com.tr/" },
+  ciceksepeti:{ ad: "Çiçeksepeti", h: "Ç", r: "#00A86B", ana: "https://www.ciceksepeti.com/" },
+  lego:      { ad: "LEGO", h: "L", r: "#E3000B", ara: q => `https://www.lego.com/tr-tr/search?q=${q}` },
+  toyzz:     { ad: "Toyzz Shop", h: "T", r: "#F7A600", ana: "https://www.toyzzshop.com/" },
+  biletix:   { ad: "Biletix", h: "B", r: "#E4002B", ana: "https://www.biletix.com/" },
+  passo:     { ad: "Passo", h: "P", r: "#2C2A6B", ana: "https://www.passo.com.tr/" }
+};
+const UZMAN = [
+  { ad: "DJ ve müzik ekipmanı", k: ["dj", "mikser", "pikap", "plak çalar", "turntable", "controller", "kontrol cihazı", "launchpad", "midi"], m: ["pioneer", "thomann", "mediamarkt"] },
+  { ad: "Müzik aletleri", k: ["gitar", "ukulele", "keman", "bateri", "davul", "piyano", "dijital piyano", "bağlama", "saz", "kalimba", "mikrofon", "stüdyo", "amfi", "enstrüman"], m: ["thomann", "mediamarkt"] },
+  { ad: "Apple ürünleri", k: ["iphone", "ipad", "airpods", "apple watch", "macbook", "airtag", "apple"], m: ["apple", "mediamarkt", "teknosa"] },
+  { ad: "Oyun", k: ["playstation", "ps5", "ps4", "xbox", "nintendo", "konsol", "oyun kolu", "gamepad", "steam", "video oyun", "oyun kartı", "dijital oyun"], m: ["mediamarkt", "ps", "steam"] },
+  { ad: "Teknoloji", k: ["kulaklık", "hoparlör", "bluetooth", "akıllı saat", "tablet", "telefon", "laptop", "bilgisayar", "klavye", "mouse", "monitör", "kamera", "fotoğraf makinesi", "drone", "powerbank", "şarj", "projeksiyon", "e-kitap okuyucu", "kindle", "robot süpürge", "kahve makinesi", "airfryer", "akıllı", "teleskop", "dürbün"], m: ["mediamarkt", "teknosa", "vatan"] },
+  { ad: "Kitap ve kırtasiye", k: ["kitap", "roman", "dergi", "ajanda", "defter", "kırtasiye", "dolma kalem", "kalem seti", "çizgi roman", "manga", "kitap ayracı", "kitap seti"], m: ["dr", "kitapyurdu"] },
+  { ad: "Spor ve doğa", k: ["kamp", "çadır", "uyku tulumu", "yoga", "mat", "koşu", "bisiklet", "fitness", "dambıl", "dumbbell", "termos", "matara", "outdoor", "trekking", "yürüyüş", "balık", "olta", "kayak", "dağcılık", "tırmanış", "pilates", "kamp sandalyesi", "fener"], m: ["decathlon"] },
+  { ad: "Spor ayakkabı ve giyim", k: ["sneaker", "spor ayakkabı", "koşu ayakkabısı", "eşofman", "forma", "spor çanta"], m: ["nike", "decathlon"] },
+  { ad: "Kozmetik ve bakım", k: ["parfüm", "makyaj", "ruj", "far paleti", "cilt bakım", "bakım seti", "serum", "krem", "nemlendirici", "kozmetik", "maske", "oje", "saç bakım", "tıraş"], m: ["sephora", "gratis", "watsons"] },
+  { ad: "Ev ve dekorasyon", k: ["mum", "dekor", "vazo", "yastık", "battaniye", "lamba", "abajur", "çerçeve", "kupa", "fincan", "bardak", "tabak", "mutfak", "raf", "ayna", "halı", "nevresim", "pike", "saksı", "organizer", "düzenleyici"], m: ["ikea"] },
+  { ad: "Oyuncak", k: ["lego", "oyuncak", "peluş", "yapboz", "puzzle", "maket", "figür", "kutu oyunu", "zeka oyunu", "rubik"], m: ["lego", "toyzz"] },
+  { ad: "Çiçek ve bitki", k: ["çiçek", "buket", "bitki", "sukulent", "orkide", "kaktüs", "teraryum", "bonsai", "gül"], m: ["ciceksepeti"] },
+  { ad: "Etkinlik ve bilet", k: ["konser", "bilet", "tiyatro", "festival", "maç", "stand-up", "gösteri", "müzikal", "opera", "bale"], m: ["biletix", "passo"] }
+];
+function uzmanlar(f) {
+  const metin = " " + kucuk(`${f.ad} ${f.arama || ""}`).replace(/[^\p{L}\p{N}]+/gu, " ") + " ";
+  const q = encodeURIComponent(f.arama || f.ad), sonuc = [], basliklar = [];
+  for (const g of UZMAN) {
+    if (!g.k.some(k => metin.includes(" " + k))) continue;
+    basliklar.push(g.ad);
+    for (const m of g.m) if (!sonuc.some(x => x.id === m)) { const s = MAGAZA[m]; sonuc.push({ id: m, ad: s.ad, h: s.h, r: s.r, url: s.ara ? s.ara(q) : s.ana, ana: !s.ara }); }
+    if (sonuc.length >= 4) break;
+  }
+  return { baslik: basliklar[0] || "", l: sonuc.slice(0, 4) };
+}
+
 function detayAc(k, i) {
   const f = fikirAl(k, i); if (!f) return; acik = { k, i };
+  const uz = uzmanlar(f);
   const ts = turSinif(f.tur);
   const ist = istekOf(k, f), kisiId = ist.kisiId;
   const kisi = kisiler.find(x => x.id === kisiId);
@@ -635,7 +688,10 @@ function detayAc(k, i) {
     <div class="kv">${f.fiyat ? `<span>${esc(f.fiyat)}</span>` : ""}<span>${turAd(f.tur)}</span>${k === "f" && f.etiket ? `<span>${esc(f.etiket)}</span>` : ""}</div>
     ${f.neden ? `<p class="txt">${esc(f.neden)}</p>` : ""}
     ${f.dokunus ? `<div class="tip"><b>Küçük bir dokunuş</b>${esc(f.dokunus)}</div>` : ""}
-    <div class="grp" style="margin-top:0">${f.tur === "ürün" ? "Nereden alınır" : "Bir göz at"}</div>
+    ${uz.l.length ? `<a class="btn" style="text-decoration:none;margin-bottom:10px" href="${uz.l[0].url}" target="_blank" rel="noopener">${ic("link")}${esc(uz.l[0].ad)} sitesine git</a>
+    <div class="grp" style="margin-top:6px">${esc(uz.baslik)} için mağazalar</div>
+    <div class="shops">${uz.l.map(s => `<a href="${s.url}" target="_blank" rel="noopener"><i style="background:${s.r}">${s.h || ""}</i><span style="flex:1;min-width:0">${esc(s.ad)}<small style="display:block;color:var(--sub);font-size:11px;font-weight:500">${s.ana ? "Siteye git" : "Bu ürünü ara"}</small></span></a>`).join("")}</div>` : ""}
+    <div class="grp" style="margin-top:${uz.l.length ? 4 : 0}px">${uz.l.length ? "Diğer yerler" : f.tur === "ürün" ? "Nereden alınır" : "Bir göz at"}</div>
     <div class="shops">${linkler(f).map(([a, h, c, u]) => `<a href="${u}" target="_blank" rel="noopener"><i style="background:${c}">${h}</i>${a}</a>`).join("")}</div>
     <div class="acts">
       <button class="${favMi(f) ? "on" : ""}" data-act="favD">${ic("heart")}${favMi(f) ? "Kaydedildi" : "Kaydet"}</button>
