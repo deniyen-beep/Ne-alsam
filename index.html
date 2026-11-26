@@ -7,8 +7,10 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Ne Alsam">
-<meta name="theme-color" content="#F4F3F1" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0E0E10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FFFFFF" id="themeColor">
+<script>
+  try { const t = JSON.parse(localStorage.getItem("na-tema") || '""'); if (t) document.documentElement.dataset.theme = t; } catch {}
+</script>
 <meta name="description" content="Kime, ne için, ne kadar? Sevdiklerine tam onlara göre hediye fikirleri.">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/icon-192.png">
@@ -16,17 +18,23 @@
 <title>Ne Alsam?</title>
 <style>
 :root{
-  --bg:#F4F3F1; --card:#FFFFFF; --ink:#17161A; --sub:#6E6A72; --line:#E6E3DF; --chip:#ECEAE6;
-  --acc:#C8324B; --acc-ink:#FFFFFF; --acc-soft:#FBE8EB;
-  --blue:#2F5BD3; --blue-soft:#E7EDFC; --green:#2F7D4F; --green-soft:#E3F2E8; --amber:#9A6510; --amber-soft:#FBF0D9;
-  --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 14px rgba(0,0,0,.04);
+  --bg:#FFFFFF; --card:#F4F4F6; --card2:#FFFFFF; --ink:#111113; --sub:#6C6C72; --line:#E9E9EE; --chip:#EDEDF1;
+  --acc:#E23D58; --acc-ink:#FFFFFF; --acc-soft:#FDE9EC;
+  --blue:#2F5BD3; --blue-soft:#E8EEFD; --green:#23834E; --green-soft:#E2F4E9; --amber:#9A6510; --amber-soft:#FBF1DC;
+  --shadow:none; --tab:rgba(255,255,255,.86); color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --card:#151517; --card2:#1C1C1F; --ink:#F5F5F7; --sub:#98989F; --line:#26262A; --chip:#202024;
+  --acc:#FF5A72; --acc-ink:#FFFFFF; --acc-soft:#3A1219;
+  --blue:#8AA8FF; --blue-soft:#18203A; --green:#6FD39A; --green-soft:#0F2A1A; --amber:#F0BE62; --amber-soft:#2E2209;
+  --shadow:none; --tab:rgba(10,10,12,.82); color-scheme:dark;
 }
 @media (prefers-color-scheme: dark){
-  :root{
-    --bg:#0E0E10; --card:#1B1B1F; --ink:#F2F1F3; --sub:#9C98A2; --line:#2B2B31; --chip:#26262C;
-    --acc:#F0566C; --acc-ink:#FFFFFF; --acc-soft:#3B1A21;
-    --blue:#8AA8FF; --blue-soft:#1D2742; --green:#7CCB9A; --green-soft:#17301F; --amber:#E8B65C; --amber-soft:#33270F;
-    --shadow:none;
+  :root:not([data-theme="light"]){
+    --bg:#000000; --card:#151517; --card2:#1C1C1F; --ink:#F5F5F7; --sub:#98989F; --line:#26262A; --chip:#202024;
+    --acc:#FF5A72; --acc-ink:#FFFFFF; --acc-soft:#3A1219;
+    --blue:#8AA8FF; --blue-soft:#18203A; --green:#6FD39A; --green-soft:#0F2A1A; --amber:#F0BE62; --amber-soft:#2E2209;
+    --shadow:none; --tab:rgba(10,10,12,.82); color-scheme:dark;
   }
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -159,7 +167,7 @@ textarea.in{min-height:96px;resize:vertical}
 .empty .btn{margin-top:18px;width:auto;display:inline-flex;padding:12px 22px}
 
 /* alt menü */
-.tabbar{position:fixed;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line);z-index:10;padding-bottom:env(safe-area-inset-bottom)}
+.tabbar{position:fixed;left:0;right:0;bottom:0;background:var(--tab);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line);z-index:10;padding-bottom:env(safe-area-inset-bottom)}
 .tabbar .in2{max-width:560px;margin:0 auto;display:flex}
 .tabbar button{flex:1;height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:600;color:var(--sub);position:relative}
 .tabbar button.on{color:var(--acc)}
@@ -194,9 +202,48 @@ textarea.in{min-height:96px;resize:vertical}
 .toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translate(-50%,10px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;opacity:0;transition:all .2s;pointer-events:none;z-index:40;white-space:nowrap}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .foot{color:var(--sub);font-size:12px;text-align:center;margin-top:28px}
+.tile,.day,.cta,.item,.opt,.btn,.pill,.row,.coll,.iconbtn,.acts button,.shops a,.tabbar button,.search{transition:transform .14s ease,background .2s,border-color .2s}
+.tile:active,.day:active,.cta:active,.opt:active,.btn:active,.pill:active,.coll:active,.iconbtn:active,.acts button:active,.shops a:active,.search:active{transform:scale(.965)}
+.item:active,.row:active{transform:scale(.985)}
+.scr{animation:giris .26s cubic-bezier(.2,.8,.2,1)}
+@keyframes giris{from{opacity:0;transform:translateY(8px)}}
+.top{display:flex;align-items:center;gap:10px;padding:4px 0}
+.top .hi{flex:1;min-width:0}
+.top .hi small{display:block;color:var(--sub);font-size:14px;font-weight:500}
+.top .hi b{display:block;font-size:17px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.me{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;flex:none}
+.search{display:flex;align-items:center;gap:10px;width:100%;margin-top:14px;padding:0 14px;height:50px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
+.search input{flex:1;min-width:0;border:0;background:none;outline:none;font-size:16px}
+.search .ic{color:var(--sub);width:20px;height:20px}
+.coll{flex:none;width:210px;height:132px;border-radius:18px;padding:14px;color:#fff;text-align:left;display:flex;flex-direction:column;justify-content:space-between;scroll-snap-align:start;position:relative;overflow:hidden}
+.coll .ic{width:30px;height:30px;stroke-width:1.6;opacity:.95}
+.coll b{font-size:16px;line-height:1.2}
+.coll small{display:block;font-size:12.5px;opacity:.85;font-weight:500;margin-top:2px}
+.coll::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.12)}
+#splash{position:fixed;inset:0;z-index:60;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .35s}
+#splash img{width:96px;height:96px;border-radius:22px;animation:pop .5s cubic-bezier(.2,.9,.3,1.3)}
+#splash b{font-size:22px;font-weight:800;letter-spacing:-.02em}
+#splash.bitti{opacity:0;pointer-events:none}
+@keyframes pop{from{transform:scale(.7);opacity:0}}
+#tanit{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;padding:calc(24px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom))}
+#tanit .sl{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:460px;margin:0 auto;width:100%}
+#tanit img{width:84px;height:84px;border-radius:20px;margin-bottom:22px}
+#tanit h2{font-size:32px;line-height:1.12;font-weight:800;letter-spacing:-.03em;margin-bottom:10px}
+#tanit p{color:var(--sub);font-size:17px;line-height:1.45}
+#tanit .feat{display:flex;gap:14px;align-items:flex-start;margin-top:20px}
+#tanit .feat .fi{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+#tanit .feat b{display:block;font-size:16px}
+#tanit .feat span{color:var(--sub);font-size:14px}
+#tanit .dots{display:flex;gap:6px;justify-content:center;margin-bottom:16px}
+#tanit .dots i{width:7px;height:7px;border-radius:4px;background:var(--line);transition:all .25s}
+#tanit .dots i.on{width:22px;background:var(--acc)}
+#tanit .bot{max-width:460px;margin:0 auto;width:100%}
+.ver{color:var(--sub);font-size:12px;text-align:center;margin-top:18px}
+
 </style>
 </head>
 <body>
+<div id="splash"><img src="/icon-512.png" alt=""><b>Ne Alsam?</b></div>
 <div class="app">
   <section id="v-home"></section>
   <section id="v-bul" hidden></section>
@@ -229,7 +276,19 @@ const YOL = {
   pen: '<path d="M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4"/>', cal: '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
   trash: '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>', refresh: '<path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>',
   phone: '<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>', bag: '<path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/>',
-  clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'
+  clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  search: '<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+  cup: '<path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 3c-.7 1 .7 2 0 3M12 3c-.7 1 .7 2 0 3"/>',
+  pad: '<rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7 11v3M5.5 12.5h3M15.5 11.5h.01M17.5 13.5h.01"/>',
+  book: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/>',
+  tent: '<path d="M12 4 3 20h18zM12 4v16M9 20l3-6 3 6"/>',
+  spark: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
+  ticket: '<path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4zM14 6v12"/>',
+  tag: '<path d="M3 12V4h8l10 10-8 8zM7.5 7.5h.01"/>',
+  leaf: '<path d="M5 19c0-9 6-14 15-14 0 9-5 15-14 15M5 19l7-7"/>',
+  gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>'
 };
 const ic = n => `<svg class="ic" viewBox="0 0 24 24">${YOL[n]}</svg>`;
 
@@ -245,6 +304,16 @@ const ILGI = {
 };
 const TARZ = ["Pratik","Romantik","Eğlenceli","Şık","Kişiye özel","Doğa dostu","Teknolojik","Nostaljik","Rahatlatıcı"];
 const TUR = [["ürün","Ürün"],["deneyim","Deneyim"],["kendin yap","Kendin yap"]];
+const KOLEKSIYON = [
+  { ad: "Kahve tutkunlarına", alt: "Demlemeden fincana", ic: "cup", r: ["#6B4226","#B07A4F"], f: { ilgi: ["Kahve"] } },
+  { ad: "Son dakika", alt: "Bugün bulunabilecekler", ic: "clock", r: ["#C0392B","#E8735A"], f: { acil: true } },
+  { ad: "Oyunculara", alt: "Konsol, PC, kutu oyunu", ic: "pad", r: ["#4B2BB3","#8A63F2"], f: { ilgi: ["Video oyunları","Kutu oyunları"] } },
+  { ad: "Kitap kurtlarına", alt: "Sayfalar arasında", ic: "book", r: ["#1F5E4A","#3E9A78"], f: { ilgi: ["Kitap"] } },
+  { ad: "300 ₺ altı", alt: "Az bütçe, çok anlam", ic: "tag", r: ["#1E4FB8","#4D86F0"], f: { butce: "300" } },
+  { ad: "Deneyim hediyeleri", alt: "Eşya değil, anı", ic: "ticket", r: ["#A2306B","#E25C9E"], f: { turler: ["deneyim"] } },
+  { ad: "Doğa ve kamp", alt: "Dışarıyı sevenlere", ic: "tent", r: ["#3C5A1E","#7A9E3C"], f: { ilgi: ["Kamp","Doğa yürüyüşü"] } },
+  { ad: "Kendine iyi bak", alt: "Bakım ve rahatlama", ic: "leaf", r: ["#2D6E7E","#56AFC2"], f: { ilgi: ["Cilt bakımı"], tarz: ["Rahatlatıcı"] } }
+];
 const TON = [["duygusal","Duygusal"],["komik","Komik"],["kısa","Kısa"],["şiirsel","Şiirsel"]];
 const RENK = ["#C8324B","#2F5BD3","#2F7D4F","#9A6510","#7A3FC2","#0F7C8C","#C2571A","#5A5F6B"];
 const renk = s => RENK[[...String(s)].reduce((a, c) => a + c.charCodeAt(0), 0) % RENK.length];
@@ -257,6 +326,14 @@ let kisiler = oku("na-kisiler", []);
 let favs = oku("na-favs", []).map(f => ({ ...f, etiket: f.etiket || [f.istek?.isim || f.istek?.kime, f.istek?.gun].filter(Boolean).join(" · ") }));
 let gecmis = oku("na-gecmis", []);
 let bilgiKapali = oku("na-bilgi", false);
+let kullanici = oku("na-ad", "");
+let tema = oku("na-tema", "");
+function temaUygula() {
+  if (tema) document.documentElement.dataset.theme = tema; else delete document.documentElement.dataset.theme;
+  const koyu = tema === "dark" || (!tema && matchMedia("(prefers-color-scheme: dark)").matches);
+  $("#themeColor").content = koyu ? "#000000" : "#FFFFFF";
+}
+matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", temaUygula);
 const kaydet = () => { yaz("na-kisiler", kisiler); yaz("na-favs", favs); yaz("na-gecmis", gecmis); };
 
 /* ---------- tarih hesapları ---------- */
@@ -291,7 +368,7 @@ function sekmeCiz() {
 }
 function git(s) {
   sekme = s;
-  for (const [id] of SEKMELER) $("#v-" + id).hidden = id !== s;
+  for (const [id] of SEKMELER) { const el = $("#v-" + id); el.hidden = id !== s; if (id === s) { el.classList.remove("scr"); void el.offsetWidth; el.classList.add("scr"); } }
   sekmeCiz(); ciz(); scrollTo(0, 0);
 }
 function ciz() { ({ home: anaCiz, bul: bulCiz, kisi: kisiCiz, kayit: kayitCiz })[sekme](); }
@@ -302,10 +379,15 @@ function anaCiz() {
   const y = yaklasanlar();
   const hizli = kisiler.length ? kisiler.slice(0, 8).map(k => [k.ad, k.id]) : ["Anne","Baba","Sevgili","Arkadaş","Kardeş","Eş","Öğretmen","Kendim"].map(k => [k, ""]);
   $("#v-home").innerHTML = `
-    <div class="brand"><img src="/icon-192.png" alt="">Ne Alsam?</div>
-    <h1 class="big">${selam()}.<br>Bugün kimi mutlu ediyoruz?</h1>
+    <div class="top"><img src="/icon-192.png" alt="" style="width:40px;height:40px;border-radius:10px">
+      <div class="hi"><small>${selam()}${kullanici ? "," : ""}</small><b>${kullanici ? esc(kullanici) : "Ne Alsam?"}</b></div>
+      <button class="me" style="background:${kullanici ? renk(kullanici) : "var(--chip)"};color:${kullanici ? "#fff" : "var(--sub)"}" data-act="ayarlar" aria-label="Ayarlar">${kullanici ? esc(harf(kullanici)) : ic("gear")}</button></div>
+    <h1 class="big">Bugün kimi mutlu ediyoruz?</h1>
+    <form class="search" id="araForm" role="search">${ic("search")}<input id="araIn" maxlength="140" placeholder="ör. kahve seven 30 yaşında ablam" enterkeyhint="search"></form>
     <button class="cta" data-act="yeni">${ic("gift")}<div><b>Hediye bul</b><span>Birkaç soruya cevap ver, fikirler gelsin</span></div><svg class="ic go" viewBox="0 0 24 24">${YOL.arrow}</svg></button>
     ${!bilgiKapali && !(matchMedia("(display-mode: standalone)").matches || navigator.standalone) ? `<div class="note-row">${ic("phone")}<span>Ana ekrana ekle, uygulama gibi açılsın</span><button data-act="yukle">Nasıl?</button><button data-act="bilgiKapat" aria-label="Kapat">${ic("close")}</button></div>` : ""}
+    <h2 class="sec">Koleksiyonlar</h2>
+    <div class="hscroll">${KOLEKSIYON.map((c, i) => `<button class="coll" style="background:linear-gradient(135deg,${c.r[0]},${c.r[1]})" data-act="koleksiyon" data-i="${i}">${ic(c.ic)}<div><b>${c.ad}</b><small>${c.alt}</small></div></button>`).join("")}</div>
     <h2 class="sec">Yaklaşan günler <button data-act="sekme" data-v="kisi">Doğum günü ekle</button></h2>
     <div class="hscroll">${y.map((g, i) => { const n = gunFarki(g.tarih); return `<button class="day" data-act="gun" data-i="${i}"><div class="d">${tarihYaz(g.tarih)}</div><div class="n">${esc(g.ad)}</div><span class="k ${n <= 14 ? "hot" : ""}">${kalan(n)}</span></button>`; }).join("")}</div>
     <h2 class="sec">${kisiler.length ? "Kişilerin" : "Kime alıyorsun?"}</h2>
@@ -313,12 +395,13 @@ function anaCiz() {
     <h2 class="sec">Bütçeye göre</h2>
     <div class="pills">${BUTCE.slice(0, 6).map(([v, l]) => `<button class="pill" data-act="butceIle" data-v="${v}">${l}</button>`).join("")}</div>
     ${gecmis.length ? `<h2 class="sec">Son aramaların <button data-act="gecmisSil">Temizle</button></h2>
-    <div class="list">${gecmis.map((g, i) => `<button class="row" data-act="tekrar" data-i="${i}"><div class="av" style="background:${renk(g.isim || g.kime)};width:34px;height:34px;font-size:14px">${esc(harf(g.isim || g.kime))}</div><div class="t"><b>${esc(g.isim || g.kime)}${g.gun ? " · " + esc(g.gun) : ""}</b><small>${esc([BUTCE.find(b => b[0] === g.butce)?.[1], ...(g.ilgi || [])].filter(Boolean).join(", ") || "Ayrıntı yok")}</small></div>${ic("chev").replace('class="ic"', 'class="ic chev"')}</button>`).join("")}</div>` : ""}
+    <div class="list">${gecmis.map((g, i) => `<button class="row" data-act="tekrar" data-i="${i}"><div class="av" style="background:${g.form?.serbest ? "var(--chip)" : renk(g.isim || g.kime)};color:${g.form?.serbest ? "var(--sub)" : "#fff"};width:34px;height:34px;font-size:14px">${g.form?.serbest ? ic("search") : esc(harf(g.isim || g.kime))}</div><div class="t"><b>${g.form?.serbest ? esc(etiketYap(g.form)) : esc(g.isim || g.kime) + (g.gun ? " · " + esc(g.gun) : "")}</b><small>${esc([BUTCE.find(b => b[0] === g.butce)?.[1], ...(g.ilgi || [])].filter(Boolean).join(", ") || "Ayrıntı yok")}</small></div>${ic("chev").replace('class="ic"', 'class="ic chev"')}</button>`).join("")}</div>` : ""}
     <p class="foot">Fiyatlar yaklaşıktır, almadan önce kontrol et.</p>`;
+  $("#araForm").onsubmit = e => { e.preventDefault(); const q = $("#araIn").value.trim(); if (q.length < 3) { toast("Biraz daha anlat"); return; } serbestAra(q); };
 }
 
 /* ---------- hediye bulma (soru soru) ---------- */
-const bosForm = () => ({ kime: "", kisiId: "", isim: "", yas: "", cinsiyet: "", gun: "", butce: null, ilgi: [], tarz: [], turler: [], acil: false, not: "" });
+const bosForm = () => ({ serbest: "", kime: "", kisiId: "", isim: "", yas: "", cinsiyet: "", gun: "", butce: null, ilgi: [], tarz: [], turler: [], acil: false, not: "" });
 let w = Object.assign(bosForm(), oku("na-form", {}));
 let adim = 0;          // 0-6 sorular, 7 sonuçlar
 let sonuc = null;       // { istek, fikirler, filtre, sira, durum, hata }
@@ -436,13 +519,18 @@ async function ara(dahaFazla) {
   if (sekme === "bul") sonucCiz();
 }
 
+function serbestAra(q) {
+  w = Object.assign(bosForm(), { kime: "Tarif edilen kişi", serbest: q.slice(0, 140), not: `Aradığım kişi ve durum: ${q.slice(0, 140)}` });
+  formKaydet(); git("bul"); ara(false);
+}
+
 /* ---------- sonuçlar ---------- */
 const fiyatSayi = s => { const m = String(s || "").replace(/\./g, "").match(/\d+/); return m ? +m[0] : Infinity; };
 const favMi = f => favs.some(x => kucuk(x.ad) === kucuk(f.ad));
-const etiketYap = i => [i.isim || i.kime, i.gun].filter(Boolean).join(" · ");
+const etiketYap = i => i.serbest ? `"${i.serbest.length > 28 ? i.serbest.slice(0, 28) + "…" : i.serbest}"` : [i.isim || i.kime, i.gun].filter(Boolean).join(" · ");
 function sonucCiz() {
   const s = sonuc, v = $("#v-bul");
-  const ust = `<div class="rhead"><button class="iconbtn" data-act="adim" data-v="6" aria-label="Geri">${ic("back")}</button><div class="t">${esc(s.istek.isim || s.istek.kime)} için</div><button class="iconbtn" data-act="listePaylas" aria-label="Paylaş">${ic("share")}</button></div>`;
+  const ust = `<div class="rhead"><button class="iconbtn" ${s.istek.serbest ? 'data-act="sekme" data-v="home"' : 'data-act="adim" data-v="6"'} aria-label="Geri">${ic("back")}</button><div class="t">${s.istek.serbest ? "Sonuçlar" : esc(s.istek.isim || s.istek.kime) + " için"}</div><button class="iconbtn" data-act="listePaylas" aria-label="Paylaş">${ic("share")}</button></div>`;
   if (s.durum === "yukleniyor") { v.innerHTML = ust + `<p class="lead" style="margin:14px 2px">Fikirler hazırlanıyor…</p>` + '<div class="skel"></div>'.repeat(5); return; }
   if (s.durum === "hata") { v.innerHTML = ust + `<div class="msg"><b>Olmadı</b>${esc(s.hata)}<br><button class="btn" data-act="ara">${ic("refresh")}Tekrar dene</button></div>`; return; }
   let l = s.fikirler.map((f, i) => ({ f, i }));
@@ -452,7 +540,7 @@ function sonucCiz() {
   const say = t => s.fikirler.filter(f => !t || f.tur === t).length;
   v.innerHTML = ust + `
     <div class="filt">${[["", "Tümü"], ...TUR].map(([t, a]) => `<button class="pill sm ${s.filtre === t ? "on" : ""}" data-act="filtre" data-v="${t}">${a} ${say(t)}</button>`).join("")}</div>
-    <div class="sortline"><span>${l.length} fikir</span><select id="sira" aria-label="Sırala"><option value="">Önerilen</option><option value="artan" ${s.sira === "artan" ? "selected" : ""}>Ucuzdan pahalıya</option><option value="azalan" ${s.sira === "azalan" ? "selected" : ""}>Pahalıdan ucuza</option></select></div>
+    ${s.istek.serbest ? `<p class="lead" style="margin-top:12px">"${esc(s.istek.serbest)}"</p>` : ""}<div class="sortline"><span>${l.length} fikir</span><select id="sira" aria-label="Sırala"><option value="">Önerilen</option><option value="artan" ${s.sira === "artan" ? "selected" : ""}>Ucuzdan pahalıya</option><option value="azalan" ${s.sira === "azalan" ? "selected" : ""}>Pahalıdan ucuza</option></select></div>
     ${l.map(({ f, i }) => urunKarti(f, i, "s")).join("") || `<div class="msg">Bu türde fikir yok.</div>`}
     ${s.durum === "dahayukleniyor" ? '<div class="skel"></div><div class="skel"></div>' : `<button class="btn ghost" data-act="daha" ${s.fikirler.length >= 30 ? "disabled" : ""}>${ic("refresh")}Daha fazla fikir</button>`}
     <button class="btn ghost" style="margin-top:8px" data-act="yeni">${ic("gift")}Yeni arama</button>`;
@@ -586,7 +674,7 @@ document.addEventListener("click", e => {
   const b = e.target.closest("[data-act]"); if (!b) return;
   const { act, v, i, k, id, alan } = b.dataset;
   switch (act) {
-    case "sekme": sheetKapat(); if (v === "bul" && sekme === "bul" && adim >= ADIMLAR && sonuc) { sonucCiz(); break; } git(v); break;
+    case "sekme": if (navigator.vibrate) try { navigator.vibrate(8); } catch {} sheetKapat(); if (v === "bul" && sekme === "bul" && adim >= ADIMLAR && sonuc) { sonucCiz(); break; } git(v); break;
     case "yeni": sheetKapat(); yeniArama(); break;
     case "bilgiKapat": bilgiKapali = true; yaz("na-bilgi", true); anaCiz(); break;
     case "yukle": yukle(); break;
@@ -638,6 +726,13 @@ document.addEventListener("click", e => {
       const temel = acik?.k === "s" && sonuc ? sonuc.istek : { ...bosForm(), kime: f.kime || "Arkadaş", isim: f.isim || "", gun: f.gun || "" };
       w = Object.assign(bosForm(), JSON.parse(JSON.stringify(temel))); w.not = `"${f.ad}" gibi fikirler istiyorum, ama aynısı olmasın.`; formKaydet(); git("bul"); ara(false); break; }
     case "kapat": sheetKapat(); break;
+    case "koleksiyon": { const c = KOLEKSIYON[+i]; yeniArama(JSON.parse(JSON.stringify(c.f))); break; }
+    case "ayarlar": ayarlarAc(); break;
+    case "tema": tema = v; yaz("na-tema", v); temaUygula(); b.parentElement.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); break;
+    case "adKaydet": kullanici = $("#ayAd").value.trim().slice(0, 24); yaz("na-ad", kullanici); sheetKapat(); toast("Kaydedildi"); ciz(); break;
+    case "hepsiniSil": if (confirm("Kişiler, kaydedilenler ve aramalar silinsin mi? Bu geri alınamaz.")) { ["na-kisiler","na-favs","na-gecmis","na-form","na-ad","na-tanitim"].forEach(x => { try { localStorage.removeItem(x); } catch {} }); location.reload(); } break;
+    case "tanitIleri": tanitAdim(+v); break;
+    case "tanitBitir": { const a = $("#tAd")?.value.trim(); if (a) { kullanici = a.slice(0, 24); yaz("na-ad", kullanici); } yaz("na-tanitim", true); const el = $("#tanit"); el.style.transition = "opacity .3s"; el.style.opacity = 0; setTimeout(() => el.remove(), 300); ciz(); break; }
     case "kisiForm": kisiFormAc(id); break;
     case "kCins": b.parentElement.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); break;
     case "kisiKaydet": {
@@ -654,6 +749,38 @@ document.addEventListener("click", e => {
   }
 });
 
+/* ---------- ayarlar ---------- */
+function ayarlarAc() {
+  sheetAc(`<div class="shead"><h3>Ayarlar</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
+    <label class="f" style="margin-top:0">Adın</label>
+    <div class="addrow"><input class="in" id="ayAd" maxlength="24" placeholder="Sana nasıl seslenelim?" value="${esc(kullanici)}"><button data-act="adKaydet" aria-label="Kaydet">${ic("check")}</button></div>
+    <label class="f">Görünüm</label>
+    <div class="seg">${[["light","Beyaz"],["dark","Siyah"],["","Otomatik"]].map(([v, l]) => `<button data-act="tema" data-v="${v}" class="${tema === v ? "on" : ""}">${l}</button>`).join("")}</div>
+    <p class="lead" style="font-size:13px;margin-top:8px">Otomatik: telefonun ayarına göre değişir.</p>
+    <div class="list" style="margin-top:20px">
+      <button class="row" data-act="yukle">${ic("phone")}<div class="t"><b>Ana ekrana ekle</b><small>Uygulama gibi açılsın</small></div>${ic("chev").replace('class="ic"', 'class="ic chev"')}</button>
+      <button class="row" data-act="hepsiniSil" style="color:var(--acc)">${ic("trash")}<div class="t"><b>Tüm verileri sil</b><small style="color:var(--sub)">Kişiler, kaydedilenler, aramalar</small></div></button>
+    </div>
+    <p class="ver">Ne Alsam? · Sürüm 1.2<br>Verilerin sadece bu telefonda saklanır.</p>`);
+}
+
+/* ---------- ilk açılış: tanıtım ---------- */
+const TANIT = [
+  () => `<img src="/icon-512.png" alt=""><h2>Hediye bulmanın<br>en kolay yolu.</h2><p>Kime alacağını ve neleri sevdiğini söyle; ona gerçekten uyan fikirleri getirelim.</p>`,
+  () => `<h2>Neler yapabilirsin?</h2>
+    <div class="feat"><div class="fi" style="background:var(--acc-soft);color:var(--acc)">${ic("gift")}</div><div><b>Kişiye özel fikirler</b><span>Yaşı, bütçesi, sevdikleri ve tarzına göre</span></div></div>
+    <div class="feat"><div class="fi" style="background:var(--blue-soft);color:var(--blue)">${ic("cal")}</div><div><b>Önemli günleri kaçırma</b><span>Doğum günleri ve özel günler ana sayfanda</span></div></div>
+    <div class="feat"><div class="fi" style="background:var(--green-soft);color:var(--green)">${ic("pen")}</div><div><b>Kart notu da hazır</b><span>Duygusal, komik ya da şiirsel</span></div></div>`,
+  () => `<h2>Sana nasıl<br>seslenelim?</h2><p>İstersen boş bırakabilirsin.</p><input class="in" id="tAd" maxlength="24" placeholder="Adın" style="margin-top:20px" value="${esc(kullanici)}">`
+];
+function tanitAdim(n) {
+  const el = $("#tanit"); if (!el) return;
+  el.innerHTML = `<div class="sl scr">${TANIT[n]()}</div><div class="bot"><div class="dots">${TANIT.map((_, i) => `<i class="${i === n ? "on" : ""}"></i>`).join("")}</div>
+    <button class="btn" data-act="${n < TANIT.length - 1 ? "tanitIleri" : "tanitBitir"}" data-v="${n + 1}">${n < TANIT.length - 1 ? "Devam" : "Başla"}</button>
+    ${n < TANIT.length - 1 ? `<button class="btn ghost" style="margin-top:8px;border:0;background:none;color:var(--sub)" data-act="tanitBitir">Geç</button>` : ""}</div>`;
+  const i = $("#tAd"); if (i) i.onkeydown = e => { if (e.key === "Enter") $("[data-act=tanitBitir]").click(); };
+}
+
 /* ---------- telefona yükleme ---------- */
 let istem = null;
 addEventListener("beforeinstallprompt", e => { e.preventDefault(); istem = e; });
@@ -666,7 +793,10 @@ async function yukle() {
 }
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
 
+temaUygula();
 git("home");
+if (!oku("na-tanitim", false)) { const d = document.createElement("div"); d.id = "tanit"; document.body.appendChild(d); tanitAdim(0); }
+setTimeout(() => { const s = $("#splash"); s.classList.add("bitti"); setTimeout(() => s.remove(), 400); }, 650);
 </script>
 </body>
 </html>
