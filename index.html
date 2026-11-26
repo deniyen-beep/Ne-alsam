@@ -177,7 +177,7 @@ textarea.in{min-height:96px;resize:vertical}
 .tabbar .badge{position:absolute;top:9px;left:calc(50% + 6px);background:var(--acc);color:#fff;font-size:10px;font-weight:700;min-width:17px;height:17px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px}
 
 /* alttan açılan pencere */
-.sheet{position:fixed;inset:0;z-index:20;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s}
+.sheet{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s}
 .sheet.on{opacity:1;pointer-events:auto}
 .sheet .box{width:100%;max-width:560px;max-height:88vh;overflow:auto;background:var(--bg);border-radius:20px 20px 0 0;padding:8px 16px calc(20px + env(safe-area-inset-bottom));transform:translateY(30px);transition:transform .25s}
 .sheet.on .box{transform:none}
@@ -198,10 +198,11 @@ textarea.in{min-height:96px;resize:vertical}
 .acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .acts button{display:flex;align-items:center;justify-content:center;gap:7px;padding:13px 8px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:14px}
 .acts button.on{color:var(--acc);border-color:var(--acc)}
+.acts a{display:flex;align-items:center;justify-content:center;gap:7px;padding:13px 8px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:14px;color:var(--ink);text-decoration:none}
 .acts button.on .ic{fill:currentColor}
 .acts button.wide{grid-column:span 2}
 .cardnote{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;font-size:17px;line-height:1.6;min-height:110px;white-space:pre-wrap;margin:14px 0}
-.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translate(-50%,10px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;opacity:0;transition:all .2s;pointer-events:none;z-index:40;white-space:nowrap}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translate(-50%,10px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;opacity:0;transition:all .2s;pointer-events:none;z-index:70;white-space:nowrap}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .foot{color:var(--sub);font-size:12px;text-align:center;margin-top:28px}
 .tile,.day,.cta,.item,.opt,.btn,.pill,.row,.coll,.iconbtn,.acts button,.shops a,.tabbar button,.search{transition:transform .14s ease,background .2s,border-color .2s}
@@ -230,7 +231,7 @@ textarea.in{min-height:96px;resize:vertical}
 #splash b{font-size:22px;font-weight:800;letter-spacing:-.02em}
 #splash.bitti{opacity:0;pointer-events:none}
 @keyframes pop{from{transform:scale(.7);opacity:0}}
-#tanit{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;padding:calc(24px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom))}
+#tanit{position:fixed;inset:0;z-index:55;background:var(--bg);display:flex;flex-direction:column;padding:calc(24px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom))}
 #tanit .sl{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:460px;margin:0 auto;width:100%}
 #tanit img{width:120px;height:120px;border-radius:28px;margin-bottom:24px;animation:suz 3s ease-in-out infinite}
 @keyframes suz{0%,100%{transform:translateY(0);box-shadow:0 12px 30px -10px rgba(109,40,217,.45)}50%{transform:translateY(-8px);box-shadow:0 22px 40px -12px rgba(109,40,217,.6)}}
@@ -245,6 +246,36 @@ textarea.in{min-height:96px;resize:vertical}
 #tanit .dots i.on{width:22px;background:var(--acc)}
 #tanit .bot{max-width:460px;margin:0 auto;width:100%}
 .ver{color:var(--sub);font-size:12px;text-align:center;margin-top:18px}
+.qa{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:16px}
+.qa button{display:flex;flex-direction:column;align-items:center;gap:7px;font-size:12px;font-weight:600;line-height:1.2;text-align:center;transition:transform .14s}
+.qa button:active{transform:scale(.94)}
+.qa .qi{width:58px;height:58px;border-radius:18px;display:flex;align-items:center;justify-content:center}
+.qa .qi .ic{width:27px;height:27px}
+.rh{flex:none;width:250px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:left;scroll-snap-align:start;transition:transform .14s}
+.rh:active{transform:scale(.97)}
+.rh .k{font-size:11px;font-weight:800;color:var(--acc);text-transform:uppercase;letter-spacing:.06em}
+.rh b{display:block;font-size:16px;margin:6px 0 4px;line-height:1.25}
+.rh small{color:var(--sub);font-size:13px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.art h4{font-size:16px;margin:16px 0 6px}
+.art p,.art li{font-size:15px;line-height:1.55}
+.art ul{padding-left:20px}.art li{margin-bottom:6px}
+.slot{height:150px;border-radius:22px;background:radial-gradient(circle at 50% 40%,#5B21B6,#1A0638 75%);display:flex;align-items:center;justify-content:center;font-size:76px;overflow:hidden;margin:4px 0 14px;box-shadow:inset 0 0 40px rgba(0,0,0,.45)}
+.slot.don span{animation:salla .11s linear infinite}
+.slot.dur span{animation:pop .45s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes salla{0%{transform:translateY(-18px);opacity:.4}50%{transform:none;opacity:1}100%{transform:translateY(18px);opacity:.4}}
+.tam{position:fixed;inset:0;z-index:45;background:var(--bg);overflow:auto;-webkit-overflow-scrolling:touch;padding:calc(12px + env(safe-area-inset-top)) 16px calc(30px + env(safe-area-inset-bottom));animation:giris .25s ease}
+.tam .in3{max-width:560px;margin:0 auto}
+.quizq{font-size:27px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:16px 0 18px}
+.hero{border-radius:22px;padding:22px 18px;color:#fff;background:linear-gradient(135deg,#1A0638,#5B21B6 60%,#8B5CF6);margin:10px 0 16px;position:relative;overflow:hidden}
+.hero b{display:block;font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+.hero span{display:block;opacity:.85;font-size:15px;margin-top:6px}
+.hero::after{content:"";position:absolute;right:-50px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(246,195,91,.35),transparent 70%)}
+.pp{display:flex;align-items:center;gap:12px;margin:22px 0 10px}
+.pp .t{flex:1}.pp .t b{display:block;font-size:17px}.pp .t small{color:var(--sub);font-size:13px}
+.inline{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;color:var(--acc);padding:6px 0}
+.preview{width:100%;border-radius:16px;display:block;margin:4px 0 14px;box-shadow:0 10px 30px -10px rgba(0,0,0,.4)}
+.res-k{font-size:12px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.08em}
+
 
 </style>
 </head>
@@ -294,7 +325,15 @@ const YOL = {
   leaf: '<path d="M5 19c0-9 6-14 15-14 0 9-5 15-14 15M5 19l7-7"/>',
   gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
   sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
-  moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>'
+  moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+  dice: '<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="8.8" cy="8.8" r=".9" fill="currentColor"/><circle cx="15.2" cy="8.8" r=".9" fill="currentColor"/><circle cx="12" cy="12" r=".9" fill="currentColor"/><circle cx="8.8" cy="15.2" r=".9" fill="currentColor"/><circle cx="15.2" cy="15.2" r=".9" fill="currentColor"/>',
+  list: '<path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/>',
+  quest: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/>',
+  camera: '<path d="M4 8h3l2-2.5h6L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/>',
+  image: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 9"/>',
+  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  download: '<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>',
+  wallet: '<path d="M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a1 1 0 0 1-1-1zM4 7l11-3v3M16 13.5h.01"/>'
 };
 const ic = n => `<svg class="ic" viewBox="0 0 24 24">${YOL[n]}</svg>`;
 
@@ -367,10 +406,10 @@ const tarihYaz = d => d.toLocaleDateString("tr-TR", { day: "numeric", month: "lo
 
 /* ---------- sekmeler ---------- */
 let sekme = "home";
-const SEKMELER = [["home","home","Ana sayfa"],["bul","gift","Hediye bul"],["kisi","users","Kişilerim"],["kayit","heart","Kaydettiklerim"]];
+const SEKMELER = [["home","home","Ana sayfa"],["bul","gift","Hediye bul"],["kisi","users","Kişilerim"],["kayit","heart","Listelerim"]];
 function sekmeCiz() {
   $("#tabs").innerHTML = SEKMELER.map(([id, i, ad]) =>
-    `<button data-act="sekme" data-v="${id}" class="${sekme === id ? "on" : ""}">${ic(i)}${ad}${id === "kayit" && favs.length ? `<span class="badge">${favs.length}</span>` : ""}</button>`).join("");
+    `<button data-act="sekme" data-v="${id}" class="${sekme === id ? "on" : ""}">${ic(i)}${ad}${id === "kayit" && favs.length + istekListem.length ? `<span class="badge">${favs.length + istekListem.length}</span>` : ""}</button>`).join("");
 }
 function git(s) {
   sekme = s;
@@ -391,6 +430,12 @@ function anaCiz() {
     <h1 class="big">Bugün kimi mutlu ediyoruz?</h1>
     <form class="search" id="araForm" role="search">${ic("search")}<input id="araIn" maxlength="140" placeholder="ör. kahve seven 30 yaşında ablam" enterkeyhint="search"></form>
     <button class="cta" data-act="yeni">${ic("gift")}<div><b>Hediye bul</b><span>Birkaç soruya cevap ver, fikirler gelsin</span></div><svg class="ic go" viewBox="0 0 24 24">${YOL.arrow}</svg></button>
+    <div class="qa">
+      <button data-act="surpriz"><div class="qi" style="background:var(--acc-soft);color:var(--acc)">${ic("dice")}</div>Sürpriz yap</button>
+      <button data-act="plan"><div class="qi" style="background:var(--amber-soft);color:var(--amber)">${ic("wallet")}</div>Toplu plan</button>
+      <button data-act="listeAc"><div class="qi" style="background:var(--green-soft);color:var(--green)">${ic("list")}</div>İstek listem</button>
+      <button data-act="anketYeni"><div class="qi" style="background:var(--blue-soft);color:var(--blue)">${ic("quest")}</div>Gizli anket</button>
+    </div>
     ${!bilgiKapali && !(matchMedia("(display-mode: standalone)").matches || navigator.standalone) ? `<div class="note-row">${ic("phone")}<span>Ana ekrana ekle, uygulama gibi açılsın</span><button data-act="yukle">Nasıl?</button><button data-act="bilgiKapat" aria-label="Kapat">${ic("close")}</button></div>` : ""}
     <h2 class="sec">Koleksiyonlar</h2>
     <div class="hscroll">${KOLEKSIYON.map((c, i) => `<button class="coll" style="background:linear-gradient(135deg,${c.r[0]},${c.r[1]})" data-act="koleksiyon" data-i="${i}">${ic(c.ic)}<div><b>${c.ad}</b><small>${c.alt}</small></div></button>`).join("")}</div>
@@ -398,6 +443,8 @@ function anaCiz() {
     <div class="hscroll">${y.map((g, i) => { const n = gunFarki(g.tarih); return `<button class="day" data-act="gun" data-i="${i}"><div class="d">${tarihYaz(g.tarih)}</div><div class="n">${esc(g.ad)}</div><span class="k ${n <= 14 ? "hot" : ""}">${kalan(n)}</span></button>`; }).join("")}</div>
     <h2 class="sec">${kisiler.length ? "Kişilerin" : "Kime alıyorsun?"}</h2>
     <div class="grid4">${hizli.map(([ad, id]) => `<button class="tile" data-act="hizli" data-v="${esc(ad)}" data-id="${id}"><div class="av" style="background:${renk(ad)}">${esc(harf(ad))}</div>${esc(ad)}</button>`).join("")}${kisiler.length ? `<button class="tile" data-act="yeni"><div class="av" style="background:var(--chip);color:var(--sub)">${ic("plus")}</div>Başkası</button>` : ""}</div>
+    <h2 class="sec">Hediye rehberi</h2>
+    <div class="hscroll">${REHBER.map((r, i) => `<button class="rh" data-act="rehber" data-i="${i}"><div class="k">${r.k}</div><b>${r.ad}</b><small>${r.ozet}</small></button>`).join("")}</div>
     <h2 class="sec">Bütçeye göre</h2>
     <div class="pills">${BUTCE.slice(0, 6).map(([v, l]) => `<button class="pill" data-act="butceIle" data-v="${v}">${l}</button>`).join("")}</div>
     ${gecmis.length ? `<h2 class="sec">Son aramaların <button data-act="gecmisSil">Temizle</button></h2>
@@ -407,7 +454,7 @@ function anaCiz() {
 }
 
 /* ---------- hediye bulma (soru soru) ---------- */
-const bosForm = () => ({ serbest: "", kime: "", kisiId: "", isim: "", yas: "", cinsiyet: "", gun: "", butce: null, ilgi: [], tarz: [], turler: [], acil: false, not: "" });
+const bosForm = () => ({ fotoOzet: "", serbest: "", kime: "", kisiId: "", isim: "", yas: "", cinsiyet: "", gun: "", butce: null, ilgi: [], tarz: [], turler: [], acil: false, not: "" });
 let w = Object.assign(bosForm(), oku("na-form", {}));
 let adim = 0;          // 0-6 sorular, 7 sonuçlar
 let sonuc = null;       // { istek, fikirler, filtre, sira, durum, hata }
@@ -447,6 +494,7 @@ function bulCiz() {
       <div class="opts one">${BUTCE.map(([b, l]) => secenek(l, w.butce === b, "butce", b)).join("")}</div>`;
   } else if (adim === 4) {
     ic2 = `<h2 class="q">Neleri sever?</h2><p class="qs">Ne kadar çok seçersen o kadar iyi. ${w.ilgi.length ? `<b style="color:var(--acc)">${w.ilgi.length} seçildi</b>` : ""}</p>
+      <button class="switch" style="margin:0 0 12px" data-act="fotoSec"><span style="color:var(--acc)">${ic("camera")}</span><div class="t"><b>Fotoğraftan tahmin et</b><small>${w.fotoOzet ? esc(w.fotoOzet) : "Odası, rafı ya da profilinin ekran görüntüsü"}</small></div>${ic("chev")}</button><input type="file" id="fotoIn" accept="image/*" hidden>
       <div class="addrow"><input class="in" id="fIlgi" maxlength="40" placeholder="Kendin yaz: ör. Harry Potter" enterkeyhint="done"><button data-act="ilgiEkle" aria-label="Ekle">${ic("plus")}</button></div>
       ${w.ilgi.filter(i => !Object.values(ILGI).flat().includes(i)).length ? `<div class="grp">Senin eklediklerin</div><div class="pills">${w.ilgi.filter(i => !Object.values(ILGI).flat().includes(i)).map(i => `<button class="pill sm on" data-act="ilgi" data-v="${esc(i)}">${esc(i)} ✕</button>`).join("")}</div>` : ""}
       ${Object.entries(ILGI).map(([g, l]) => `<div class="grp">${g}</div><div class="pills">${l.map(i => `<button class="pill sm ${w.ilgi.includes(i) ? "on" : ""}" data-act="ilgi" data-v="${esc(i)}">${esc(i)}</button>`).join("")}</div>`).join("")}`;
@@ -468,6 +516,7 @@ function bulCiz() {
   v.innerHTML = ust + ic2 + (dugme ? `<div class="spacer"></div><div class="dock"><div class="in2"><button class="btn" data-act="${adim === 6 ? "ara" : "ileri"}">${dugme}</button></div></div>` : "");
   const bagla = (id, alan) => { const e = $(id); if (e) e.oninput = () => { w[alan] = e.value; formKaydet(); }; };
   bagla("#fIsim", "isim"); bagla("#fYas", "yas"); bagla("#fNot", "not");
+  const fo = $("#fotoIn"); if (fo) fo.onchange = () => { if (fo.files[0]) fotoIlgi(fo.files[0]); fo.value = ""; };
   const fi = $("#fIlgi"); if (fi) fi.onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); ilgiEkle(); } };
 }
 function secenek(etiket, on, alan, deger = etiket) {
@@ -489,7 +538,7 @@ async function api(yol, govde) {
   try { r = await fetch(API_ADRESI + yol, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(govde) }); }
   catch { throw new Error("İnternet bağlantını kontrol et."); }
   let j = {}; try { j = await r.json(); } catch {}
-  if (!r.ok) throw new Error(j.hata || "Şu an cevap alınamadı, birazdan tekrar dene.");
+  if (!r.ok) { const e = new Error(j.hata || "Şu an cevap alınamadı, birazdan tekrar dene."); e.status = r.status; throw e; }
   return j;
 }
 function istekYap(f, haric) {
@@ -559,10 +608,11 @@ function urunKarti(f, i, k, alt) {
     <div class="t"><b>${esc(f.ad)}</b><div class="p">${esc(f.fiyat || "")}<span class="tag ${ts}">${turAd(f.tur)}</span></div><small>${esc(alt || f.neden || "")}</small></div></button>
     <button class="fav ${favMi(f) ? "on" : ""}" data-act="fav" data-k="${k}" data-i="${i}" aria-label="Kaydet">${ic("heart")}</button></div>`;
 }
-const fikirAl = (k, i) => k === "s" ? sonuc?.fikirler[i] : favs[i];
-function favDegis(f, etiket) {
+const fikirAl = (k, i) => k === "s" ? sonuc?.fikirler[i] : k === "z" ? surpriz?.fikirler[i] : k === "p" ? planDuz[i] : favs[i];
+const istekOf = (k, f) => k === "s" ? sonuc.istek : (f.ist || f);
+function favDegis(f, ist) {
   if (favMi(f)) { favs = favs.filter(x => kucuk(x.ad) !== kucuk(f.ad)); toast("Kaydedilenlerden çıkarıldı"); }
-  else { favs.unshift({ ...f, etiket, kisiId: sonuc?.istek.kisiId || f.kisiId || "", kime: sonuc?.istek.kime || f.kime, isim: sonuc?.istek.isim || f.isim, gun: sonuc?.istek.gun || f.gun }); toast("Kaydedildi"); }
+  else { const { ist: _, ...temiz } = f; favs.unshift({ ...temiz, etiket: etiketYap(ist), kisiId: ist.kisiId || "", kime: ist.kime, isim: ist.isim, gun: ist.gun, serbest: ist.serbest || "" }); toast("Kaydedildi"); }
   kaydet(); sekmeCiz();
 }
 
@@ -577,7 +627,7 @@ function linkler(f) {
 function detayAc(k, i) {
   const f = fikirAl(k, i); if (!f) return; acik = { k, i };
   const ts = turSinif(f.tur);
-  const kisiId = k === "s" ? sonuc.istek.kisiId : f.kisiId;
+  const ist = istekOf(k, f), kisiId = ist.kisiId;
   const kisi = kisiler.find(x => x.id === kisiId);
   const alindi = kisi?.alinan?.some(a => kucuk(a.ad) === kucuk(f.ad));
   sheetAc(`<div class="shead"><h3>${esc(f.ad)}</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
@@ -592,6 +642,7 @@ function detayAc(k, i) {
       <button data-act="kart">${ic("pen")}Kart notu yaz</button>
       <button data-act="fikirPaylas">${ic("share")}Paylaş</button>
       ${kisi ? `<button class="${alindi ? "on" : ""}" data-act="aldim">${ic("check")}${alindi ? "Alındı" : "Bunu aldım"}</button>` : `<button data-act="benzer">${ic("refresh")}Benzerleri</button>`}
+      ${ist.kime === "Kendim" ? `<button class="wide" data-act="listemeEkle">${ic("list")}İstek listeme ekle</button>` : ""}
     </div>`);
 }
 
@@ -599,7 +650,7 @@ function detayAc(k, i) {
 let kartHedef = null, ton = "duygusal", kartNo = 0;
 function kartAc() {
   const f = fikirAl(acik.k, acik.i); if (!f) return;
-  const ist = acik.k === "s" ? sonuc.istek : f;
+  const ist = istekOf(acik.k, f);
   kartHedef = { hediye: f.ad, kime: ist.kime || "sevdiğim biri", isim: ist.isim || "", gun: ist.gun || "" };
   kartCiz(); notYaz();
 }
@@ -608,7 +659,7 @@ function kartCiz(metin) {
     <p class="lead">${esc(kartHedef.hediye)} · ${esc(kartHedef.isim || kartHedef.kime)}</p>
     <div class="seg" style="margin-top:14px">${TON.map(([v, l]) => `<button data-act="ton" data-v="${v}" class="${ton === v ? "on" : ""}">${l}</button>`).join("")}</div>
     <div class="cardnote" id="not">${metin ?? '<div class="skel" style="height:70px;margin:0"></div>'}</div>
-    <div class="acts"><button data-act="notYeni">${ic("refresh")}Başka yaz</button><button data-act="notKopya">Kopyala</button><button class="wide" data-act="notPaylas">${ic("share")}Paylaş</button></div>`);
+    <div class="acts"><button data-act="notYeni">${ic("refresh")}Başka yaz</button><button data-act="notKopya">Kopyala</button><button data-act="notPaylas">${ic("share")}Metni paylaş</button><button data-act="kartGorsel" style="color:var(--acc)">${ic("image")}Kart görseli</button></div>`);
 }
 async function notYaz() {
   const no = ++kartNo; const el = () => $("#not");
@@ -627,6 +678,7 @@ function kisiCiz() {
   }).sort((a, b) => a.n - b.n);
   v.innerHTML = `<h1 class="big">Kişilerim</h1><p class="lead">Sevdiklerini ekle; doğum günlerini hatırlatalım, aldığın hediyeleri tekrar önermeyelim.</p>
     <button class="btn" style="margin:18px 0 6px" data-act="kisiForm">${ic("plus")}Kişi ekle</button>
+    ${kisiler.some(k => k.dogum) ? `<button class="btn ghost" style="margin-top:8px" data-act="takvimHepsi">${ic("cal")}Doğum günlerini takvime ekle</button>` : ""}
     ${sirali.length ? `<div class="list" style="margin-top:12px">${sirali.map(({ k, n }) => `<button class="row" data-act="kisiDetay" data-id="${k.id}"><div class="av" style="background:${renk(k.ad)}">${esc(harf(k.ad))}</div><div class="t"><b>${esc(k.ad)}</b><small>${esc(k.kime)}${n !== Infinity ? ` · Doğum günü: ${kalan(n).toLocaleLowerCase("tr")}` : ""}${k.alinan?.length ? ` · ${k.alinan.length} hediye` : ""}</small></div>${ic("chev").replace('class="ic"', 'class="ic chev"')}</button>`).join("")}</div>`
       : `<div class="empty">${ic("users")}<b>Henüz kimse yok</b>Annen, en yakın arkadaşın, sevgilin… Ekle, bir dahaki sefere tek dokunuşla hediye bul.</div>`}`;
 }
@@ -649,19 +701,25 @@ function kisiDetayAc(id) {
     ${dg ? `<div class="note-row" style="margin:0 0 14px">${ic("cal")}<span>${esc(dg)}</span></div>` : ""}
     ${k.ilgi?.length ? `<div class="grp" style="margin-top:0">Sevdikleri</div><div class="pills">${k.ilgi.map(i => `<span class="pill sm">${esc(i)}</span>`).join("")}</div>` : ""}
     ${k.not ? `<div class="grp">Not</div><p class="txt">${esc(k.not)}</p>` : ""}
+    ${k.istek?.length ? `<div class="grp">İstek listesi</div>${k.istek.map(x => `<div class="item"><div class="thumb urun">${esc(x.emoji || "🎁")}</div><div class="t"><b>${esc(x.ad)}</b>${x.fiyat ? `<div class="p">${esc(x.fiyat)}</div>` : ""}${x.not ? `<small>${esc(x.not)}</small>` : ""}</div>${x.link ? `<a class="fav" href="${esc(x.link)}" target="_blank" rel="noopener">${ic("link")}</a>` : ""}</div>`).join("")}` : ""}
     <div class="grp">Aldığın hediyeler</div>
     ${k.alinan?.length ? `<div class="list">${k.alinan.map((a, i) => `<div class="row"><div class="t"><b>${esc(a.ad)}</b><small>${esc(a.tarih)}</small></div><button data-act="alinanSil" data-id="${k.id}" data-i="${i}" aria-label="Sil" style="color:var(--sub)">${ic("trash")}</button></div>`).join("")}</div>` : `<p class="lead">Henüz yok. Bir fikirde "Bunu aldım"a basınca buraya eklenir ve bir daha önerilmez.</p>`}
     <button class="btn" style="margin-top:18px" data-act="kisiAra" data-id="${k.id}">${ic("gift")}${esc(k.ad)} için hediye bul</button>
-    <div class="acts" style="margin-top:8px"><button data-act="kisiForm" data-id="${k.id}">${ic("pen")}Düzenle</button><button data-act="kisiSil" data-id="${k.id}">${ic("trash")}Sil</button></div>`);
+    <div class="acts" style="margin-top:8px">
+      ${k.dogum ? `<button data-act="takvimKisi" data-id="${k.id}">${ic("cal")}Takvime ekle</button>` : ""}
+      <button data-act="anketYeni" data-id="${k.id}">${ic("quest")}Gizli anket</button>
+      <button data-act="kisiForm" data-id="${k.id}">${ic("pen")}Düzenle</button><button data-act="kisiSil" data-id="${k.id}">${ic("trash")}Sil</button></div>`);
 }
 
 /* ---------- kaydedilenler ---------- */
 function kayitCiz() {
   const v = $("#v-kayit");
-  if (!favs.length) { v.innerHTML = `<h1 class="big">Kaydettiklerim</h1><div class="empty">${ic("heart")}<b>Henüz bir şey yok</b>Beğendiğin fikirlerdeki kalbe dokun, burada saklansın.<br><button class="btn" data-act="yeni">${ic("gift")}Hediye bul</button></div>`; return; }
+  const seg = `<div class="seg" style="margin:14px 0 4px"><button data-act="listeSekme" data-v="kayit" class="${listeSekme === "kayit" ? "on" : ""}">Kaydettiklerim${favs.length ? ` (${favs.length})` : ""}</button><button data-act="listeSekme" data-v="istek" class="${listeSekme === "istek" ? "on" : ""}">İstek listem${istekListem.length ? ` (${istekListem.length})` : ""}</button></div>`;
+  if (listeSekme === "istek") { v.innerHTML = `<h1 class="big">Listelerim</h1>` + seg + istekHTML(); return; }
+  if (!favs.length) { v.innerHTML = `<h1 class="big">Listelerim</h1>` + seg + `<div class="empty">${ic("heart")}<b>Henüz bir şey yok</b>Beğendiğin fikirlerdeki kalbe dokun, burada saklansın.<br><button class="btn" data-act="yeni">${ic("gift")}Hediye bul</button></div>`; return; }
   const gruplar = {};
   favs.forEach((f, i) => (gruplar[f.etiket || "Diğer"] ||= []).push(i));
-  v.innerHTML = `<h1 class="big">Kaydettiklerim</h1><p class="lead">${favs.length} fikir</p>` +
+  v.innerHTML = `<h1 class="big">Listelerim</h1>` + seg +
     Object.entries(gruplar).map(([g, l]) => `<h2 class="sec">${esc(g)}</h2>${l.map(i => urunKarti(favs[i], i, "f")).join("")}`).join("");
 }
 
@@ -713,25 +771,64 @@ document.addEventListener("click", e => {
     case "filtre": sonuc.filtre = v; sonucCiz(); break;
     case "listePaylas": if (sonuc?.fikirler.length) paylas(`${etiketYap(sonuc.istek)} için hediye fikirleri:\n\n` + sonuc.fikirler.map((f, n) => `${n + 1}. ${f.ad}${f.fiyat ? ` (${f.fiyat})` : ""}`).join("\n") + `\n\n${location.origin}`); break;
     case "detay": detayAc(k, +i); break;
-    case "fav": { const f = fikirAl(k, +i); if (!f) break; favDegis(f, k === "s" ? etiketYap(sonuc.istek) : f.etiket); ciz(); break; }
-    case "favD": { const f = fikirAl(acik.k, acik.i); if (!f) break; const a = { ...acik }; favDegis(f, a.k === "s" ? etiketYap(sonuc.istek) : f.etiket);
+    case "fav": { const f = fikirAl(k, +i); if (!f) break; favDegis(f, istekOf(k, f)); ciz(); if (k === "z") surprizSonuc(); if (k === "p") planCiz(); break; }
+    case "favD": { const f = fikirAl(acik.k, acik.i); if (!f) break; const a = { ...acik }; favDegis(f, istekOf(a.k, f));
       if (a.k === "f" && !favMi(f)) { sheetKapat(); } else detayAc(a.k, a.k === "f" ? favs.findIndex(x => kucuk(x.ad) === kucuk(f.ad)) : a.i); ciz(); break; }
     case "kart": kartAc(); break;
     case "detayGeri": kartNo++; detayAc(acik.k, acik.i); break;
+    case "kartGeri": kartCiz(esc(kartSonMetin)); break;
     case "ton": ton = v; b.parentElement.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); notYaz(); break;
     case "notYeni": notYaz(); break;
     case "notKopya": navigator.clipboard?.writeText($("#not").textContent).then(() => toast("Kopyalandı"), () => toast("Kopyalanamadı")); break;
     case "notPaylas": paylas($("#not").textContent); break;
     case "fikirPaylas": { const f = fikirAl(acik.k, acik.i); if (f) paylas(`${f.ad}${f.fiyat ? ` (${f.fiyat})` : ""}\n${f.neden || ""}\n\n${location.origin}`); break; }
-    case "aldim": { const f = fikirAl(acik.k, acik.i); const kid = acik.k === "s" ? sonuc.istek.kisiId : f.kisiId; const kisi = kisiler.find(x => x.id === kid); if (!f || !kisi) break;
+    case "aldim": { const f = fikirAl(acik.k, acik.i); const kid = istekOf(acik.k, f).kisiId; const kisi = kisiler.find(x => x.id === kid); if (!f || !kisi) break;
       kisi.alinan ||= [];
       if (kisi.alinan.some(a => kucuk(a.ad) === kucuk(f.ad))) kisi.alinan = kisi.alinan.filter(a => kucuk(a.ad) !== kucuk(f.ad));
       else { kisi.alinan.unshift({ ad: f.ad, tarih: new Date().toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" }) }); toast(`${kisi.ad} için not edildi`); }
       kaydet(); detayAc(acik.k, acik.i); break; }
-    case "benzer": { const f = fikirAl(acik.k, acik.i); if (!f) break; sheetKapat();
-      const temel = acik?.k === "s" && sonuc ? sonuc.istek : { ...bosForm(), kime: f.kime || "Arkadaş", isim: f.isim || "", gun: f.gun || "" };
+    case "benzer": { const f = fikirAl(acik.k, acik.i); if (!f) break; const ak = acik.k; sheetKapat(); document.querySelectorAll(".tam").forEach(x => x.remove());
+      const kaynak = istekOf(ak, f); const temel = ak === "s" ? kaynak : { ...bosForm(), kime: kaynak.kime || "Arkadaş", isim: kaynak.isim || "", gun: kaynak.gun || "", kisiId: kaynak.kisiId || "" };
       w = Object.assign(bosForm(), JSON.parse(JSON.stringify(temel))); w.not = `"${f.ad}" gibi fikirler istiyorum, ama aynısı olmasın.`; formKaydet(); git("bul"); ara(false); break; }
     case "kapat": sheetKapat(); break;
+    case "tamKapat": b.closest(".tam")?.remove(); if (location.hash) history.replaceState(null, "", location.pathname); ciz(); break;
+    case "rehber": rehberAc(+i); break;
+    case "fotoSec": $("#fotoIn")?.click(); break;
+    case "takvimHepsi": icsIndir(kisiler); break;
+    case "takvimKisi": icsIndir(kisiler.filter(x => x.id === id)); break;
+    case "listeAc": listeSekme = "istek"; git("kayit"); break;
+    case "listeSekme": listeSekme = v; kayitCiz(); break;
+    case "istekForm": istekFormAc(id); break;
+    case "istekKaydet": istekKaydet(id); break;
+    case "istekSil": istekListem = istekListem.filter(x => x.id !== id); yaz("na-istek", istekListem); sheetKapat(); kayitCiz(); sekmeCiz(); break;
+    case "istekPaylas": istekPaylas(); break;
+    case "kendime": yeniArama({ kime: "Kendim" }); break;
+    case "listemeEkle": { const f = fikirAl(acik.k, acik.i); if (!f) break; if (istekListem.some(x => kucuk(x.ad) === kucuk(f.ad))) { toast("Zaten listende"); break; }
+      istekListem.unshift({ id: yeniId(), ad: f.ad, fiyat: f.fiyat || "", link: linkler(f)[0][3], not: "", emoji: f.emoji || "🎁" }); yaz("na-istek", istekListem); sekmeCiz(); toast("İstek listene eklendi"); break; }
+    case "wlAl": wlIsaretle(+i); break;
+    case "wlHaber": paylas(`${wlVeri.a ? wlVeri.a + " için " : ""}"${wlVeri.i[+i][0]}" hediyesini ben alıyorum, siz başka bir şey seçin 🙂`); break;
+    case "wlKaydet": wlKaydet(); break;
+    case "kartGorsel": kartGorsel(); break;
+    case "kartIndir": kartDosyaPaylas(false); break;
+    case "kartPaylas": kartDosyaPaylas(true); break;
+    case "surpriz": surprizAc(); break;
+    case "szKime": szKime = { ad: v, id: id || "" }; b.parentElement.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); break;
+    case "szCevir": surprizCevir(); break;
+    case "plan": planAc(); break;
+    case "planSec": { const o = planTaslak.secili; o.has(id) ? o.delete(id) : o.add(id); planKurCiz(); break; }
+    case "planEkle": planElleEkle(); break;
+    case "planCikar": planTaslak.elle.splice(+i, 1); planKurCiz(); break;
+    case "planBasla": planBasla(); break;
+    case "planYeni": plan = null; yaz("na-plan", null); planAc(); break;
+    case "planTekrar": planKisiAra(+i); break;
+    case "planAc2": { const pk = plan.kisiler[+i]; pk.acik = !pk.acik; planCiz(); break; }
+    case "anketYeni": anketOlustur(id); break;
+    case "anketGonder": anketGonder(); break;
+    case "anketCevap": anketCevapla(+i); break;
+    case "anketGeri": if (anketDurum.n > 0) { anketDurum.n--; anketDurum.c.pop(); anketCiz(); } break;
+    case "anketSonucGonder": anketSonucGonder(); break;
+    case "cevapKaydet": cevapKaydet(false); break;
+    case "cevapAra": cevapKaydet(true); break;
     case "koleksiyon": { const c = KOLEKSIYON[+i]; yeniArama(JSON.parse(JSON.stringify(c.f))); break; }
     case "ayarlar": ayarlarAc(); break;
     case "tema": tema = v; yaz("na-tema", v); temaUygula(); b.parentElement.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); break;
@@ -754,6 +851,383 @@ document.addEventListener("click", e => {
     case "alinanSil": { const kisi = kisiler.find(x => x.id === id); if (kisi) { kisi.alinan.splice(+i, 1); kaydet(); kisiDetayAc(id); } break; }
   }
 });
+
+/* ---------- link içine veri gömme (sunucusuz paylaşım) ---------- */
+const b64e = o => { const b = new TextEncoder().encode(JSON.stringify(o)); let s = ""; b.forEach(x => s += String.fromCharCode(x)); return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); };
+const b64d = s => { const t = atob(s.replace(/-/g, "+").replace(/_/g, "/")); return JSON.parse(new TextDecoder().decode(Uint8Array.from(t, c => c.charCodeAt(0)))); };
+function tamAc(id, html) { document.getElementById(id)?.remove(); const d = document.createElement("div"); d.className = "tam"; d.id = id; d.innerHTML = `<div class="in3">${html}</div>`; document.body.appendChild(d); return d; }
+const tamUst = (baslik, sag = "") => `<div class="rhead"><button class="iconbtn" data-act="tamKapat" aria-label="Kapat">${ic("close")}</button><div class="t">${baslik}</div>${sag || '<span style="width:40px"></span>'}</div>`;
+
+/* ---------- hediye rehberi ---------- */
+const REHBER = [
+  { k: "Taktik", ad: "Son dakika kurtarıcıları", ozet: "Yarın doğum günü ve elinde hiçbir şey yoksa.", m: `<p>Panik yok. Kargo beklemeden hazır olabilecek fikirler:</p><ul>
+    <li><b>Deneyim hediye et.</b> Konser, sinema, atölye ya da müze bileti telefonuna gelir; kargo beklemez.</li>
+    <li><b>Mahalleyi unutma.</b> Kitapçı, çiçekçi ve pastaneler çoğu zaman en hızlı ve en sıcak çözümdür.</li>
+    <li><b>Dijital abonelik.</b> Müzik, dizi ya da oyun aboneliği birkaç dakikada hazır.</li>
+    <li><b>Kupon hazırla.</b> "Bir kahvaltı benden" ya da "Bir gün boyunca bulaşık bende" gibi bir söz, güzel bir kâğıda yazılınca çok değerli olur.</li></ul>
+    <p>Ne Alsam'da <b>Acil lazım</b> seçeneğini açarsan fikirler buna göre gelir.</p>` },
+  { k: "Nasıl yapılır", ad: "Hediye nasıl paketlenir?", ozet: "Sade, şık ve ucuz bir paketin dört kuralı.", m: `<ul>
+    <li><b>Kraft kâğıt + kurdele</b> her zaman şık durur. Üstüne kuru bir dal, tarçın çubuğu ya da küçük bir not ekle.</li>
+    <li><b>Kâğıdı fazla kesme.</b> Kutuyu ortaya koy, kenarlar kutunun yarı yüksekliği kadar taşsın; fazlası buruşuk görünür.</li>
+    <li><b>Çift taraflı bant</b> kullan, bant izi görünmesin.</li>
+    <li><b>Fiyat etiketini çıkar.</b> Değişim fişini ayrı küçük bir zarfa koyup paketin altına iliştir.</li></ul>` },
+  { k: "Fikir", ad: "Az bütçe, çok anlam", ozet: "Pahalı olmayan ama yıllarca saklanan hediyeler.", m: `<ul>
+    <li>Ortak bir anınızın fotoğrafını bastırıp çerçevele, arkasına o günün tarihini yaz.</li>
+    <li>Sevdiği atıştırmalıklardan küçük bir sepet hazırla.</li>
+    <li>Onun için bir çalma listesi yap, karekodunu bir karta yapıştır.</li>
+    <li>Elle yazılmış uzun bir mektup. Çoğu pahalı hediyeden daha uzun saklanır.</li></ul>
+    <p>Ana sayfadaki <b>300 ₺ altı</b> koleksiyonunu da dene.</p>` },
+  { k: "Rehber", ad: "Ne alacağını hiç bilmiyorsan", ozet: "Kendine sorman gereken 5 soru.", m: `<ul>
+    <li>Son zamanlarda en çok neden bahsediyor?</li>
+    <li>Sık kullandığı ama eskimiş bir eşyası var mı?</li>
+    <li>Hep yapmak isteyip ertelediği bir şey ne?</li>
+    <li>Sevdiği ama kendine almaya kıyamadığı bir şey var mı?</li>
+    <li>Onunla en güzel anın neydi? Hediyeyi o ana bağlayabilir misin?</li></ul>
+    <p>Cevaplarını <b>Hediye bul</b>'un son adımındaki nota yaz; fikirler çok daha isabetli olur. Emin olamıyorsan ona bir <b>Gizli anket</b> gönder.</p>` }
+];
+function rehberAc(i) { const r = REHBER[i]; sheetAc(`<div class="shead"><h3>${r.ad}</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div><div class="art">${r.m}</div><button class="btn" style="margin-top:18px" data-act="yeni">${ic("gift")}Hediye bul</button>`); }
+
+/* ---------- takvime ekle (.ics, bu sitenin kendi sunucusu üretir) ---------- */
+function icsIndir(liste) {
+  const l = liste.filter(k => k.dogum); if (!l.length) { toast("Önce doğum günü ekle"); return; }
+  const url = "/api/takvim?v=" + b64e(l.map(k => ({ i: k.id, a: k.ad, d: k.dogum }))) + "&o=" + encodeURIComponent(location.origin);
+  if (location.hostname === "localhost" || /iphone|ipad|ipod|macintosh/i.test(navigator.userAgent)) { location.href = url; return; }
+  const a = document.createElement("a"); a.href = url; a.download = "dogum-gunleri.ics"; document.body.appendChild(a); a.click(); a.remove();
+  toast("Dosya indi, açınca takvime eklenir");
+}
+
+/* ---------- istek listem ---------- */
+let istekListem = oku("na-istek", []);
+let listeSekme = "kayit";
+function istekHTML() {
+  return `<p class="lead" style="margin-top:12px">İstediğin şeyleri ekle, linkini paylaş. Sana hediye alacak olanlar buradan seçsin.</p>
+    <div class="acts" style="margin:14px 0"><button data-act="istekForm">${ic("plus")}Ekle</button><button data-act="istekPaylas" style="color:var(--acc)">${ic("share")}Listeyi paylaş</button></div>
+    ${istekListem.length ? istekListem.map(x => `<div class="item"><button style="display:flex;gap:13px;flex:1;text-align:left;min-width:0" data-act="istekForm" data-id="${x.id}"><div class="thumb urun">${esc(x.emoji || "🎁")}</div><div class="t"><b>${esc(x.ad)}</b>${x.fiyat ? `<div class="p">${esc(x.fiyat)}</div>` : ""}${x.not ? `<small>${esc(x.not)}</small>` : ""}</div></button>${x.link ? `<a class="fav" href="${esc(x.link)}" target="_blank" rel="noopener" aria-label="Bağlantı">${ic("link")}</a>` : ""}</div>`).join("")
+      : `<div class="empty">${ic("list")}<b>Listen boş</b>İstediğin bir şeyi ekle ya da kendine fikir bul, beğendiklerini buraya ekle.<br><button class="btn" data-act="kendime">${ic("gift")}Kendime fikir bul</button></div>`}`;
+}
+function istekFormAc(id) {
+  const x = istekListem.find(y => y.id === id) || { ad: "", fiyat: "", link: "", not: "", emoji: "🎁" };
+  sheetAc(`<div class="shead"><h3>${id ? "Düzenle" : "Listeye ekle"}</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
+    <label class="f" style="margin-top:0">Ne istiyorsun?</label><input class="in" id="iAd" maxlength="80" placeholder="ör. Kablosuz kulaklık" value="${esc(x.ad)}">
+    <label class="f">Yaklaşık fiyatı</label><input class="in" id="iFiyat" maxlength="30" placeholder="ör. 1.500 ₺" value="${esc(x.fiyat)}">
+    <label class="f">Bağlantı (isteğe bağlı)</label><input class="in" id="iLink" type="url" maxlength="400" placeholder="https://..." value="${esc(x.link)}">
+    <label class="f">Not</label><input class="in" id="iNot" maxlength="120" placeholder="ör. Siyah olsun, M beden" value="${esc(x.not)}">
+    <button class="btn" style="margin-top:18px" data-act="istekKaydet" data-id="${id || ""}">Kaydet</button>
+    ${id ? `<button class="btn ghost" style="margin-top:8px;color:var(--acc)" data-act="istekSil" data-id="${id}">${ic("trash")}Listeden çıkar</button>` : ""}`);
+}
+function istekKaydet(id) {
+  const ad = $("#iAd").value.trim(); if (!ad) { toast("Ne istediğini yaz"); return; }
+  let link = $("#iLink").value.trim(); if (link && !/^https?:\/\//i.test(link)) link = "https://" + link;
+  const veri = { ad: ad.slice(0, 80), fiyat: $("#iFiyat").value.trim().slice(0, 30), link: link.slice(0, 400), not: $("#iNot").value.trim().slice(0, 120) };
+  const eski = istekListem.find(y => y.id === id);
+  if (eski) Object.assign(eski, veri); else istekListem.unshift({ id: yeniId(), emoji: "🎁", ...veri });
+  yaz("na-istek", istekListem); sheetKapat(); kayitCiz(); sekmeCiz(); toast("Kaydedildi");
+}
+function istekPaylas() {
+  if (!istekListem.length) { toast("Önce listene bir şey ekle"); return; }
+  const url = location.origin + "/#liste=" + b64e({ a: kullanici, i: istekListem.slice(0, 25).map(x => [x.ad, x.fiyat || "", x.link || "", x.not || "", x.emoji || ""]) });
+  paylas(`🎁 İstek listem\nBana hediye alacaksan buradan bakabilirsin:\n${url}`);
+}
+// paylaşılan listeyi açan kişi
+let wlVeri = null;
+const wlAnahtar = () => "na-wl-" + (wlVeri.a || "") + wlVeri.i.map(x => x[0]).join("|").slice(0, 60);
+function listeGoster(veri) {
+  wlVeri = veri; const al = oku(wlAnahtar(), []);
+  tamAc("wlEkran", `${tamUst("İstek listesi")}
+    <div class="hero"><b>${veri.a ? esc(veri.a) + " şunları istiyor" : "Arkadaşın şunları istiyor"}</b><span>Birini seç, "Ben alıyorum" de. Aynı şeyi iki kişi almasın diye diğerlerine de haber ver.</span></div>
+    ${veri.i.map((x, n) => `<div class="item"><div class="thumb urun">${esc(x[4] || "🎁")}</div><div class="t" style="padding-right:0"><b>${esc(x[0])}</b>${x[1] ? `<div class="p">${esc(x[1])}</div>` : ""}${x[3] ? `<small>${esc(x[3])}</small>` : ""}
+      <div class="acts" style="margin-top:10px">${x[2] && /^https?:\/\//i.test(x[2]) ? `<a href="${esc(x[2])}" target="_blank" rel="noopener">${ic("link")}Bak</a>` : `<a href="https://www.google.com/search?tbm=shop&q=${encodeURIComponent(x[0])}" target="_blank" rel="noopener">${ic("search")}Ara</a>`}
+      <button class="${al.includes(n) ? "on" : ""}" data-act="wlAl" data-i="${n}">${ic("check")}${al.includes(n) ? "Ben alıyorum" : "Bunu alacağım"}</button>
+      ${al.includes(n) ? `<button class="wide" data-act="wlHaber" data-i="${n}">${ic("share")}Diğerlerine haber ver</button>` : ""}</div></div></div>`).join("")}
+    <p class="lead" style="font-size:13px;margin:6px 2px 16px">İşaretlediğin şey sadece senin telefonunda görünür.</p>
+    <button class="btn" data-act="wlKaydet">${ic("users")}Kişilerime kaydet</button>
+    <button class="btn ghost" style="margin-top:8px" data-act="tamKapat">Ne Alsam'ı keşfet</button>`);
+}
+function wlIsaretle(n) { let al = oku(wlAnahtar(), []); al = al.includes(n) ? al.filter(x => x !== n) : [...al, n]; yaz(wlAnahtar(), al); const y = $("#wlEkran").scrollTop; listeGoster(wlVeri); $("#wlEkran").scrollTop = y; }
+function wlKaydet() {
+  const ad = wlVeri.a || "Arkadaşım"; let k = kisiler.find(x => kucuk(x.ad) === kucuk(ad));
+  if (!k) { k = { id: yeniId(), ad, kime: "Arkadaş", dogum: "", cinsiyet: "", ilgi: [], not: "", alinan: [] }; kisiler.push(k); }
+  k.istek = wlVeri.i.map(x => ({ ad: x[0], fiyat: x[1], link: /^https?:\/\//i.test(x[2]) ? x[2] : "", not: x[3], emoji: x[4] || "🎁" }));
+  kaydet(); toast(`${ad} kişilerine kaydedildi`);
+}
+
+/* ---------- fotoğraftan ilgi alanı ---------- */
+function kucult(file, max = 1024) {
+  return new Promise((ok, no) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => { const o = Math.min(1, max / Math.max(img.width, img.height)); const c = document.createElement("canvas"); c.width = Math.round(img.width * o); c.height = Math.round(img.height * o); c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url); ok(c.toDataURL("image/jpeg", .82)); };
+    img.onerror = () => no(new Error("Bu fotoğraf açılamadı."));
+    img.src = url;
+  });
+}
+async function fotoIlgi(file) {
+  const kart = $("[data-act=fotoSec] small"); if (kart) kart.textContent = "Fotoğrafa bakılıyor…";
+  try {
+    const j = await api("/api/ilgi", { resim: await kucult(file) });
+    const hepsi = Object.values(ILGI).flat(); let n = 0;
+    for (const x of j.ilgi || []) {
+      const ad = hepsi.find(h => kucuk(h) === kucuk(x)) || (x[0].toLocaleUpperCase("tr") + x.slice(1));
+      if (w.ilgi.length < 15 && !w.ilgi.some(y => kucuk(y) === kucuk(ad))) { w.ilgi.push(ad); n++; }
+    }
+    w.fotoOzet = j.ozet || ""; formKaydet(); bulCiz();
+    toast(n ? `${n} ilgi alanı eklendi` : "Fotoğrafta ipucu bulunamadı");
+  } catch (e) { if (kart) kart.textContent = e.message; toast(e.message); }
+}
+
+/* ---------- kart notu görseli ---------- */
+let kartDosya = null, kartSonMetin = "";
+async function kartGorsel() {
+  const metin = $("#not")?.textContent.trim(); if (!metin || metin.length < 3 || $("#not .skel")) { toast("Önce not yazılsın"); return; }
+  kartSonMetin = metin;
+  const W = 1080, H = 1350, c = document.createElement("canvas"); c.width = W; c.height = H; const x = c.getContext("2d");
+  const g = x.createLinearGradient(0, 0, W, H); g.addColorStop(0, "#07010F"); g.addColorStop(.55, "#2A0B5C"); g.addColorStop(1, "#5B21B6"); x.fillStyle = g; x.fillRect(0, 0, W, H);
+  const r = x.createRadialGradient(W / 2, 300, 10, W / 2, 300, 560); r.addColorStop(0, "rgba(246,195,91,.32)"); r.addColorStop(1, "rgba(246,195,91,0)"); x.fillStyle = r; x.fillRect(0, 0, W, H);
+  const yildiz = (cx, cy, s, a) => { x.save(); x.globalAlpha = a; x.fillStyle = "#F6C35B"; x.beginPath(); x.moveTo(cx, cy - s); x.quadraticCurveTo(cx, cy, cx + s, cy); x.quadraticCurveTo(cx, cy, cx, cy + s); x.quadraticCurveTo(cx, cy, cx - s, cy); x.quadraticCurveTo(cx, cy, cx, cy - s); x.fill(); x.restore(); };
+  [[140, 170, 28, .9], [935, 230, 22, .8], [880, 520, 14, .55], [185, 610, 12, .5], [960, 1060, 24, .7], [115, 1140, 16, .55], [560, 95, 10, .5], [700, 1230, 10, .4]].forEach(a => yildiz(...a));
+  const img = new Image(); img.src = "/icon-512.png"; await new Promise(o => { img.onload = o; img.onerror = o; });
+  if (img.naturalWidth) { const s = 210, lx = (W - s) / 2, ly = 140; x.save(); x.beginPath(); x.roundRect ? x.roundRect(lx, ly, s, s, 48) : x.rect(lx, ly, s, s); x.clip(); x.drawImage(img, lx, ly, s, s); x.restore(); }
+  const yazi = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+  x.textAlign = "center"; x.fillStyle = "#F6C35B"; x.font = `800 32px ${yazi}`; try { x.letterSpacing = "5px"; } catch {}
+  x.fillText((kartHedef.isim ? kartHedef.isim + " için" : "Sana bir notum var").toLocaleUpperCase("tr"), W / 2, 450); try { x.letterSpacing = "0px"; } catch {}
+  const sar = fs => { x.font = `600 ${fs}px ${yazi}`; const l = []; for (const p of metin.split("\n")) { let s = ""; for (const k of p.split(" ")) { const d = s ? s + " " + k : k; if (x.measureText(d).width > 840 && s) { l.push(s); s = k; } else s = d; } l.push(s); } return l; };
+  let fs = 62, l; while ((l = sar(fs)).length * fs * 1.38 > 600 && fs > 30) fs -= 4;
+  x.fillStyle = "#FFFFFF"; const bas = 520 + (620 - l.length * fs * 1.38) / 2 + fs;
+  l.forEach((s, i) => x.fillText(s, W / 2, bas + i * fs * 1.38));
+  if (kullanici) { x.fillStyle = "rgba(255,255,255,.78)"; x.font = `500 38px ${yazi}`; x.fillText("— " + kullanici, W / 2, 1200); }
+  x.fillStyle = "rgba(255,255,255,.42)"; x.font = `700 26px ${yazi}`; x.fillText("Ne Alsam?", W / 2, 1290);
+  const blob = await new Promise(o => c.toBlob(o, "image/png"));
+  kartDosya = new File([blob], "kart-notu.png", { type: "image/png" });
+  sheetAc(`<div class="shead"><button class="iconbtn" data-act="kartGeri" aria-label="Geri">${ic("back")}</button><h3>Kart görseli</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
+    <img class="preview" src="${URL.createObjectURL(blob)}" alt="Kart notu görseli">
+    <div class="acts"><button data-act="kartIndir">${ic("download")}İndir</button><button data-act="kartPaylas" style="color:var(--acc)">${ic("share")}Paylaş</button></div>
+    <p class="lead" style="font-size:13px;margin-top:10px;text-align:center">iPhone'da görsele uzun basıp "Fotoğraflara Ekle" de diyebilirsin.</p>`);
+}
+async function kartDosyaPaylas(paylasmayaCalis) {
+  if (!kartDosya) return;
+  if (paylasmayaCalis && navigator.canShare?.({ files: [kartDosya] })) { try { await navigator.share({ files: [kartDosya] }); return; } catch (e) { if (e.name === "AbortError") return; } }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(kartDosya); a.download = "kart-notu.png"; document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* ---------- sürpriz yap ---------- */
+let surpriz = null, szKime = null, szPoz = 0, szDonuyor = false;
+const SLOT = ["🎧", "🎮", "📚", "☕", "🎟️", "🧴", "🪴", "🎨", "⌚", "🧸", "🕯️", "👟", "📷", "🎲", "🧩", "🎁"];
+function surprizAc() {
+  const secenek = [...kisiler.slice(0, 6).map(k => [k.ad, k.id]), ...["Anne", "Baba", "Sevgili", "Arkadaş", "Kardeş", "Kendim"].map(k => [k, ""])];
+  if (!szKime) szKime = { ad: secenek[0][0], id: secenek[0][1] };
+  sheetAc(`<div class="shead"><h3>Sürpriz yap</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
+    <p class="lead" style="margin-bottom:12px">Kim için olduğunu seç, çarkı çevir. Gerisini şansa bırak.</p>
+    <div class="pills" style="margin-bottom:14px">${secenek.map(([a, id]) => `<button class="pill sm ${szKime.ad === a && szKime.id === id ? "on" : ""}" data-act="szKime" data-v="${esc(a)}" data-id="${id}">${esc(a)}</button>`).join("")}</div>
+    <div class="slot" id="slot"><span>🎁</span></div>
+    <div id="szSonuc"></div>
+    <button class="btn" id="szBtn" data-act="szCevir">${ic("dice")}Çevir</button>`);
+  if (surpriz && surpriz.anahtar === szAnahtar() && surpriz.goster != null) surprizSonuc();
+}
+const szAnahtar = () => szKime.id || szKime.ad;
+async function surprizCevir() {
+  if (szDonuyor) return; szDonuyor = true;
+  const slot = $("#slot"), btn = $("#szBtn"); btn.disabled = true; $("#szSonuc").innerHTML = "";
+  slot.className = "slot don"; let n = 0; const dongu = setInterval(() => { slot.firstChild.textContent = SLOT[n++ % SLOT.length]; }, 95);
+  const bekle = new Promise(o => setTimeout(o, 1900));
+  try {
+    if (!surpriz || surpriz.anahtar !== szAnahtar() || surpriz.poz >= surpriz.fikirler.length) {
+      const k = kisiler.find(x => x.id === szKime.id);
+      const form = Object.assign(bosForm(), k ? kisidenForm(k) : { kime: szKime.ad });
+      form.tarz = [TARZ[Math.floor(Math.random() * TARZ.length)]];
+      const ist = { kime: form.kime, isim: form.isim, gun: "", kisiId: form.kisiId || "" };
+      const once = surpriz?.anahtar === szAnahtar() ? surpriz.fikirler.map(f => f.ad) : [];
+      const j = await api("/api/hediye", istekYap(form, once));
+      const l = (j.fikirler || []).map(f => ({ ...f, ist })).sort(() => Math.random() - .5);
+      if (!l.length) throw new Error("Çark boş döndü, bir daha dene.");
+      surpriz = { anahtar: szAnahtar(), fikirler: [...(once.length ? surpriz.fikirler : []), ...l], poz: once.length, goster: null };
+    }
+    await bekle;
+    surpriz.goster = surpriz.poz++;
+    clearInterval(dongu); slot.className = "slot dur"; slot.firstChild.textContent = surpriz.fikirler[surpriz.goster].emoji || "🎁";
+    if (navigator.vibrate) try { navigator.vibrate([20, 40, 20]); } catch {}
+    surprizSonuc();
+  } catch (e) { clearInterval(dongu); slot.className = "slot"; slot.firstChild.textContent = "😕"; toast(e.message); }
+  szDonuyor = false; btn.disabled = false;
+}
+function surprizSonuc() {
+  const el = $("#szSonuc"); if (!el || !surpriz || surpriz.goster == null) return;
+  el.innerHTML = urunKarti(surpriz.fikirler[surpriz.goster], surpriz.goster, "z");
+  const b = $("#szBtn"); if (b) b.innerHTML = `${ic("dice")}Bir daha çevir`;
+}
+
+/* ---------- toplu hediye planı ---------- */
+let plan = oku("na-plan", null), planTaslak = null, planDuz = [];
+const tl = n => Math.round(n).toLocaleString("tr-TR") + " ₺";
+const butceKodu = n => n <= 300 ? "300" : n <= 750 ? "750" : n <= 1500 ? "1500" : n <= 3000 ? "3000" : n <= 7500 ? "7500" : "7500+";
+function planAc() {
+  sheetKapat();
+  if (plan) return planCiz();
+  planTaslak = { gun: "Yılbaşı", toplam: "", secili: new Set(kisiler.slice(0, 4).map(k => k.id)), elle: [] };
+  planKurCiz();
+}
+function planKurCiz() {
+  const p = planTaslak, kisiSay = p.secili.size + p.elle.length, pay = +p.toplam && kisiSay ? +p.toplam / kisiSay : 0;
+  const ekran = $("#planEkran"), y = ekran?.scrollTop || 0;
+  tamAc("planEkran", `${tamUst("Toplu plan")}
+    <div class="hero"><b>Herkese tek seferde hediye</b><span>Yılbaşı, bayram ya da aile toplantısı… Kişileri ve toplam bütçeni seç, herkes için fikirler gelsin.</span></div>
+    <label class="f">Ne için?</label><select class="in" id="pGun">${GUN.map(g => `<option ${g === p.gun ? "selected" : ""}>${g}</option>`).join("")}</select>
+    <label class="f">Toplam bütçe</label><div class="addrow"><input class="in" id="pToplam" type="number" inputmode="numeric" min="0" placeholder="ör. 5000" value="${esc(p.toplam)}"><span style="align-self:center;font-weight:700;padding:0 6px">₺</span></div>
+    <p class="lead" id="pPay" style="margin-top:6px">${pay ? `Kişi başı yaklaşık <b style="color:var(--acc)">${tl(pay)}</b>` : ""}</p>
+    <div class="grp">Kimler var? (${kisiSay})</div>
+    ${kisiler.length ? `<div class="opts one">${kisiler.map(k => `<button class="opt ${p.secili.has(k.id) ? "on" : ""}" data-act="planSec" data-id="${k.id}">${esc(k.ad)} <small style="color:var(--sub);font-weight:500;margin-left:6px;flex:1">${esc(k.kime)}</small><span class="ck">${p.secili.has(k.id) ? ic("check") : ""}</span></button>`).join("")}</div>` : ""}
+    ${p.elle.map((k, i) => `<div class="opt on" style="margin-top:8px">${esc(k.ad)} <small style="color:var(--sub);font-weight:500;margin-left:6px;flex:1">${esc(k.kime)}</small><button data-act="planCikar" data-i="${i}" aria-label="Çıkar" style="color:var(--sub)">${ic("close")}</button></div>`).join("")}
+    <div class="addrow" style="margin-top:10px"><input class="in" id="pAd" maxlength="24" placeholder="Başka biri: ör. Ayşe teyze"><select class="in" id="pKime" style="max-width:130px">${KIME.map(x => `<option>${x}</option>`).join("")}</select><button data-act="planEkle" aria-label="Ekle">${ic("plus")}</button></div>
+    <button class="btn" style="margin-top:22px" data-act="planBasla" ${kisiSay ? "" : "disabled"}>${ic("gift")}Planı oluştur${kisiSay ? ` (${kisiSay} kişi)` : ""}</button>`);
+  $("#planEkran").scrollTop = y;
+  $("#pGun").onchange = e => p.gun = e.target.value;
+  $("#pToplam").oninput = e => { p.toplam = e.target.value; const n = p.secili.size + p.elle.length; $("#pPay").innerHTML = +p.toplam && n ? `Kişi başı yaklaşık <b style="color:var(--acc)">${tl(+p.toplam / n)}</b>` : ""; };
+}
+function planElleEkle() {
+  const ad = $("#pAd").value.trim(); if (!ad) { toast("Bir ad yaz"); return; }
+  planTaslak.elle.push({ ad: ad.slice(0, 24), kime: $("#pKime").value }); planKurCiz();
+}
+async function planBasla() {
+  const p = planTaslak; p.toplam = $("#pToplam").value; p.gun = $("#pGun").value;
+  const liste = [...kisiler.filter(k => p.secili.has(k.id)).map(k => ({ ad: k.ad, kime: k.kime, kisiId: k.id })), ...p.elle.map(k => ({ ...k, kisiId: "" }))];
+  if (!liste.length) return;
+  const pay = +p.toplam ? +p.toplam / liste.length : 0;
+  plan = { gun: p.gun, toplam: +p.toplam || 0, kisiler: liste.map(k => ({ ...k, pay, durum: "sirada", fikirler: [] })) };
+  planCiz();
+  for (let i = 0; i < plan.kisiler.length; i++) await planKisiAra(i);
+}
+async function planKisiAra(i) {
+  const pk = plan.kisiler[i]; pk.durum = "yukleniyor"; planCiz();
+  const k = kisiler.find(x => x.id === pk.kisiId);
+  const form = Object.assign(bosForm(), k ? kisidenForm(k) : { kime: pk.kime, isim: pk.ad }, { gun: plan.gun, butce: pk.pay ? butceKodu(pk.pay) : "" });
+  if (pk.pay) form.not = (`Bu kişi için bütçe yaklaşık ${tl(pk.pay)}. ` + form.not).trim();
+  const ist = { kime: form.kime, isim: form.isim || pk.ad, gun: plan.gun, kisiId: pk.kisiId };
+  for (let deneme = 0; deneme < 4; deneme++) {
+    try { const j = await api("/api/hediye", istekYap(form, [])); pk.fikirler = (j.fikirler || []).map(f => ({ ...f, ist })); pk.durum = pk.fikirler.length ? "tamam" : "hata"; pk.hata = pk.fikirler.length ? "" : "Fikir çıkmadı"; break; }
+    catch (e) {
+      // dakikalık sınıra takıldıysa biraz bekleyip kendisi tekrar dener (günlük sınırda beklemez)
+      if (e.status === 429 && !/Bugünlük/.test(e.message) && deneme < 3) { pk.durum = "bekliyor"; planCiz(); await new Promise(o => setTimeout(o, 20000)); pk.durum = "yukleniyor"; planCiz(); continue; }
+      pk.durum = "hata"; pk.hata = e.message; break;
+    }
+  }
+  yaz("na-plan", plan); planCiz();
+}
+function planCiz() {
+  if (!plan) return; planDuz = [];
+  const ekran = $("#planEkran"), y = ekran?.scrollTop || 0;
+  const biten = plan.kisiler.filter(k => k.durum === "tamam").length;
+  tamAc("planEkran", `${tamUst("Toplu plan", `<button class="iconbtn" data-act="planYeni" aria-label="Yeni plan">${ic("refresh")}</button>`)}
+    <div class="hero"><b>${esc(plan.gun)} planı</b><span>${plan.kisiler.length} kişi${plan.toplam ? ` · toplam ${tl(plan.toplam)} · kişi başı ~${tl(plan.toplam / plan.kisiler.length)}` : ""}${biten < plan.kisiler.length ? ` · ${biten}/${plan.kisiler.length} hazır` : ""}</span></div>
+    ${plan.kisiler.map((pk, i) => {
+      const bas = `<div class="pp"><div class="av" style="background:${renk(pk.ad)}">${esc(harf(pk.ad))}</div><div class="t"><b>${esc(pk.ad)}</b><small>${esc(pk.kime)}${pk.pay ? ` · ${tl(pk.pay)}` : ""}</small></div></div>`;
+      if (pk.durum === "sirada") return bas + `<p class="lead">Sırada…</p>`;
+      if (pk.durum === "yukleniyor") return bas + '<div class="skel"></div>';
+      if (pk.durum === "bekliyor") return bas + `<p class="lead">Çok hızlı gittik, birkaç saniye bekleyip devam ediyorum…</p>`;
+      if (pk.durum === "hata") return bas + `<div class="note-row" style="margin:0;background:var(--acc-soft);color:var(--acc)"><span>${esc(pk.hata)}</span><button data-act="planTekrar" data-i="${i}">Tekrar dene</button></div>`;
+      const goster = pk.acik ? pk.fikirler : pk.fikirler.slice(0, 1);
+      return bas + goster.map(f => { planDuz.push(f); return urunKarti(f, planDuz.length - 1, "p"); }).join("") +
+        (pk.fikirler.length > 1 ? `<button class="inline" data-act="planAc2" data-i="${i}">${pk.acik ? "Daha az göster" : `Diğer ${pk.fikirler.length - 1} fikir`}</button>` : "");
+    }).join("")}
+    <p class="foot">Fiyatlar yaklaşıktır.</p>`);
+  $("#planEkran").scrollTop = y;
+}
+
+/* ---------- gizli anket ---------- */
+const ANKET = [
+  { q: "Hafta sonu için ideal plan?", o: [["Doğada kamp ⛺", ["Kamp", "Doğa yürüyüşü"]], ["Evde film, dizi 🍿", ["Film ve dizi"]], ["Arkadaşlarla dışarıda 🎉", ["Konser"]], ["Yeni bir şey öğrenmek 📚", ["Kitap"]]] },
+  { q: "Sabahları?", o: [["Kahve olmadan olmaz ☕", ["Kahve"]], ["Demli bir çay 🫖", ["Çay"]], ["Hiçbiri, direkt güne başlarım ⚡", []]] },
+  { q: "Tatil dediğin…", o: [["Deniz, kum, güneş 🏖️", ["Seyahat", "Yüzme"]], ["Şehir şehir gezmek 🏛️", ["Seyahat", "Fotoğraf"]], ["Dağ evinde sessizlik 🏔️", ["Doğa yürüyüşü"], ["Rahatlatıcı"]], ["Evde dinlenmek 🛋️", [], ["Rahatlatıcı"]]] },
+  { q: "Boş vaktinde elin neye gider?", o: [["Oyun konsoluna 🎮", ["Video oyunları", "Teknoloji"]], ["Kitaba 📖", ["Kitap"]], ["Spor ayakkabıma 👟", ["Fitness", "Koşu"]], ["Kalem, boya, iplik 🎨", ["Resim", "El işi"]]] },
+  { q: "Müzik senin için?", o: [["Hep kulağımda 🎧", ["Müzik"]], ["Konserleri kaçırmam 🎤", ["Konser", "Müzik"]], ["Arada bir dinlerim 🎵", []]] },
+  { q: "Tarzın nasıl?", o: [["Rahat ve sportif 🧢", [], ["Pratik"]], ["Şık ve özenli ✨", ["Moda"], ["Şık"]], ["Sade, az ama öz 🤍", [], ["Pratik"]], ["Renkli ve eğlenceli 🌈", ["Moda"], ["Eğlenceli"]]] },
+  { q: "Mutfakta sen…", o: [["Şefim, deneme yaparım 👨‍🍳", ["Yemek yapmak"]], ["Tatlıcıyım 🧁", ["Yemek yapmak"]], ["Sadece yemeye gelirim 😄", []]] },
+  { q: "Evinde olmazsa olmaz?", o: [["Bir kedi ya da köpek 🐾", ["Hayvanlar"]], ["Bitkilerim 🌿", ["Bitkiler"]], ["Güzel bir ışık, dekor 🕯️", ["Dekorasyon"]], ["Son model teknoloji 💻", ["Teknoloji"]]] },
+  { q: "Sana hediye alınsa hangisi?", o: [["İşime yarayacak bir şey 🛠️", [], ["Pratik"]], ["Unutamayacağım bir deneyim 🎟️", [], [], ["deneyim"]], ["El emeği, kişisel bir şey 💌", [], ["Kişiye özel"]], ["Tam bir sürpriz 🎁", [], ["Eğlenceli"]]] }
+];
+const ANKET_TIP = [
+  ["Maceracı ruh", ["Kamp", "Doğa yürüyüşü", "Seyahat", "Yüzme", "Fitness", "Koşu"]],
+  ["Keyif ustası", ["Film ve dizi", "Kahve", "Çay", "Dekorasyon", "Rahatlatıcı"]],
+  ["Teknoloji meraklısı", ["Video oyunları", "Teknoloji"]],
+  ["Sanatçı ruh", ["Resim", "El işi", "Kitap", "Müzik", "Fotoğraf"]],
+  ["Sosyal kelebek", ["Konser", "Moda", "Yemek yapmak", "Hayvanlar", "Bitkiler"]]
+];
+function anketSonuc(c) {
+  const ilgi = [], tarz = [], turler = [];
+  c.forEach((s, n) => { const o = ANKET[n]?.o[s]; if (!o) return; (o[1] || []).forEach(x => ilgi.includes(x) || ilgi.push(x)); (o[2] || []).forEach(x => tarz.includes(x) || tarz.push(x)); (o[3] || []).forEach(x => turler.includes(x) || turler.push(x)); });
+  const puan = ANKET_TIP.map(([ad, l]) => [ad, [...ilgi, ...tarz].filter(x => l.includes(x)).length]).sort((a, b) => b[1] - a[1]);
+  return { ilgi, tarz, turler, tip: puan[0][1] ? puan[0][0] : "Gizemli ve özgün" };
+}
+let anketDurum = null;
+function anketOlustur(kisiId) {
+  const k = kisiler.find(x => x.id === kisiId);
+  sheetAc(`<div class="shead"><h3>Gizli anket</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
+    <p class="txt">Hediye alacağın kişiye eğlenceli bir test gönder: <b>"Ne tarz birisin?"</b> Cevaplarken ne sevdiğini öğrenirsin, ama hediye alacağını anlamaz 🤫</p>
+    <div class="list" style="margin-bottom:14px"><div class="row">${ic("share")}<div class="t"><b>1. Linki gönder</b><small>WhatsApp ya da mesajla</small></div></div><div class="row">${ic("quest")}<div class="t"><b>2. O testi çözer</b><small>9 eğlenceli soru, 1 dakika</small></div></div><div class="row">${ic("gift")}<div class="t"><b>3. Sonucu sana gönderir</b><small>Sevdikleri kişilerine eklenir</small></div></div></div>
+    <label class="f" style="margin-top:0">Kime gönderiyorsun?</label><input class="in" id="anAd" maxlength="24" placeholder="ör. Elif" value="${esc(k?.ad || "")}">
+    <input type="hidden" id="anKisi" value="${esc(k?.id || "")}">
+    <button class="btn" style="margin-top:16px" data-act="anketGonder">${ic("share")}Linki gönder</button>`);
+}
+function anketGonder() {
+  const ad = $("#anAd").value.trim(); if (!ad) { toast("Bir ad yaz"); return; }
+  const id = yeniId(), kisiId = $("#anKisi").value;
+  const l = oku("na-anketler", []); l.unshift({ id, ad, kisiId, tarih: Date.now() }); yaz("na-anketler", l.slice(0, 30));
+  const url = location.origin + "/#anket=" + b64e({ id, k: ad.slice(0, 24), g: kullanici });
+  paylas(`${ad}, sana 1 dakikalık bir test buldum: Ne tarz birisin? 😄 Çöz, sonucunu bana gönder!\n${url}`);
+}
+function anketCoz(veri) { anketDurum = { ...veri, n: 0, c: [] }; anketCiz(); }
+function anketCiz() {
+  const a = anketDurum;
+  if (a.n >= ANKET.length) {
+    const s = anketSonuc(a.c);
+    tamAc("anketEkran", `${tamUst("Sonucun")}
+      <div class="hero" style="text-align:center;padding:30px 18px"><div class="res-k">Sen bir</div><b style="font-size:32px;margin:8px 0">${esc(s.tip)}</b><span>${s.ilgi.slice(0, 6).map(esc).join(" · ") || "Seni tek kelimeyle anlatmak zor 🙂"}</span></div>
+      <p class="txt" style="text-align:center">${a.g ? `Sonucunu <b>${esc(a.g)}</b> ile paylaş, ne çıktığını merak ediyor!` : "Sonucunu testi sana gönderen kişiyle paylaş!"}</p>
+      <button class="btn" data-act="anketSonucGonder">${ic("share")}Sonucu gönder</button>
+      <button class="btn ghost" style="margin-top:8px" data-act="tamKapat">Ne Alsam'ı keşfet</button>`);
+    return;
+  }
+  const q = ANKET[a.n];
+  tamAc("anketEkran", `<div class="wtop">${a.n ? `<button class="iconbtn" data-act="anketGeri" aria-label="Geri">${ic("back")}</button>` : `<button class="iconbtn" data-act="tamKapat" aria-label="Kapat">${ic("close")}</button>`}<div class="bar"><i style="width:${(a.n + 1) / ANKET.length * 100}%"></i></div></div>
+    ${a.n === 0 ? `<div class="hero"><b>Ne tarz birisin?</b><span>${a.g ? esc(a.g) + " sana gönderdi. " : ""}9 soru, 1 dakika. Aklına ilk geleni seç!</span></div>` : `<div class="step">Soru ${a.n + 1} / ${ANKET.length}</div>`}
+    <h2 class="quizq">${q.q}</h2>
+    <div class="opts one">${q.o.map((o, i) => `<button class="opt" data-act="anketCevap" data-i="${i}">${o[0]}<span class="ck"></span></button>`).join("")}</div>`);
+}
+function anketCevapla(i) { anketDurum.c.push(i); anketDurum.n++; setTimeout(anketCiz, 120); }
+function anketSonucGonder() {
+  const a = anketDurum, s = anketSonuc(a.c);
+  const url = location.origin + "/#cevap=" + b64e({ id: a.id, k: a.k, c: a.c });
+  paylas(`Testi çözdüm: ${s.tip} çıktım! 😄\n${url}`);
+}
+let cevapVeri = null;
+function cevapAl(veri) {
+  cevapVeri = veri; const s = anketSonuc(veri.c || []);
+  const an = oku("na-anketler", []).find(x => x.id === veri.id);
+  const k = kisiler.find(x => x.id === an?.kisiId) || kisiler.find(x => kucuk(x.ad) === kucuk(veri.k || ""));
+  cevapVeri.kisiId = k?.id || "";
+  sheetAc(`<div class="shead"><h3>${esc(veri.k || "Arkadaşın")} testi çözdü 🎉</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
+    <div class="hero" style="margin-top:0"><div class="res-k">Sonuç</div><b>${esc(s.tip)}</b><span>Hiçbir şeyden şüphelenmedi 🤫</span></div>
+    <div class="grp" style="margin-top:0">Sevdikleri</div><div class="pills" style="margin-bottom:8px">${[...s.ilgi, ...s.tarz].map(x => `<span class="pill sm">${esc(x)}</span>`).join("") || '<span class="lead">Belirgin bir şey çıkmadı</span>'}</div>
+    <button class="btn" style="margin-top:14px" data-act="cevapAra">${ic("gift")}Buna göre hediye bul</button>
+    <button class="btn ghost" style="margin-top:8px" data-act="cevapKaydet">${ic("users")}${k ? `${esc(k.ad)} kişisine ekle` : "Kişilerime kaydet"}</button>`);
+}
+function cevapKaydet(araDa) {
+  const s = anketSonuc(cevapVeri.c || []); let k = kisiler.find(x => x.id === cevapVeri.kisiId);
+  if (!k) { k = { id: yeniId(), ad: cevapVeri.k || "Arkadaşım", kime: "Arkadaş", dogum: "", cinsiyet: "", ilgi: [], not: "", alinan: [] }; kisiler.push(k); }
+  for (const x of s.ilgi) if (k.ilgi.length < 15 && !k.ilgi.includes(x)) k.ilgi.push(x);
+  kaydet(); sheetKapat();
+  if (araDa) { yeniArama(Object.assign(kisidenForm(k), { tarz: s.tarz, turler: s.turler })); adim = 2; bulCiz(); }
+  else { toast(`${k.ad} kaydedildi`); git("kisi"); }
+}
+
+/* ---------- linkle gelenler ---------- */
+function linkKontrol() {
+  const m = location.hash.match(/^#(liste|anket|cevap)=([A-Za-z0-9_-]+)$/); if (!m) return false;
+  try {
+    const v = b64d(m[2]);
+    if (m[1] === "liste" && Array.isArray(v.i)) listeGoster({ a: String(v.a || "").slice(0, 24), i: v.i.slice(0, 25).map(x => [0, 1, 2, 3, 4].map(n => String(x?.[n] ?? "").slice(0, 400))) });
+    else if (m[1] === "anket") anketCoz({ id: String(v.id || ""), k: String(v.k || "").slice(0, 24), g: String(v.g || "").slice(0, 24) });
+    else if (m[1] === "cevap" && Array.isArray(v.c)) { history.replaceState(null, "", location.pathname); cevapAl({ id: String(v.id || ""), k: String(v.k || "").slice(0, 24), c: v.c.slice(0, ANKET.length).map(Number) }); }
+    return true;
+  } catch { toast("Bu link açılamadı"); return false; }
+}
 
 /* ---------- ayarlar ---------- */
 function ayarlarAc() {
@@ -801,7 +1275,9 @@ if ("serviceWorker" in navigator) addEventListener("load", () => navigator.servi
 
 temaUygula();
 git("home");
-if (!oku("na-tanitim", false)) { const d = document.createElement("div"); d.id = "tanit"; document.body.appendChild(d); tanitAdim(0); }
+const linkVar = linkKontrol();
+addEventListener("hashchange", () => { sheetKapat(); linkKontrol(); });
+if (!linkVar && !oku("na-tanitim", false)) { const d = document.createElement("div"); d.id = "tanit"; document.body.appendChild(d); tanitAdim(0); }
 setTimeout(() => { const s = $("#splash"); s.classList.add("bitti"); setTimeout(() => s.remove(), 400); }, 1300);
 </script>
 </body>

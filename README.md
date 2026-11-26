@@ -17,7 +17,15 @@ istersen yanına koyacağın **kart notunu** da yazsın.
   kart notu yazma, paylaşma, "benzerleri"
 - **Kişilerim:** sevdiklerini doğum günü ve ilgi alanlarıyla kaydet; "Bunu aldım" dediğin hediyeler bir daha önerilmez
 - **Kaydettiklerim:** beğenilen fikirler kişiye göre gruplu
-- Açık ve koyu tema; veriler sadece telefonun kendisinde saklanır
+- **Sürpriz yap:** çark çevir, şansına bir fikir gelsin
+- **Toplu plan:** yılbaşı gibi günlerde birden çok kişiye, toplam bütçeyi bölerek fikir
+- **İstek listem:** kendi listeni yap, linkle paylaş (veriler linkin içinde, sunucu gerekmez)
+- **Gizli anket:** hediye alacağın kişiye "Ne tarz birisin?" testi gönder, sonucu ilgi alanı olarak gelsin
+- **Fotoğraftan tahmin:** oda/raf/profil fotoğrafından ilgi alanları (`/api/ilgi`, Dolapta Ne Var'da)
+- **Takvime ekle:** doğum günleri 1 hafta önceden hatırlatmalı takvim dosyası (`api/takvim.js`, bu projede)
+- **Kart görseli:** kart notunu paylaşılabilir bir görsele çevir
+- **Hediye rehberi:** kısa ipucu yazıları
+- Beyaz / Siyah / Otomatik görünüm; veriler sadece telefonun kendisinde saklanır
 
 > Not: Yapay zekâ istekleri şimdilik Dolapta Ne Var projesinin `/api/hediye` ve `/api/kart` servislerine gider
 > (Gemini anahtarı orada). Bu projeye kendi anahtarı eklenirse `index.html` içindeki `API_ADRESI` boş yapılabilir.
