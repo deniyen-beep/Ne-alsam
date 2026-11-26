@@ -610,7 +610,7 @@ function sonucCiz() {
   const s = sonuc, v = $("#v-bul");
   const ust = `<div class="rhead"><button class="iconbtn" ${s.istek.serbest ? 'data-act="sekme" data-v="home"' : 'data-act="adim" data-v="6"'} aria-label="Geri">${ic("back")}</button><div class="t">${s.istek.serbest ? "Sonuçlar" : esc(s.istek.isim || s.istek.kime) + " için"}</div><button class="iconbtn" data-act="listePaylas" aria-label="Paylaş">${ic("share")}</button></div>`;
   if (s.durum === "yukleniyor") { v.innerHTML = ust + `<p class="lead" style="margin:14px 2px">Fikirler hazırlanıyor…</p>` + '<div class="skel"></div>'.repeat(5); return; }
-  if (s.durum === "hata") { v.innerHTML = ust + `<div class="msg"><b>Olmadı</b>${esc(s.hata)}<br><button class="btn" data-act="ara">${ic("refresh")}Tekrar dene</button></div>`; return; }
+  if (s.durum === "hata") { v.innerHTML = ust + `<div class="msg"><b>Bu sefer olmadı</b>${esc(s.hata)}<br><small style="display:block;margin-top:8px;font-size:13px">Yapay zekâ bazen kısa süreliğine yoğun oluyor; birkaç saniye sonra tekrar dene.</small><button class="btn" data-act="ara">${ic("refresh")}Tekrar dene</button></div>`; return; }
   let l = s.fikirler.map((f, i) => ({ f, i }));
   if (s.filtre) l = l.filter(x => x.f.tur === s.filtre);
   if (s.sira === "artan") l.sort((a, b) => fiyatSayi(a.f.fiyat) - fiyatSayi(b.f.fiyat));
