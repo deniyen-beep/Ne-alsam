@@ -7,384 +7,666 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Ne Alsam">
-<meta name="theme-color" content="#8E2A3E">
-<meta name="description" content="Kime, ne için, ne kadar? Yapay zeka sevdiklerine tam ona göre hediye fikirleri bulsun.">
+<meta name="theme-color" content="#F4F3F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E0E10" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Kime, ne için, ne kadar? Sevdiklerine tam onlara göre hediye fikirleri.">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="/icon-192.png">
 <link rel="manifest" href="/manifest.json">
 <title>Ne Alsam?</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
+:root{
+  --bg:#F4F3F1; --card:#FFFFFF; --ink:#17161A; --sub:#6E6A72; --line:#E6E3DF; --chip:#ECEAE6;
+  --acc:#C8324B; --acc-ink:#FFFFFF; --acc-soft:#FBE8EB;
+  --blue:#2F5BD3; --blue-soft:#E7EDFC; --green:#2F7D4F; --green-soft:#E3F2E8; --amber:#9A6510; --amber-soft:#FBF0D9;
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 14px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark){
   :root{
-    --bg:#FBF4EE; --card:#FFFDFB; --ink:#2B1419; --muted:#8A6E72; --line:#EEDDD8; --field:#FFFAF7;
-    --berry:#8E2A3E; --berry2:#B23A52; --berry-bg:#F8E6EA;
-    --gold:#C48C34; --gold2:#E9B85C; --gold-bg:#FBF0DC;
-    --sage:#4E7A5E; --sage-bg:#E5F0E8;
+    --bg:#0E0E10; --card:#1B1B1F; --ink:#F2F1F3; --sub:#9C98A2; --line:#2B2B31; --chip:#26262C;
+    --acc:#F0566C; --acc-ink:#FFFFFF; --acc-soft:#3B1A21;
+    --blue:#8AA8FF; --blue-soft:#1D2742; --green:#7CCB9A; --green-soft:#17301F; --amber:#E8B65C; --amber-soft:#33270F;
+    --shadow:none;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:Nunito,system-ui,sans-serif;color:var(--ink);min-height:100vh;
-    background:radial-gradient(ellipse 120% 50% at 50% 0%,#FFF8F3 0%,var(--bg) 60%) fixed,var(--bg)}
-  .wrap{max-width:520px;margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 16px calc(40px + env(safe-area-inset-bottom))}
-  button{font-family:inherit;-webkit-tap-highlight-color:transparent}
-  header{text-align:center;padding:10px 0 18px}
-  .logo{width:84px;height:84px;border-radius:22px;display:block;margin:0 auto;box-shadow:0 10px 26px rgba(142,42,62,.3)}
-  h1{font-family:Fraunces,serif;font-weight:800;font-size:34px;margin-top:14px;letter-spacing:-.5px;color:var(--berry)}
-  .sub{color:var(--muted);font-size:16px;margin-top:4px}
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg)}
+body{font:16px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);
+  min-height:100vh;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.app{max-width:560px;margin:0 auto;padding:calc(10px + env(safe-area-inset-top)) 16px calc(96px + env(safe-area-inset-bottom))}
+[hidden]{display:none!important}
 
-  .tabs{display:flex;margin-bottom:16px;border-bottom:1px solid var(--line)}
-  .tabs button{flex:1;border:0;background:none;padding:12px 2px 13px;font-weight:800;font-size:12px;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);cursor:pointer;position:relative}
-  .tabs button.on{color:var(--berry)}
-  .tabs button.on::after{content:"";position:absolute;left:18%;right:18%;bottom:-1px;height:3px;border-radius:3px;background:var(--berry)}
+/* üst kısım */
+.brand{display:flex;align-items:center;gap:9px;padding:6px 0 2px;font-weight:700;font-size:15px}
+.brand img{width:28px;height:28px;border-radius:7px}
+h1.big{font-size:31px;line-height:1.15;font-weight:800;letter-spacing:-.025em;margin:14px 0 4px}
+.lead{color:var(--sub);font-size:15px}
+h2.sec{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:26px 0 10px;display:flex;align-items:baseline;justify-content:space-between}
+h2.sec button{font-size:14px;font-weight:600;color:var(--acc)}
 
-  .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:12px;box-shadow:0 10px 28px -16px rgba(110,30,45,.22)}
-  .t{display:flex;align-items:baseline;gap:8px;font-family:Fraunces,serif;font-weight:600;font-size:19px;margin-bottom:12px}
-  .t small{font-family:Nunito;font-size:12px;color:var(--muted);font-weight:600}
-  .chips{display:flex;flex-wrap:wrap;gap:7px}
-  .chips button{border:1px solid var(--line);background:var(--field);border-radius:999px;padding:8px 13px;font-weight:700;font-size:14px;color:var(--ink);cursor:pointer;transition:all .15s}
-  .chips button.on{background:var(--berry);border-color:var(--berry);color:#fff}
-  .chips.sm button{padding:6px 11px;font-size:13px;color:var(--muted)}
-  .chips.sm button.on{color:#fff}
-  .row{display:flex;gap:8px;margin-top:12px}
-  input[type=text],input[type=number],textarea{flex:1;width:100%;min-width:0;border:1px solid var(--line);background:var(--field);border-radius:14px;padding:12px 14px;font:600 16px Nunito;color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s}
-  textarea{resize:vertical;min-height:70px;font-weight:600}
-  input:focus,textarea:focus{border-color:var(--berry2);box-shadow:0 0 0 4px rgba(178,58,82,.12)}
-  input[type=number]{max-width:110px}
-  .seg{display:flex;border:1px solid var(--line);border-radius:14px;overflow:hidden;flex:1}
-  .seg button{flex:1;border:0;background:var(--field);font-weight:700;font-size:14px;color:var(--muted);cursor:pointer;padding:0 6px}
-  .seg button+button{border-left:1px solid var(--line)}
-  .seg button.on{background:var(--berry-bg);color:var(--berry)}
-  .add{border:0;background:var(--berry);color:#fff;border-radius:14px;width:50px;font-size:26px;cursor:pointer;flex:none}
-  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
-  .tag{background:var(--gold-bg);color:#7A5418;border-radius:999px;padding:6px 8px 6px 13px;font-weight:700;font-size:14px;display:flex;align-items:center;gap:6px}
-  .tag button{border:0;background:rgba(196,140,52,.2);width:20px;height:20px;border-radius:50%;cursor:pointer;font-size:10px;color:#7A5418}
-  .hint{color:var(--muted);font-size:13px;margin:12px 0 8px}
+/* ana sayfa */
+.cta{display:flex;align-items:center;gap:14px;width:100%;margin-top:18px;padding:18px;border-radius:18px;background:var(--acc);color:var(--acc-ink);text-align:left}
+.cta .ic{width:30px;height:30px}
+.cta b{display:block;font-size:18px}
+.cta span{font-size:14px;opacity:.85}
+.cta .go{margin-left:auto;width:20px;height:20px}
+.hscroll{display:flex;gap:10px;overflow-x:auto;margin:0 -16px;padding:2px 16px 6px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.day{flex:none;width:148px;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px;text-align:left;box-shadow:var(--shadow)}
+.day .d{font-size:12px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.04em}
+.day .n{font-weight:700;font-size:15px;margin:6px 0 10px;line-height:1.25;min-height:38px}
+.day .k{display:inline-block;font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--chip);color:var(--sub)}
+.day .k.hot{background:var(--acc-soft);color:var(--acc)}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 4px 10px;font-size:13px;font-weight:600;text-align:center;box-shadow:var(--shadow)}
+.tile .av{margin:0 auto 7px}
+.av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;flex:none}
+.list{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.row{display:flex;align-items:center;gap:12px;width:100%;padding:13px 14px;text-align:left;min-height:56px}
+.row+.row{border-top:1px solid var(--line)}
+.row .t{flex:1;min-width:0}
+.row .t b{display:block;font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .t small{display:block;color:var(--sub);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .chev{color:var(--sub);width:18px;height:18px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600}
+.pill.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.pill.sm{padding:6px 12px;font-size:13px}
+.note-row{display:flex;gap:10px;align-items:center;margin-top:16px;padding:12px 14px;border-radius:14px;background:var(--blue-soft);color:var(--blue);font-size:14px;font-weight:600}
+.note-row button{margin-left:auto;color:inherit;opacity:.7}
 
-  .go{width:100%;border:0;border-radius:18px;padding:18px;font-weight:800;font-size:16px;letter-spacing:.5px;color:#fff;cursor:pointer;margin-top:4px;
-    background:linear-gradient(135deg,var(--berry2),var(--berry));box-shadow:0 12px 26px -10px rgba(142,42,62,.6)}
-  .go:disabled{opacity:.6;cursor:wait}
-  .status{text-align:center;color:var(--muted);padding:26px 8px;font-size:16px}
-  .status.err{color:#9A2A2A;font-weight:700}
-  .spin{width:34px;height:34px;border:3px solid var(--berry-bg);border-top-color:var(--berry);border-radius:50%;margin:0 auto 12px;animation:d 0.9s linear infinite}
-  @keyframes d{to{transform:rotate(360deg)}}
+/* sihirbaz */
+.wtop{display:flex;align-items:center;gap:10px;height:44px}
+.iconbtn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card);border:1px solid var(--line)}
+.bar{flex:1;height:5px;border-radius:5px;background:var(--chip);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);border-radius:5px;transition:width .3s}
+.skip{font-size:15px;font-weight:600;color:var(--sub);padding:8px 4px}
+.step{font-size:13px;color:var(--sub);font-weight:600;margin-top:14px}
+.q{font-size:27px;line-height:1.2;font-weight:800;letter-spacing:-.02em;margin:4px 0 6px}
+.qs{color:var(--sub);font-size:15px;margin-bottom:18px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:14px;font-weight:600;font-size:15px;text-align:left;min-height:52px}
+.opt.on{border-color:var(--acc);background:var(--acc-soft);color:var(--acc)}
+.opt .ck{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center}
+.opt.on .ck{background:var(--acc);border-color:var(--acc);color:#fff}
+.opt .ck .ic{width:13px;height:13px;stroke-width:3}
+.opts.one{grid-template-columns:1fr}
+label.f{display:block;font-size:13px;font-weight:600;color:var(--sub);margin:16px 0 6px}
+.in{width:100%;border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:13px 14px;font-size:16px;outline:none}
+.in:focus{border-color:var(--acc)}
+textarea.in{min-height:96px;resize:vertical}
+.stepper{display:flex;align-items:center;gap:0;border:1.5px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden;width:max-content}
+.stepper button{width:52px;height:50px;font-size:22px;font-weight:500}
+.stepper input{width:70px;text-align:center;border:0;background:none;font-size:18px;font-weight:700;outline:none;-moz-appearance:textfield}
+.stepper input::-webkit-inner-spin-button{-webkit-appearance:none}
+.seg{display:flex;background:var(--chip);border-radius:12px;padding:3px}
+.seg button{flex:1;padding:10px 6px;border-radius:10px;font-weight:600;font-size:14px;color:var(--sub)}
+.seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.grp{font-size:13px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.05em;margin:18px 0 8px}
+.addrow{display:flex;gap:8px}
+.addrow .in{flex:1}
+.addrow button{flex:none;width:50px;border-radius:14px;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center}
+.switch{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:18px;width:100%;text-align:left}
+.switch .t{flex:1}
+.switch .t b{display:block;font-size:15px}
+.switch .t small{color:var(--sub);font-size:13px}
+.tg{width:50px;height:30px;border-radius:15px;background:var(--chip);position:relative;flex:none;transition:background .2s}
+.tg::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}
+.switch.on .tg{background:var(--green)}
+.switch.on .tg::after{left:23px}
+.sum .row{min-height:48px;padding:11px 14px}
+.sum .row small{color:var(--sub);font-size:13px;width:84px;flex:none}
+.sum .row span{flex:1;font-weight:600;font-size:14px}
+.sum .row em{font-style:normal;color:var(--acc);font-size:14px;font-weight:600}
+.dock{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));padding:10px 16px 12px;background:linear-gradient(transparent,var(--bg) 30%);z-index:5}
+.dock .in2{max-width:528px;margin:0 auto}
+.btn{width:100%;padding:16px;border-radius:14px;background:var(--acc);color:var(--acc-ink);font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn:disabled{opacity:.45}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.spacer{height:84px}
 
-  .res-h{font-family:Fraunces,serif;font-size:22px;font-weight:800;margin:18px 2px 10px;color:var(--berry)}
-  .idea{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:12px;box-shadow:0 10px 28px -16px rgba(110,30,45,.22);animation:up .35s ease both}
-  @keyframes up{from{opacity:0;transform:translateY(10px)}}
-  .idea .top{display:flex;gap:12px;align-items:flex-start}
-  .idea .em{font-size:30px;width:52px;height:52px;flex:none;border-radius:16px;background:var(--berry-bg);display:flex;align-items:center;justify-content:center}
-  .idea h3{font-family:Fraunces,serif;font-weight:600;font-size:18px;line-height:1.25}
-  .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-  .b{font-size:12px;font-weight:800;border-radius:999px;padding:3px 9px}
-  .b.p{background:var(--gold-bg);color:#7A5418}
-  .b.ürün{background:var(--berry-bg);color:var(--berry)}
-  .b.deneyim{background:#E6ECF8;color:#3A5190}
-  .b.kendin{background:var(--sage-bg);color:var(--sage)}
-  .idea p{margin-top:10px;font-size:15px;line-height:1.5}
-  .idea .dk{margin-top:10px;background:var(--field);border:1px dashed var(--line);border-radius:14px;padding:10px 12px;font-size:14px;color:#5E474B}
-  .acts{display:flex;gap:8px;margin-top:12px}
-  .acts button,.acts a{flex:1;border:1px solid var(--line);background:var(--field);border-radius:12px;padding:10px 4px;font-weight:800;font-size:13px;color:var(--ink);cursor:pointer;text-align:center;text-decoration:none}
-  .acts .fav.on{background:var(--berry-bg);border-color:#E9C0C9;color:var(--berry)}
-  .who{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:8px}
-  .more{display:flex;gap:8px}
-  .more button{flex:1;border:1px solid var(--berry);background:none;color:var(--berry);border-radius:16px;padding:14px 6px;font-weight:800;font-size:14px;cursor:pointer}
-  .more button:disabled{opacity:.5}
-  .empty{text-align:center;color:var(--muted);padding:40px 16px}
-  .empty div{font-size:42px;margin-bottom:8px}
+/* sonuçlar */
+.rhead{display:flex;align-items:center;gap:10px;height:44px}
+.rhead .t{flex:1;font-weight:700;font-size:16px;text-align:center}
+.filt{display:flex;gap:8px;overflow-x:auto;margin:14px -16px 4px;padding:0 16px;scrollbar-width:none}
+.filt::-webkit-scrollbar{display:none}
+.filt .pill{flex:none}
+.sortline{display:flex;align-items:center;justify-content:space-between;color:var(--sub);font-size:13px;margin:10px 2px}
+.sortline select{border:0;background:none;color:var(--ink);font-weight:600;font-size:13px}
+.item{display:flex;gap:13px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px;margin-bottom:10px;box-shadow:var(--shadow);position:relative}
+.thumb{width:62px;height:62px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:30px;flex:none;background:var(--chip)}
+.thumb.urun{background:var(--acc-soft)}.thumb.deneyim{background:var(--blue-soft)}.thumb.kendin{background:var(--green-soft)}
+.item .t{flex:1;min-width:0;padding-right:26px}
+.item b{display:block;font-size:15px;font-weight:700;line-height:1.3}
+.item .p{font-weight:700;font-size:14px;margin-top:3px}
+.item small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--sub);font-size:13px;margin-top:3px}
+.item .fav{position:absolute;top:10px;right:10px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--sub)}
+.item .fav.on{color:var(--acc)}
+.item .fav.on .ic{fill:currentColor}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;margin-left:6px;vertical-align:1px}
+.tag.urun{background:var(--acc-soft);color:var(--acc)}.tag.deneyim{background:var(--blue-soft);color:var(--blue)}.tag.kendin{background:var(--green-soft);color:var(--green)}
+.skel{height:90px;border-radius:16px;margin-bottom:10px;background:linear-gradient(90deg,var(--card) 0%,var(--chip) 50%,var(--card) 100%);background-size:200% 100%;animation:sk 1.2s infinite linear;border:1px solid var(--line)}
+@keyframes sk{to{background-position:-200% 0}}
+.msg{text-align:center;padding:36px 16px;color:var(--sub)}
+.msg b{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}
+.msg .btn{margin-top:16px;width:auto;display:inline-flex;padding:12px 22px}
+.empty{text-align:center;padding:50px 20px;color:var(--sub)}
+.empty .ic{width:42px;height:42px;stroke-width:1.4;margin-bottom:10px}
+.empty b{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}
+.empty .btn{margin-top:18px;width:auto;display:inline-flex;padding:12px 22px}
 
-  .sheet{position:fixed;inset:0;background:rgba(43,20,25,.45);display:none;align-items:flex-end;justify-content:center;z-index:20}
-  .sheet.on{display:flex}
-  .sheet .in{background:var(--card);width:100%;max-width:520px;border-radius:24px 24px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom));max-height:90vh;overflow:auto;animation:up .25s ease}
-  .sheet h2{font-family:Fraunces,serif;font-size:21px;color:var(--berry);margin-bottom:4px}
-  .sheet .sm{color:var(--muted);font-size:14px;margin-bottom:14px}
-  .note{margin-top:14px;background:var(--gold-bg);border-radius:16px;padding:16px;font-size:16px;line-height:1.55;white-space:pre-wrap;min-height:60px;font-family:Fraunces,serif;font-weight:600;color:#4A2E14}
-  .close{float:right;border:0;background:var(--field);width:34px;height:34px;border-radius:50%;font-size:16px;cursor:pointer;color:var(--muted)}
-  .install{display:none;width:100%;margin-top:14px;border:1px dashed var(--berry);background:var(--berry-bg);color:var(--berry);border-radius:14px;padding:12px;font-weight:800;font-size:14px;cursor:pointer}
-  .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;transition:all .25s;pointer-events:none;z-index:30}
-  .toast.on{opacity:1;transform:translateX(-50%)}
-  footer{text-align:center;color:var(--muted);font-size:12px;margin-top:24px}
-  [hidden]{display:none!important}
+/* alt menü */
+.tabbar{position:fixed;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line);z-index:10;padding-bottom:env(safe-area-inset-bottom)}
+.tabbar .in2{max-width:560px;margin:0 auto;display:flex}
+.tabbar button{flex:1;height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:600;color:var(--sub);position:relative}
+.tabbar button.on{color:var(--acc)}
+.tabbar button.on .ic{stroke-width:2.2}
+.tabbar .badge{position:absolute;top:9px;left:calc(50% + 6px);background:var(--acc);color:#fff;font-size:10px;font-weight:700;min-width:17px;height:17px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+
+/* alttan açılan pencere */
+.sheet{position:fixed;inset:0;z-index:20;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s}
+.sheet.on{opacity:1;pointer-events:auto}
+.sheet .box{width:100%;max-width:560px;max-height:88vh;overflow:auto;background:var(--bg);border-radius:20px 20px 0 0;padding:8px 16px calc(20px + env(safe-area-inset-bottom));transform:translateY(30px);transition:transform .25s}
+.sheet.on .box{transform:none}
+.grab{width:38px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 10px}
+.shead{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.shead h3{flex:1;font-size:20px;font-weight:800;letter-spacing:-.015em;line-height:1.25}
+.shead .iconbtn{width:34px;height:34px}
+.shead .iconbtn .ic{width:18px;height:18px}
+.big-thumb{width:100%;height:120px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:60px;margin-bottom:14px}
+.kv{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.kv span{font-size:13px;font-weight:700;padding:5px 10px;border-radius:8px;background:var(--chip)}
+.box p.txt{font-size:15px;line-height:1.55;margin-bottom:12px}
+.tip{background:var(--amber-soft);color:var(--amber);border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.5;margin-bottom:16px}
+.tip b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.shops{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.shops a{display:flex;align-items:center;gap:8px;padding:12px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:14px;color:var(--ink);text-decoration:none}
+.shops a i{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:12px;color:#fff;flex:none}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acts button{display:flex;align-items:center;justify-content:center;gap:7px;padding:13px 8px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:14px}
+.acts button.on{color:var(--acc);border-color:var(--acc)}
+.acts button.on .ic{fill:currentColor}
+.acts button.wide{grid-column:span 2}
+.cardnote{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;font-size:17px;line-height:1.6;min-height:110px;white-space:pre-wrap;margin:14px 0}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translate(-50%,10px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;opacity:0;transition:all .2s;pointer-events:none;z-index:40;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.foot{color:var(--sub);font-size:12px;text-align:center;margin-top:28px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <img class="logo" src="/icon-192.png" alt="">
-    <h1>Ne Alsam?</h1>
-    <p class="sub">Sevdiklerine tam onlara göre hediye fikirleri</p>
-    <button class="install" id="install">📲 Uygulamayı telefonuna yükle</button>
-  </header>
-
-  <nav class="tabs">
-    <button class="on" data-tab="bul">🎁 Fikir bul</button>
-    <button data-tab="kayit">♥ Kaydettiklerim <span id="favCount"></span></button>
-  </nav>
-
-  <main id="bul">
-    <section class="card">
-      <div class="t">Kime alıyorsun?</div>
-      <div class="chips" id="kime"></div>
-      <div class="row">
-        <input type="text" id="isim" placeholder="Adı (isteğe bağlı)" maxlength="30">
-        <input type="number" id="yas" placeholder="Yaşı" min="0" max="110" inputmode="numeric">
-      </div>
-      <div class="row" style="height:44px">
-        <div class="seg" id="cinsiyet">
-          <button data-v="kadın">Kadın</button><button data-v="erkek">Erkek</button><button data-v="" class="on">Fark etmez</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="card">
-      <div class="t">Ne için?</div>
-      <div class="chips" id="gun"></div>
-    </section>
-
-    <section class="card">
-      <div class="t">Bütçen ne kadar?</div>
-      <div class="chips" id="butce"></div>
-    </section>
-
-    <section class="card">
-      <div class="t">Neleri sever? <small>ne kadar çok, o kadar iyi</small></div>
-      <div class="row" style="margin-top:0">
-        <input type="text" id="ilgiIn" placeholder="ör. kamp, kahve, Harry Potter" maxlength="40" enterkeyhint="done">
-        <button class="add" id="ilgiAdd" aria-label="Ekle">+</button>
-      </div>
-      <div class="tags" id="ilgiler"></div>
-      <p class="hint">Hızlı ekle:</p>
-      <div class="chips sm" id="hizli"></div>
-      <p class="hint">Bilmem gereken başka bir şey var mı?</p>
-      <textarea id="notlar" maxlength="300" placeholder="ör. Geçen yıl parfüm aldım. Çok pratik biridir, süs eşyası sevmez."></textarea>
-    </section>
-
-    <section class="card">
-      <div class="t">Ne tür bir hediye? <small>seçmezsen hepsi</small></div>
-      <div class="chips" id="tur"></div>
-    </section>
-
-    <button class="go" id="go">✨ Hediye fikirlerini bul</button>
-    <div id="sonuc"></div>
-  </main>
-
-  <main id="kayit" hidden>
-    <div id="kayitlar"></div>
-  </main>
-
-  <footer>Fiyatlar yaklaşıktır, satın almadan önce kontrol et.</footer>
+<div class="app">
+  <section id="v-home"></section>
+  <section id="v-bul" hidden></section>
+  <section id="v-kisi" hidden></section>
+  <section id="v-kayit" hidden></section>
 </div>
 
-<div class="sheet" id="sheet">
-  <div class="in">
-    <button class="close" id="kapat" aria-label="Kapat">✕</button>
-    <h2>✍️ Kart notu</h2>
-    <p class="sm" id="kartAlt"></p>
-    <div class="chips" id="ton"></div>
-    <div class="note" id="not"></div>
-    <div class="acts">
-      <button id="yeniNot">🔄 Başka yaz</button>
-      <button id="kopyala">📋 Kopyala</button>
-      <button id="paylasNot">📤 Paylaş</button>
-    </div>
-  </div>
-</div>
+<nav class="tabbar"><div class="in2" id="tabs"></div></nav>
+<div class="sheet" id="sheet"><div class="box" id="sbox"></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
+/* ---------- yardımcılar ---------- */
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const oku = (k, v) => { try { const x = localStorage.getItem(k); return x ? JSON.parse(x) : v; } catch { return v; } };
 const yaz = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
-const toast = m => { const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(t._z); t._z = setTimeout(() => t.classList.remove("on"), 2000); };
+const toast = m => { const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(t._z); t._z = setTimeout(() => t.classList.remove("on"), 1900); };
+const kucuk = s => String(s).toLocaleLowerCase("tr");
+const yeniId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 
-const KIME = ["Anne","Baba","Sevgili","Eş","Arkadaş","Kardeş","Çocuk","Dede","Nine","İş arkadaşı","Patron","Öğretmen","Komşu"];
-const GUN = ["Doğum günü","Yılbaşı","Sevgililer Günü","Anneler Günü","Babalar Günü","Yıldönümü","Mezuniyet","Yeni ev","Yeni iş","Teşekkür","Geçmiş olsun","Bebek","Sebepsiz"];
-const BUTCE = [["300","≤ 300 ₺"],["750","300–750 ₺"],["1500","750–1.500 ₺"],["3000","1.500–3.000 ₺"],["7500","3.000–7.500 ₺"],["7500+","7.500 ₺ +"]];
-const HIZLI = ["Kitap","Kahve","Çay","Spor","Müzik","Seyahat","Yemek yapmak","Teknoloji","Bitkiler","Moda","Oyun","Resim","El işi","Hayvanlar","Fotoğraf","Bakım","Futbol","Doğa","Film-dizi","Dekorasyon"];
-const TUR = [["ürün","🎁 Ürün"],["deneyim","🎟️ Deneyim"],["kendin yap","✂️ Kendin yap"]];
-const TON = [["duygusal","🥹 Duygusal"],["komik","😄 Komik"],["kısa","✏️ Kısa"],["şiirsel","🌸 Şiirsel"]];
+const YOL = {
+  home: '<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
+  gift: '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8M12 8v13M12 8S10.5 3 7.5 3a2.5 2.5 0 0 0 0 5M12 8s1.5-5 4.5-5a2.5 2.5 0 0 1 0 5"/>',
+  users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.8c1.7.7 3 2.4 3.5 5.2"/>',
+  heart: '<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/>',
+  back: '<path d="M15 5l-7 7 7 7"/>', close: '<path d="M6 6l12 12M18 6 6 18"/>', plus: '<path d="M12 5v14M5 12h14"/>',
+  chev: '<path d="M9 5l7 7-7 7"/>', arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>', check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  share: '<path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>',
+  pen: '<path d="M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4"/>', cal: '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  trash: '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>', refresh: '<path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>',
+  phone: '<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>', bag: '<path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/>',
+  clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'
+};
+const ic = n => `<svg class="ic" viewBox="0 0 24 24">${YOL[n]}</svg>`;
 
-const s = Object.assign({ kime: "", gun: "", butce: "", cinsiyet: "", ilgi: [], turler: [], isim: "", yas: "", notlar: "" }, oku("na-form", {}));
-let favs = oku("na-favs", []);
-let fikirler = [], sonIstek = null, gosterilen = [];
+/* ---------- sabit listeler ---------- */
+const KIME = ["Anne","Baba","Sevgili","Eş","Arkadaş","Kardeş","Çocuk","Bebek","Dede","Nine","Teyze / Hala","Amca / Dayı","Kuzen","İş arkadaşı","Patron","Öğretmen","Komşu","Kendim"];
+const GUN = ["Doğum günü","Yılbaşı","Sevgililer Günü","Anneler Günü","Babalar Günü","Öğretmenler Günü","Kadınlar Günü","Yıldönümü","Nişan / Düğün","Mezuniyet","Karne","Yeni ev","Yeni iş","Emeklilik","Bebek doğumu","Geçmiş olsun","Teşekkür","Özür dilemek","Bayram","Sebepsiz"];
+const BUTCE = [["300","300 ₺'ye kadar"],["750","300 – 750 ₺"],["1500","750 – 1.500 ₺"],["3000","1.500 – 3.000 ₺"],["7500","3.000 – 7.500 ₺"],["7500+","7.500 ₺ ve üstü"],["","Fark etmez"]];
+const ILGI = {
+  "Hobiler": ["Kitap","Resim","Müzik","Fotoğraf","El işi","Bahçe","Bitkiler","Yemek yapmak","Kahve","Çay","Koleksiyon"],
+  "Spor ve doğa": ["Futbol","Basketbol","Koşu","Fitness","Yoga","Bisiklet","Kamp","Balık tutmak","Yüzme","Doğa yürüyüşü"],
+  "Eğlence": ["Film ve dizi","Anime","Video oyunları","Kutu oyunları","Konser","Tiyatro","Podcast"],
+  "Yaşam": ["Moda","Makyaj","Cilt bakımı","Parfüm","Dekorasyon","Seyahat","Hayvanlar","Teknoloji","Araba","Astroloji"]
+};
+const TARZ = ["Pratik","Romantik","Eğlenceli","Şık","Kişiye özel","Doğa dostu","Teknolojik","Nostaljik","Rahatlatıcı"];
+const TUR = [["ürün","Ürün"],["deneyim","Deneyim"],["kendin yap","Kendin yap"]];
+const TON = [["duygusal","Duygusal"],["komik","Komik"],["kısa","Kısa"],["şiirsel","Şiirsel"]];
+const RENK = ["#C8324B","#2F5BD3","#2F7D4F","#9A6510","#7A3FC2","#0F7C8C","#C2571A","#5A5F6B"];
+const renk = s => RENK[[...String(s)].reduce((a, c) => a + c.charCodeAt(0), 0) % RENK.length];
+const harf = s => (String(s).trim()[0] || "?").toLocaleUpperCase("tr");
+const turSinif = t => t === "deneyim" ? "deneyim" : t === "kendin yap" ? "kendin" : "urun";
+const turAd = t => t === "deneyim" ? "Deneyim" : t === "kendin yap" ? "Kendin yap" : "Ürün";
 
-function tekSecim(el, liste, alan) {
-  el.innerHTML = liste.map(x => { const [v, l] = Array.isArray(x) ? x : [x, x]; return `<button data-v="${esc(v)}" class="${s[alan] === v ? "on" : ""}">${esc(l)}</button>`; }).join("");
-  el.onclick = e => { const b = e.target.closest("button"); if (!b) return;
-    s[alan] = s[alan] === b.dataset.v ? "" : b.dataset.v;
-    el.querySelectorAll("button").forEach(x => x.classList.toggle("on", x.dataset.v === s[alan])); kaydetForm(); };
+/* ---------- kayıtlı veriler ---------- */
+let kisiler = oku("na-kisiler", []);
+let favs = oku("na-favs", []).map(f => ({ ...f, etiket: f.etiket || [f.istek?.isim || f.istek?.kime, f.istek?.gun].filter(Boolean).join(" · ") }));
+let gecmis = oku("na-gecmis", []);
+let bilgiKapali = oku("na-bilgi", false);
+const kaydet = () => { yaz("na-kisiler", kisiler); yaz("na-favs", favs); yaz("na-gecmis", gecmis); };
+
+/* ---------- tarih hesapları ---------- */
+const bugun = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
+const gunFarki = d => Math.round((d - bugun()) / 864e5);
+const pazar = (y, m, n) => { const d = new Date(y, m, 1); return new Date(y, m, 1 + (7 - d.getDay()) % 7 + 7 * (n - 1)); };
+function sonraki(f) { const y = bugun().getFullYear(); let d = f(y); if (d < bugun()) d = f(y + 1); return d; }
+const OZEL = [
+  ["Yılbaşı", y => new Date(y, 0, 1), ""], ["Sevgililer Günü", y => new Date(y, 1, 14), "Sevgili"],
+  ["Kadınlar Günü", y => new Date(y, 2, 8), ""], ["Anneler Günü", y => pazar(y, 4, 2), "Anne"],
+  ["Babalar Günü", y => pazar(y, 5, 3), "Baba"], ["Öğretmenler Günü", y => new Date(y, 10, 24), "Öğretmen"]
+];
+function yaklasanlar() {
+  const l = OZEL.map(([ad, f, kime]) => ({ ad, tarih: sonraki(f), gun: ad, kime }));
+  for (const k of kisiler) {
+    if (!k.dogum) continue;
+    const [yy, mm, dd] = k.dogum.split("-").map(Number);
+    const t = sonraki(y => new Date(y, mm - 1, dd));
+    l.push({ ad: `${k.ad} doğum günü`, tarih: t, gun: "Doğum günü", kisiId: k.id, yas: yy > 1900 ? t.getFullYear() - yy : 0 });
+  }
+  return l.sort((a, b) => a.tarih - b.tarih).slice(0, 8);
 }
-tekSecim($("#kime"), KIME, "kime");
-tekSecim($("#gun"), GUN, "gun");
-tekSecim($("#butce"), BUTCE, "butce");
+const kalan = n => n === 0 ? "Bugün" : n === 1 ? "Yarın" : `${n} gün kaldı`;
+const tarihYaz = d => d.toLocaleDateString("tr-TR", { day: "numeric", month: "long" });
 
-$("#tur").innerHTML = TUR.map(([v, l]) => `<button data-v="${v}">${l}</button>`).join("");
-const turCiz = () => $("#tur").querySelectorAll("button").forEach(b => b.classList.toggle("on", s.turler.includes(b.dataset.v)));
-$("#tur").onclick = e => { const b = e.target.closest("button"); if (!b) return;
-  const v = b.dataset.v; s.turler = s.turler.includes(v) ? s.turler.filter(x => x !== v) : [...s.turler, v]; turCiz(); kaydetForm(); };
-turCiz();
-
-$("#cinsiyet").onclick = e => { const b = e.target.closest("button"); if (!b) return; s.cinsiyet = b.dataset.v; cinsCiz(); kaydetForm(); };
-const cinsCiz = () => $("#cinsiyet").querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.v === s.cinsiyet));
-cinsCiz();
-
-function ilgiCiz() {
-  $("#ilgiler").innerHTML = s.ilgi.map((m, i) => `<span class="tag">${esc(m)}<button data-i="${i}" aria-label="Sil">✕</button></span>`).join("");
-  $("#hizli").innerHTML = HIZLI.map(h => `<button class="${s.ilgi.includes(h) ? "on" : ""}">${h}</button>`).join("");
+/* ---------- sekmeler ---------- */
+let sekme = "home";
+const SEKMELER = [["home","home","Ana sayfa"],["bul","gift","Hediye bul"],["kisi","users","Kişilerim"],["kayit","heart","Kaydettiklerim"]];
+function sekmeCiz() {
+  $("#tabs").innerHTML = SEKMELER.map(([id, i, ad]) =>
+    `<button data-act="sekme" data-v="${id}" class="${sekme === id ? "on" : ""}">${ic(i)}${ad}${id === "kayit" && favs.length ? `<span class="badge">${favs.length}</span>` : ""}</button>`).join("");
 }
-function ilgiEkle(m) { m = m.trim(); if (!m || s.ilgi.length >= 15) return; if (!s.ilgi.some(x => x.toLocaleLowerCase("tr") === m.toLocaleLowerCase("tr"))) s.ilgi.push(m); ilgiCiz(); kaydetForm(); }
-$("#ilgiAdd").onclick = () => { $("#ilgiIn").value.split(",").forEach(ilgiEkle); $("#ilgiIn").value = ""; $("#ilgiIn").focus(); };
-$("#ilgiIn").onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); $("#ilgiAdd").click(); } };
-$("#ilgiler").onclick = e => { const b = e.target.closest("button"); if (!b) return; s.ilgi.splice(+b.dataset.i, 1); ilgiCiz(); kaydetForm(); };
-$("#hizli").onclick = e => { const b = e.target.closest("button"); if (!b) return; const h = b.textContent;
-  if (s.ilgi.includes(h)) s.ilgi = s.ilgi.filter(x => x !== h); else ilgiEkle(h); ilgiCiz(); kaydetForm(); };
-ilgiCiz();
+function git(s) {
+  sekme = s;
+  for (const [id] of SEKMELER) $("#v-" + id).hidden = id !== s;
+  sekmeCiz(); ciz(); scrollTo(0, 0);
+}
+function ciz() { ({ home: anaCiz, bul: bulCiz, kisi: kisiCiz, kayit: kayitCiz })[sekme](); }
 
-for (const id of ["isim", "yas", "notlar"]) { $("#" + id).value = s[id] || ""; $("#" + id).oninput = e => { s[id] = e.target.value; kaydetForm(); }; }
-function kaydetForm() { yaz("na-form", s); }
+/* ---------- ana sayfa ---------- */
+function selam() { const h = new Date().getHours(); return h < 6 ? "İyi geceler" : h < 12 ? "Günaydın" : h < 18 ? "İyi günler" : "İyi akşamlar"; }
+function anaCiz() {
+  const y = yaklasanlar();
+  const hizli = kisiler.length ? kisiler.slice(0, 8).map(k => [k.ad, k.id]) : ["Anne","Baba","Sevgili","Arkadaş","Kardeş","Eş","Öğretmen","Kendim"].map(k => [k, ""]);
+  $("#v-home").innerHTML = `
+    <div class="brand"><img src="/icon-192.png" alt="">Ne Alsam?</div>
+    <h1 class="big">${selam()}.<br>Bugün kimi mutlu ediyoruz?</h1>
+    <button class="cta" data-act="yeni">${ic("gift")}<div><b>Hediye bul</b><span>Birkaç soruya cevap ver, fikirler gelsin</span></div><svg class="ic go" viewBox="0 0 24 24">${YOL.arrow}</svg></button>
+    ${!bilgiKapali && !(matchMedia("(display-mode: standalone)").matches || navigator.standalone) ? `<div class="note-row">${ic("phone")}<span>Ana ekrana ekle, uygulama gibi açılsın</span><button data-act="yukle">Nasıl?</button><button data-act="bilgiKapat" aria-label="Kapat">${ic("close")}</button></div>` : ""}
+    <h2 class="sec">Yaklaşan günler <button data-act="sekme" data-v="kisi">Doğum günü ekle</button></h2>
+    <div class="hscroll">${y.map((g, i) => { const n = gunFarki(g.tarih); return `<button class="day" data-act="gun" data-i="${i}"><div class="d">${tarihYaz(g.tarih)}</div><div class="n">${esc(g.ad)}</div><span class="k ${n <= 14 ? "hot" : ""}">${kalan(n)}</span></button>`; }).join("")}</div>
+    <h2 class="sec">${kisiler.length ? "Kişilerin" : "Kime alıyorsun?"}</h2>
+    <div class="grid4">${hizli.map(([ad, id]) => `<button class="tile" data-act="hizli" data-v="${esc(ad)}" data-id="${id}"><div class="av" style="background:${renk(ad)}">${esc(harf(ad))}</div>${esc(ad)}</button>`).join("")}${kisiler.length ? `<button class="tile" data-act="yeni"><div class="av" style="background:var(--chip);color:var(--sub)">${ic("plus")}</div>Başkası</button>` : ""}</div>
+    <h2 class="sec">Bütçeye göre</h2>
+    <div class="pills">${BUTCE.slice(0, 6).map(([v, l]) => `<button class="pill" data-act="butceIle" data-v="${v}">${l}</button>`).join("")}</div>
+    ${gecmis.length ? `<h2 class="sec">Son aramaların <button data-act="gecmisSil">Temizle</button></h2>
+    <div class="list">${gecmis.map((g, i) => `<button class="row" data-act="tekrar" data-i="${i}"><div class="av" style="background:${renk(g.isim || g.kime)};width:34px;height:34px;font-size:14px">${esc(harf(g.isim || g.kime))}</div><div class="t"><b>${esc(g.isim || g.kime)}${g.gun ? " · " + esc(g.gun) : ""}</b><small>${esc([BUTCE.find(b => b[0] === g.butce)?.[1], ...(g.ilgi || [])].filter(Boolean).join(", ") || "Ayrıntı yok")}</small></div>${ic("chev").replace('class="ic"', 'class="ic chev"')}</button>`).join("")}</div>` : ""}
+    <p class="foot">Fiyatlar yaklaşıktır, almadan önce kontrol et.</p>`;
+}
 
-// --- Fikir bul ---
+/* ---------- hediye bulma (soru soru) ---------- */
+const bosForm = () => ({ kime: "", kisiId: "", isim: "", yas: "", cinsiyet: "", gun: "", butce: null, ilgi: [], tarz: [], turler: [], acil: false, not: "" });
+let w = Object.assign(bosForm(), oku("na-form", {}));
+let adim = 0;          // 0-6 sorular, 7 sonuçlar
+let sonuc = null;       // { istek, fikirler, filtre, sira, durum, hata }
+const ADIMLAR = 7;
+const formKaydet = () => yaz("na-form", w);
+
+function yeniArama(on = {}) {
+  w = Object.assign(bosForm(), on); adim = w.kime ? 1 : 0; sonuc = null; formKaydet(); git("bul");
+}
+function kisidenForm(k, ek = {}) {
+  return { kime: k.kime || "Arkadaş", kisiId: k.id, isim: k.ad, yas: k.dogum ? String(bugun().getFullYear() - +k.dogum.slice(0, 4)) : "", cinsiyet: k.cinsiyet || "", ilgi: [...(k.ilgi || [])], not: k.not || "", ...ek };
+}
+
+function bulCiz() {
+  if (adim >= ADIMLAR) return sonucCiz();
+  const v = $("#v-bul");
+  const atla = [1, 4, 5, 6].includes(adim);
+  const ust = `<div class="wtop">${adim > 0 ? `<button class="iconbtn" data-act="geri" aria-label="Geri">${ic("back")}</button>` : `<button class="iconbtn" data-act="sekme" data-v="home" aria-label="Kapat">${ic("close")}</button>`}
+    <div class="bar"><i style="width:${(adim + 1) / ADIMLAR * 100}%"></i></div>${atla && adim < 6 ? `<button class="skip" data-act="ileri">Atla</button>` : ""}</div>
+    <div class="step">Adım ${adim + 1} / ${ADIMLAR}</div>`;
+  let ic2 = "", dugme = "";
+  if (adim === 0) {
+    ic2 = `<h2 class="q">Hediye kime?</h2><p class="qs">Birini seç, gerisini birlikte netleştirelim.</p>
+      ${kisiler.length ? `<div class="grp">Kişilerim</div><div class="hscroll" style="margin-bottom:6px">${kisiler.map(k => `<button class="tile" style="flex:none;width:84px" data-act="kisiSec" data-id="${k.id}"><div class="av" style="background:${renk(k.ad)}">${esc(harf(k.ad))}</div>${esc(k.ad)}</button>`).join("")}</div><div class="grp">Ya da</div>` : ""}
+      <div class="opts">${KIME.map(k => secenek(k, w.kime === k, "kime")).join("")}</div>`;
+  } else if (adim === 1) {
+    ic2 = `<h2 class="q">${esc(w.kime === "Kendim" ? "Biraz kendinden bahset" : "Biraz ondan bahset")}</h2><p class="qs">İsteğe bağlı, ama fikirler daha isabetli olur.</p>
+      <label class="f">Adı</label><input class="in" id="fIsim" maxlength="30" placeholder="ör. Zeynep" value="${esc(w.isim)}">
+      <label class="f">Yaşı</label><div class="stepper"><button data-act="yas" data-v="-1">−</button><input id="fYas" type="number" inputmode="numeric" min="0" max="110" placeholder="–" value="${esc(w.yas)}"><button data-act="yas" data-v="1">+</button></div>
+      <label class="f">Cinsiyeti</label><div class="seg">${[["kadın","Kadın"],["erkek","Erkek"],["","Belirtme"]].map(([c, l]) => `<button data-act="cins" data-v="${c}" class="${w.cinsiyet === c ? "on" : ""}">${l}</button>`).join("")}</div>`;
+    dugme = "Devam";
+  } else if (adim === 2) {
+    ic2 = `<h2 class="q">Ne için alıyorsun?</h2><p class="qs">Özel bir gün mü, yoksa sadece içinden mi geldi?</p>
+      <div class="opts">${GUN.map(g => secenek(g, w.gun === g, "gun")).join("")}</div>`;
+  } else if (adim === 3) {
+    ic2 = `<h2 class="q">Ne kadar harcamak istiyorsun?</h2><p class="qs">Bu aralığın dışına çıkmayacağız.</p>
+      <div class="opts one">${BUTCE.map(([b, l]) => secenek(l, w.butce === b, "butce", b)).join("")}</div>`;
+  } else if (adim === 4) {
+    ic2 = `<h2 class="q">Neleri sever?</h2><p class="qs">Ne kadar çok seçersen o kadar iyi. ${w.ilgi.length ? `<b style="color:var(--acc)">${w.ilgi.length} seçildi</b>` : ""}</p>
+      <div class="addrow"><input class="in" id="fIlgi" maxlength="40" placeholder="Kendin yaz: ör. Harry Potter" enterkeyhint="done"><button data-act="ilgiEkle" aria-label="Ekle">${ic("plus")}</button></div>
+      ${w.ilgi.filter(i => !Object.values(ILGI).flat().includes(i)).length ? `<div class="grp">Senin eklediklerin</div><div class="pills">${w.ilgi.filter(i => !Object.values(ILGI).flat().includes(i)).map(i => `<button class="pill sm on" data-act="ilgi" data-v="${esc(i)}">${esc(i)} ✕</button>`).join("")}</div>` : ""}
+      ${Object.entries(ILGI).map(([g, l]) => `<div class="grp">${g}</div><div class="pills">${l.map(i => `<button class="pill sm ${w.ilgi.includes(i) ? "on" : ""}" data-act="ilgi" data-v="${esc(i)}">${esc(i)}</button>`).join("")}</div>`).join("")}`;
+    dugme = "Devam";
+  } else if (adim === 5) {
+    ic2 = `<h2 class="q">Nasıl bir hediye olsun?</h2><p class="qs">Birden fazla seçebilirsin.</p>
+      <div class="grp">Tarzı</div><div class="pills">${TARZ.map(t => `<button class="pill sm ${w.tarz.includes(t) ? "on" : ""}" data-act="tarz" data-v="${t}">${t}</button>`).join("")}</div>
+      <div class="grp">Türü</div><div class="pills">${TUR.map(([t, l]) => `<button class="pill sm ${w.turler.includes(t) ? "on" : ""}" data-act="tur" data-v="${t}">${l}</button>`).join("")}</div>
+      <button class="switch ${w.acil ? "on" : ""}" data-act="acil"><div class="t"><b>Acil lazım</b><small>Kargo beklemeden hemen bulunabilecek şeyler</small></div><span class="tg"></span></button>`;
+    dugme = "Devam";
+  } else if (adim === 6) {
+    const sat = (k, d, a) => `<button class="row" data-act="adim" data-v="${a}"><small>${k}</small><span>${esc(d || "—")}</span><em>Düzenle</em></button>`;
+    ic2 = `<h2 class="q">Son bir şey</h2><p class="qs">Bilmemiz gereken bir şey var mı?</p>
+      <textarea class="in" id="fNot" maxlength="180" placeholder="ör. Geçen yıl parfüm aldım. Süs eşyası sevmez, çok pratik biridir.">${esc(w.not)}</textarea>
+      <div class="grp">Özet</div>
+      <div class="list sum">${sat("Kime", [w.isim, w.kime].filter(Boolean).join(" · ") + (w.yas ? `, ${w.yas} yaş` : ""), 0)}${sat("Ne için", w.gun, 2)}${sat("Bütçe", BUTCE.find(b => b[0] === w.butce)?.[1], 3)}${sat("Sevdikleri", w.ilgi.join(", "), 4)}${sat("Tarz", [...w.tarz, ...w.turler.map(turAd), w.acil ? "Acil" : ""].filter(Boolean).join(", "), 5)}</div>`;
+    dugme = "Fikirleri göster";
+  }
+  v.innerHTML = ust + ic2 + (dugme ? `<div class="spacer"></div><div class="dock"><div class="in2"><button class="btn" data-act="${adim === 6 ? "ara" : "ileri"}">${dugme}</button></div></div>` : "");
+  const bagla = (id, alan) => { const e = $(id); if (e) e.oninput = () => { w[alan] = e.value; formKaydet(); }; };
+  bagla("#fIsim", "isim"); bagla("#fYas", "yas"); bagla("#fNot", "not");
+  const fi = $("#fIlgi"); if (fi) fi.onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); ilgiEkle(); } };
+}
+function secenek(etiket, on, alan, deger = etiket) {
+  return `<button class="opt ${on ? "on" : ""}" data-act="sec" data-alan="${alan}" data-v="${esc(deger)}">${esc(etiket)}<span class="ck">${on ? ic("check") : ""}</span></button>`;
+}
+function ilgiEkle() {
+  const e = $("#fIlgi"); if (!e) return;
+  for (const p of e.value.split(",")) { const m = p.trim(); if (m && w.ilgi.length < 15 && !w.ilgi.some(x => kucuk(x) === kucuk(m))) w.ilgi.push(m); }
+  formKaydet(); bulCiz(); setTimeout(() => $("#fIlgi")?.focus(), 0);
+}
+const toggle = (l, v) => l.includes(v) ? l.filter(x => x !== v) : [...l, v];
+
+/* ---------- sunucuya istek ---------- */
 // Yapay zekâ servisleri şimdilik Dolapta Ne Var projesinde çalışıyor (Gemini anahtarı orada).
 // Bu projeye kendi GEMINI_API_KEY'i eklenirse API_ADRESI "" yapılabilir.
 const API_ADRESI = location.hostname === "localhost" ? "" : "https://dolapta-ne-var-three.vercel.app";
 async function api(yol, govde) {
-  const r = await fetch(API_ADRESI + yol, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(govde) });
+  let r;
+  try { r = await fetch(API_ADRESI + yol, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(govde) }); }
+  catch { throw new Error("İnternet bağlantını kontrol et."); }
   let j = {}; try { j = await r.json(); } catch {}
-  if (!r.ok) throw new Error(j.hata || "Bağlantı sorunu, tekrar dene.");
+  if (!r.ok) throw new Error(j.hata || "Şu an cevap alınamadı, birazdan tekrar dene.");
   return j;
 }
-
-$("#go").onclick = () => {
-  if (!s.kime) { toast("Önce kime alacağını seç 🙂"); $("#kime").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
-  gosterilen = [];
-  sonIstek = { kime: s.kime, yas: s.yas, cinsiyet: s.cinsiyet, gun: s.gun, butce: s.butce, ilgi: s.ilgi, turler: s.turler, notlar: s.notlar, isim: s.isim.trim() };
-  getir(false);
-};
-
-async function getir(dahaFazla) {
-  const go = $("#go"); go.disabled = true;
-  const yer = dahaFazla ? $("#altDurum") : $("#sonuc");
-  const yukle = `<div class="status"><div class="spin"></div>${dahaFazla ? "Yeni fikirler düşünülüyor…" : "Sana özel fikirler hazırlanıyor…"}</div>`;
-  if (dahaFazla) { yer.innerHTML = yukle; $(".more").hidden = true; }
-  else { yer.innerHTML = yukle; yer.scrollIntoView({ behavior: "smooth", block: "start" }); }
+function istekYap(f, haric) {
+  const kisi = kisiler.find(k => k.id === f.kisiId);
+  const ek = [
+    f.tarz.length ? `Hediyenin tarzı: ${f.tarz.join(", ")}.` : "",
+    f.acil ? "Çok acil: kargo beklemeden, bugün bir mağazadan bulunabilecek şeyler öner." : "",
+    f.not.trim()
+  ].filter(Boolean).join(" ").slice(0, 300);
+  return { kime: f.kime, yas: f.yas, cinsiyet: f.cinsiyet, gun: f.gun, butce: f.butce || "", ilgi: f.ilgi, turler: f.turler, notlar: ek,
+    haric: [...haric, ...(kisi?.alinan || []).map(a => a.ad)].slice(-30) };
+}
+async function ara(dahaFazla) {
+  if (!dahaFazla) {
+    sonuc = { istek: JSON.parse(JSON.stringify(w)), fikirler: [], filtre: "", sira: "", durum: "yukleniyor" };
+    const iz = { kime: w.kime, isim: w.isim, gun: w.gun, butce: w.butce, ilgi: w.ilgi.slice(0, 4), form: sonuc.istek };
+    gecmis = [iz, ...gecmis.filter(g => JSON.stringify(g.form) !== JSON.stringify(iz.form))].slice(0, 5); kaydet();
+    adim = ADIMLAR;
+  } else sonuc.durum = "dahayukleniyor";
+  sonucCiz();
+  const benim = sonuc;
   try {
-    const j = await api("/api/hediye", { ...sonIstek, haric: gosterilen });
-    const yeni = j.fikirler || [];
-    if (!yeni.length) throw new Error("Fikir bulunamadı, bir daha dene.");
-    gosterilen.push(...yeni.map(f => f.ad));
-    fikirler = dahaFazla ? [...fikirler, ...yeni] : yeni;
-    sonucCiz(dahaFazla ? fikirler.length - yeni.length : 0);
+    const j = await api("/api/hediye", istekYap(sonuc.istek, sonuc.fikirler.map(f => f.ad)));
+    if (benim !== sonuc) return;
+    const yeni = (j.fikirler || []).filter(f => !sonuc.fikirler.some(x => kucuk(x.ad) === kucuk(f.ad)));
+    if (!yeni.length && !dahaFazla) throw new Error("Bu sefer fikir çıkmadı, bir daha dene.");
+    sonuc.fikirler.push(...yeni); sonuc.durum = "tamam"; sonuc.hata = "";
   } catch (e) {
-    if (dahaFazla) { yer.innerHTML = `<div class="status err">${esc(e.message)}</div>`; $(".more").hidden = false; }
-    else yer.innerHTML = `<div class="status err">${esc(e.message)}</div>`;
-  } finally { go.disabled = false; }
+    if (benim !== sonuc) return;
+    sonuc.durum = dahaFazla ? "tamam" : "hata"; sonuc.hata = e.message;
+    if (dahaFazla) toast(e.message);
+  }
+  if (sekme === "bul") sonucCiz();
 }
 
-const etiket = r => [r.isim || r.kime, r.gun].filter(Boolean).join(" · ");
-const turEtiket = t => ({ "ürün": ["ürün", "🎁 Ürün"], "deneyim": ["deneyim", "🎟️ Deneyim"], "kendin yap": ["kendin", "✂️ Kendin yap"] }[t] || ["ürün", "🎁 Ürün"]);
-const anahtar = f => f.ad.toLocaleLowerCase("tr");
-const favMi = f => favs.some(x => anahtar(x) === anahtar(f));
-function aramaLinki(f) {
+/* ---------- sonuçlar ---------- */
+const fiyatSayi = s => { const m = String(s || "").replace(/\./g, "").match(/\d+/); return m ? +m[0] : Infinity; };
+const favMi = f => favs.some(x => kucuk(x.ad) === kucuk(f.ad));
+const etiketYap = i => [i.isim || i.kime, i.gun].filter(Boolean).join(" · ");
+function sonucCiz() {
+  const s = sonuc, v = $("#v-bul");
+  const ust = `<div class="rhead"><button class="iconbtn" data-act="adim" data-v="6" aria-label="Geri">${ic("back")}</button><div class="t">${esc(s.istek.isim || s.istek.kime)} için</div><button class="iconbtn" data-act="listePaylas" aria-label="Paylaş">${ic("share")}</button></div>`;
+  if (s.durum === "yukleniyor") { v.innerHTML = ust + `<p class="lead" style="margin:14px 2px">Fikirler hazırlanıyor…</p>` + '<div class="skel"></div>'.repeat(5); return; }
+  if (s.durum === "hata") { v.innerHTML = ust + `<div class="msg"><b>Olmadı</b>${esc(s.hata)}<br><button class="btn" data-act="ara">${ic("refresh")}Tekrar dene</button></div>`; return; }
+  let l = s.fikirler.map((f, i) => ({ f, i }));
+  if (s.filtre) l = l.filter(x => x.f.tur === s.filtre);
+  if (s.sira === "artan") l.sort((a, b) => fiyatSayi(a.f.fiyat) - fiyatSayi(b.f.fiyat));
+  if (s.sira === "azalan") l.sort((a, b) => fiyatSayi(b.f.fiyat) - fiyatSayi(a.f.fiyat));
+  const say = t => s.fikirler.filter(f => !t || f.tur === t).length;
+  v.innerHTML = ust + `
+    <div class="filt">${[["", "Tümü"], ...TUR].map(([t, a]) => `<button class="pill sm ${s.filtre === t ? "on" : ""}" data-act="filtre" data-v="${t}">${a} ${say(t)}</button>`).join("")}</div>
+    <div class="sortline"><span>${l.length} fikir</span><select id="sira" aria-label="Sırala"><option value="">Önerilen</option><option value="artan" ${s.sira === "artan" ? "selected" : ""}>Ucuzdan pahalıya</option><option value="azalan" ${s.sira === "azalan" ? "selected" : ""}>Pahalıdan ucuza</option></select></div>
+    ${l.map(({ f, i }) => urunKarti(f, i, "s")).join("") || `<div class="msg">Bu türde fikir yok.</div>`}
+    ${s.durum === "dahayukleniyor" ? '<div class="skel"></div><div class="skel"></div>' : `<button class="btn ghost" data-act="daha" ${s.fikirler.length >= 30 ? "disabled" : ""}>${ic("refresh")}Daha fazla fikir</button>`}
+    <button class="btn ghost" style="margin-top:8px" data-act="yeni">${ic("gift")}Yeni arama</button>`;
+  $("#sira").onchange = e => { sonuc.sira = e.target.value; sonucCiz(); };
+}
+function urunKarti(f, i, k, alt) {
+  const ts = turSinif(f.tur);
+  return `<div class="item"><button style="display:flex;gap:13px;flex:1;text-align:left;min-width:0" data-act="detay" data-k="${k}" data-i="${i}">
+    <div class="thumb ${ts}">${esc(f.emoji || "🎁")}</div>
+    <div class="t"><b>${esc(f.ad)}</b><div class="p">${esc(f.fiyat || "")}<span class="tag ${ts}">${turAd(f.tur)}</span></div><small>${esc(alt || f.neden || "")}</small></div></button>
+    <button class="fav ${favMi(f) ? "on" : ""}" data-act="fav" data-k="${k}" data-i="${i}" aria-label="Kaydet">${ic("heart")}</button></div>`;
+}
+const fikirAl = (k, i) => k === "s" ? sonuc?.fikirler[i] : favs[i];
+function favDegis(f, etiket) {
+  if (favMi(f)) { favs = favs.filter(x => kucuk(x.ad) !== kucuk(f.ad)); toast("Kaydedilenlerden çıkarıldı"); }
+  else { favs.unshift({ ...f, etiket, kisiId: sonuc?.istek.kisiId || f.kisiId || "", kime: sonuc?.istek.kime || f.kime, isim: sonuc?.istek.isim || f.isim, gun: sonuc?.istek.gun || f.gun }); toast("Kaydedildi"); }
+  kaydet(); sekmeCiz();
+}
+
+/* ---------- fikir ayrıntısı ---------- */
+let acik = null;
+function linkler(f) {
   const q = encodeURIComponent(f.arama || f.ad);
-  return f.tur === "ürün" ? `https://www.google.com/search?tbm=shop&q=${q}` : `https://www.google.com/search?q=${q}`;
+  if (f.tur === "deneyim") return [["Google'da ara", "G", "#4285F4", `https://www.google.com/search?q=${q}`], ["Haritada bul", "H", "#34A853", `https://www.google.com/maps/search/${q}`]];
+  if (f.tur === "kendin yap") return [["Nasıl yapılır", "▶", "#FF0033", `https://www.youtube.com/results?search_query=${encodeURIComponent((f.arama || f.ad) + " nasıl yapılır")}`], ["Malzemeleri bul", "G", "#4285F4", `https://www.google.com/search?tbm=shop&q=${q}`]];
+  return [["Trendyol", "T", "#F27A1A", `https://www.trendyol.com/sr?q=${q}`], ["Hepsiburada", "H", "#FF6000", `https://www.hepsiburada.com/ara?q=${q}`], ["Amazon", "A", "#232F3E", `https://www.amazon.com.tr/s?k=${q}`], ["Fiyat karşılaştır", "G", "#4285F4", `https://www.google.com/search?tbm=shop&q=${q}`]];
 }
-
-function kartHTML(f, i, kaynak, who, gecikme = i) {
-  const [tc, tl] = turEtiket(f.tur);
-  return `<article class="idea" style="animation-delay:${Math.max(0, Math.min(gecikme, 6)) * 60}ms">
-    ${who ? `<div class="who">Kime: ${esc(who)}</div>` : ""}
-    <div class="top"><div class="em">${esc(f.emoji)}</div><div>
-      <h3>${esc(f.ad)}</h3>
-      <div class="meta">${f.fiyat ? `<span class="b p">${esc(f.fiyat)}</span>` : ""}<span class="b ${tc}">${tl}</span></div>
-    </div></div>
-    ${f.neden ? `<p>${esc(f.neden)}</p>` : ""}
-    ${f.dokunus ? `<div class="dk">💡 ${esc(f.dokunus)}</div>` : ""}
+function detayAc(k, i) {
+  const f = fikirAl(k, i); if (!f) return; acik = { k, i };
+  const ts = turSinif(f.tur);
+  const kisiId = k === "s" ? sonuc.istek.kisiId : f.kisiId;
+  const kisi = kisiler.find(x => x.id === kisiId);
+  const alindi = kisi?.alinan?.some(a => kucuk(a.ad) === kucuk(f.ad));
+  sheetAc(`<div class="shead"><h3>${esc(f.ad)}</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
+    <div class="big-thumb thumb ${ts}">${esc(f.emoji || "🎁")}</div>
+    <div class="kv">${f.fiyat ? `<span>${esc(f.fiyat)}</span>` : ""}<span>${turAd(f.tur)}</span>${k === "f" && f.etiket ? `<span>${esc(f.etiket)}</span>` : ""}</div>
+    ${f.neden ? `<p class="txt">${esc(f.neden)}</p>` : ""}
+    ${f.dokunus ? `<div class="tip"><b>Küçük bir dokunuş</b>${esc(f.dokunus)}</div>` : ""}
+    <div class="grp" style="margin-top:0">${f.tur === "ürün" ? "Nereden alınır" : "Bir göz at"}</div>
+    <div class="shops">${linkler(f).map(([a, h, c, u]) => `<a href="${u}" target="_blank" rel="noopener"><i style="background:${c}">${h}</i>${a}</a>`).join("")}</div>
     <div class="acts">
-      <a href="${aramaLinki(f)}" target="_blank" rel="noopener">🔎 ${f.tur === "ürün" ? "Bul" : "Ara"}</a>
-      <button class="fav ${favMi(f) ? "on" : ""}" data-k="${kaynak}" data-i="${i}">${favMi(f) ? "♥ Kayıtlı" : "♡ Kaydet"}</button>
-      <button class="kartBtn" data-k="${kaynak}" data-i="${i}">✍️ Kart notu</button>
-    </div>
-  </article>`;
+      <button class="${favMi(f) ? "on" : ""}" data-act="favD">${ic("heart")}${favMi(f) ? "Kaydedildi" : "Kaydet"}</button>
+      <button data-act="kart">${ic("pen")}Kart notu yaz</button>
+      <button data-act="fikirPaylas">${ic("share")}Paylaş</button>
+      ${kisi ? `<button class="${alindi ? "on" : ""}" data-act="aldim">${ic("check")}${alindi ? "Alındı" : "Bunu aldım"}</button>` : `<button data-act="benzer">${ic("refresh")}Benzerleri</button>`}
+    </div>`);
 }
 
-function sonucCiz(animBas) {
-  $("#sonuc").innerHTML = `<h2 class="res-h">${esc(sonIstek.isim || sonIstek.kime)} için fikirler</h2>` +
-    fikirler.map((f, i) => kartHTML(f, i, "s", "", i - animBas)).join("") +
-    `<div id="altDurum"></div><div class="more"><button id="dahaFazla">🔄 Başka fikirler</button><button id="paylas">📤 Listeyi paylaş</button></div>`;
-  $("#dahaFazla").onclick = () => getir(true);
-  $("#dahaFazla").disabled = gosterilen.length >= 30;
-  $("#paylas").onclick = listeyiPaylas;
+/* ---------- kart notu ---------- */
+let kartHedef = null, ton = "duygusal", kartNo = 0;
+function kartAc() {
+  const f = fikirAl(acik.k, acik.i); if (!f) return;
+  const ist = acik.k === "s" ? sonuc.istek : f;
+  kartHedef = { hediye: f.ad, kime: ist.kime || "sevdiğim biri", isim: ist.isim || "", gun: ist.gun || "" };
+  kartCiz(); notYaz();
+}
+function kartCiz(metin) {
+  sheetAc(`<div class="shead"><button class="iconbtn" data-act="detayGeri" aria-label="Geri">${ic("back")}</button><h3>Kart notu</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
+    <p class="lead">${esc(kartHedef.hediye)} · ${esc(kartHedef.isim || kartHedef.kime)}</p>
+    <div class="seg" style="margin-top:14px">${TON.map(([v, l]) => `<button data-act="ton" data-v="${v}" class="${ton === v ? "on" : ""}">${l}</button>`).join("")}</div>
+    <div class="cardnote" id="not">${metin ?? '<div class="skel" style="height:70px;margin:0"></div>'}</div>
+    <div class="acts"><button data-act="notYeni">${ic("refresh")}Başka yaz</button><button data-act="notKopya">Kopyala</button><button class="wide" data-act="notPaylas">${ic("share")}Paylaş</button></div>`);
+}
+async function notYaz() {
+  const no = ++kartNo; const el = () => $("#not");
+  if (el()) el().innerHTML = '<div class="skel" style="height:70px;margin:0"></div>';
+  try { const j = await api("/api/kart", { ...kartHedef, ton }); if (no === kartNo && el()) el().textContent = j.mesaj; }
+  catch (e) { if (no === kartNo && el()) el().innerHTML = `<span style="color:var(--acc);font-size:15px">${esc(e.message)}</span>`; }
 }
 
-function listeyiPaylas() {
-  const metin = `🎁 ${sonIstek.isim || sonIstek.kime} için hediye fikirleri${sonIstek.gun ? ` (${sonIstek.gun})` : ""}:\n\n` +
-    fikirler.map((f, i) => `${i + 1}. ${f.emoji} ${f.ad}${f.fiyat ? ` — ${f.fiyat}` : ""}`).join("\n") + `\n\nNe Alsam? ile bulundu: ${location.origin}`;
-  paylas(metin);
+/* ---------- kişilerim ---------- */
+function kisiCiz() {
+  const v = $("#v-kisi");
+  const sirali = [...kisiler].map(k => {
+    if (!k.dogum) return { k, n: Infinity };
+    const [, mm, dd] = k.dogum.split("-").map(Number);
+    return { k, n: gunFarki(sonraki(y => new Date(y, mm - 1, dd))) };
+  }).sort((a, b) => a.n - b.n);
+  v.innerHTML = `<h1 class="big">Kişilerim</h1><p class="lead">Sevdiklerini ekle; doğum günlerini hatırlatalım, aldığın hediyeleri tekrar önermeyelim.</p>
+    <button class="btn" style="margin:18px 0 6px" data-act="kisiForm">${ic("plus")}Kişi ekle</button>
+    ${sirali.length ? `<div class="list" style="margin-top:12px">${sirali.map(({ k, n }) => `<button class="row" data-act="kisiDetay" data-id="${k.id}"><div class="av" style="background:${renk(k.ad)}">${esc(harf(k.ad))}</div><div class="t"><b>${esc(k.ad)}</b><small>${esc(k.kime)}${n !== Infinity ? ` · Doğum günü: ${kalan(n).toLocaleLowerCase("tr")}` : ""}${k.alinan?.length ? ` · ${k.alinan.length} hediye` : ""}</small></div>${ic("chev").replace('class="ic"', 'class="ic chev"')}</button>`).join("")}</div>`
+      : `<div class="empty">${ic("users")}<b>Henüz kimse yok</b>Annen, en yakın arkadaşın, sevgilin… Ekle, bir dahaki sefere tek dokunuşla hediye bul.</div>`}`;
 }
+function kisiFormAc(id) {
+  const k = kisiler.find(x => x.id === id) || { ad: "", kime: "Arkadaş", dogum: "", cinsiyet: "", ilgi: [], not: "" };
+  sheetAc(`<div class="shead"><h3>${id ? "Kişiyi düzenle" : "Yeni kişi"}</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
+    <label class="f" style="margin-top:0">Adı</label><input class="in" id="kAd" maxlength="30" placeholder="ör. Annem" value="${esc(k.ad)}">
+    <label class="f">Yakınlığın</label><select class="in" id="kKime">${KIME.map(x => `<option ${x === k.kime ? "selected" : ""}>${x}</option>`).join("")}</select>
+    <label class="f">Doğum günü</label><input class="in" id="kDogum" type="date" value="${esc(k.dogum)}">
+    <label class="f">Cinsiyeti</label><div class="seg" id="kCins">${[["kadın","Kadın"],["erkek","Erkek"],["","Belirtme"]].map(([c, l]) => `<button data-act="kCins" data-v="${c}" class="${k.cinsiyet === c ? "on" : ""}">${l}</button>`).join("")}</div>
+    <label class="f">Neleri sever? (virgülle ayır)</label><input class="in" id="kIlgi" maxlength="200" placeholder="ör. kahve, yoga, polisiye romanlar" value="${esc((k.ilgi || []).join(", "))}">
+    <label class="f">Not</label><textarea class="in" id="kNot" maxlength="180" placeholder="ör. Altın sevmez, gümüş takar.">${esc(k.not)}</textarea>
+    <button class="btn" style="margin-top:18px" data-act="kisiKaydet" data-id="${id || ""}">Kaydet</button>`);
+}
+function kisiDetayAc(id) {
+  const k = kisiler.find(x => x.id === id); if (!k) return;
+  let dg = "";
+  if (k.dogum) { const [yy, mm, dd] = k.dogum.split("-").map(Number); const t = sonraki(y => new Date(y, mm - 1, dd)); dg = `${tarihYaz(t)} · ${kalan(gunFarki(t))}${yy > 1900 ? ` · ${t.getFullYear() - yy} yaşına giriyor` : ""}`; }
+  sheetAc(`<div class="shead"><div class="av" style="background:${renk(k.ad)};width:48px;height:48px;font-size:19px">${esc(harf(k.ad))}</div><h3>${esc(k.ad)}<br><small style="font-size:14px;font-weight:500;color:var(--sub)">${esc(k.kime)}</small></h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
+    ${dg ? `<div class="note-row" style="margin:0 0 14px">${ic("cal")}<span>${esc(dg)}</span></div>` : ""}
+    ${k.ilgi?.length ? `<div class="grp" style="margin-top:0">Sevdikleri</div><div class="pills">${k.ilgi.map(i => `<span class="pill sm">${esc(i)}</span>`).join("")}</div>` : ""}
+    ${k.not ? `<div class="grp">Not</div><p class="txt">${esc(k.not)}</p>` : ""}
+    <div class="grp">Aldığın hediyeler</div>
+    ${k.alinan?.length ? `<div class="list">${k.alinan.map((a, i) => `<div class="row"><div class="t"><b>${esc(a.ad)}</b><small>${esc(a.tarih)}</small></div><button data-act="alinanSil" data-id="${k.id}" data-i="${i}" aria-label="Sil" style="color:var(--sub)">${ic("trash")}</button></div>`).join("")}</div>` : `<p class="lead">Henüz yok. Bir fikirde "Bunu aldım"a basınca buraya eklenir ve bir daha önerilmez.</p>`}
+    <button class="btn" style="margin-top:18px" data-act="kisiAra" data-id="${k.id}">${ic("gift")}${esc(k.ad)} için hediye bul</button>
+    <div class="acts" style="margin-top:8px"><button data-act="kisiForm" data-id="${k.id}">${ic("pen")}Düzenle</button><button data-act="kisiSil" data-id="${k.id}">${ic("trash")}Sil</button></div>`);
+}
+
+/* ---------- kaydedilenler ---------- */
+function kayitCiz() {
+  const v = $("#v-kayit");
+  if (!favs.length) { v.innerHTML = `<h1 class="big">Kaydettiklerim</h1><div class="empty">${ic("heart")}<b>Henüz bir şey yok</b>Beğendiğin fikirlerdeki kalbe dokun, burada saklansın.<br><button class="btn" data-act="yeni">${ic("gift")}Hediye bul</button></div>`; return; }
+  const gruplar = {};
+  favs.forEach((f, i) => (gruplar[f.etiket || "Diğer"] ||= []).push(i));
+  v.innerHTML = `<h1 class="big">Kaydettiklerim</h1><p class="lead">${favs.length} fikir</p>` +
+    Object.entries(gruplar).map(([g, l]) => `<h2 class="sec">${esc(g)}</h2>${l.map(i => urunKarti(favs[i], i, "f")).join("")}`).join("");
+}
+
+/* ---------- alttan açılan pencere ---------- */
+function sheetAc(html) { $("#sbox").innerHTML = '<div class="grab"></div>' + html; $("#sheet").classList.add("on"); document.body.style.overflow = "hidden"; }
+function sheetKapat() { $("#sheet").classList.remove("on"); document.body.style.overflow = ""; acik = null; kartNo++; }
+$("#sheet").addEventListener("click", e => { if (e.target.id === "sheet") sheetKapat(); });
+
 async function paylas(metin) {
   if (navigator.share) { try { await navigator.share({ text: metin }); return; } catch (e) { if (e.name === "AbortError") return; } }
-  try { await navigator.clipboard.writeText(metin); toast("Kopyalandı 📋"); } catch { toast("Paylaşılamadı"); }
+  try { await navigator.clipboard.writeText(metin); toast("Kopyalandı"); } catch { toast("Paylaşılamadı"); }
 }
 
-// --- Kaydedilenler ---
-function favCiz() {
-  $("#favCount").textContent = favs.length ? `(${favs.length})` : "";
-  $("#kayitlar").innerHTML = favs.length
-    ? favs.map((f, i) => kartHTML(f, i, "f", etiket(f.istek || {}))).join("")
-    : `<div class="empty"><div>🎀</div>Henüz kaydettiğin bir fikir yok.<br>Beğendiğin fikirlerde <b>♡ Kaydet</b>'e bas, burada dursun.</div>`;
-}
+/* ---------- tüm dokunuşlar ---------- */
 document.addEventListener("click", e => {
-  const b = e.target.closest(".fav"); if (!b) return;
-  const f = b.dataset.k === "s" ? fikirler[+b.dataset.i] : favs[+b.dataset.i]; if (!f) return;
-  if (favMi(f)) { favs = favs.filter(x => anahtar(x) !== anahtar(f)); toast("Kayıtlardan çıkarıldı"); }
-  else { favs.unshift({ ...f, istek: { kime: sonIstek?.kime, isim: sonIstek?.isim, gun: sonIstek?.gun } }); toast("Kaydedildi ♥"); }
-  yaz("na-favs", favs); favCiz();
-  document.querySelectorAll("#sonuc .fav").forEach(x => { const g = fikirler[+x.dataset.i]; const on = g && favMi(g); x.classList.toggle("on", on); x.textContent = on ? "♥ Kayıtlı" : "♡ Kaydet"; });
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const { act, v, i, k, id, alan } = b.dataset;
+  switch (act) {
+    case "sekme": sheetKapat(); if (v === "bul" && sekme === "bul" && adim >= ADIMLAR && sonuc) { sonucCiz(); break; } git(v); break;
+    case "yeni": sheetKapat(); yeniArama(); break;
+    case "bilgiKapat": bilgiKapali = true; yaz("na-bilgi", true); anaCiz(); break;
+    case "yukle": yukle(); break;
+    case "gun": { const g = yaklasanlar()[+i]; const kisi = kisiler.find(x => x.id === g.kisiId);
+      yeniArama(kisi ? kisidenForm(kisi, { gun: g.gun, yas: g.yas ? String(g.yas) : "" }) : { gun: g.gun, kime: g.kime }); if (kisi || g.kime) { adim = 3; bulCiz(); } break; }
+    case "hizli": { const kisi = kisiler.find(x => x.id === id); if (kisi) { yeniArama(kisidenForm(kisi)); adim = 2; bulCiz(); } else yeniArama({ kime: v }); break; }
+    case "butceIle": yeniArama({ butce: v }); break;
+    case "tekrar": { const g = gecmis[+i]; if (!g) break; w = Object.assign(bosForm(), g.form); formKaydet(); git("bul"); ara(false); break; }
+    case "gecmisSil": gecmis = []; kaydet(); anaCiz(); break;
+    case "geri": adim = Math.max(0, adim - 1); bulCiz(); scrollTo(0, 0); break;
+    case "ileri": adim++; bulCiz(); scrollTo(0, 0); break;
+    case "adim": adim = +v; bulCiz(); scrollTo(0, 0); break;
+    case "sec": {
+      const deger = alan === "butce" ? v : v;
+      w[alan] = w[alan] === deger && alan !== "butce" ? "" : deger;
+      if (alan === "kime") { w.kisiId = ""; w.isim = ""; }
+      formKaydet(); bulCiz();
+      if (w[alan] !== "" || alan === "butce") setTimeout(() => { adim++; bulCiz(); scrollTo(0, 0); }, 180);
+      break; }
+    case "kisiSec": { const kisi = kisiler.find(x => x.id === id); if (kisi) { w = Object.assign(bosForm(), kisidenForm(kisi)); formKaydet(); adim = 2; bulCiz(); scrollTo(0, 0); } break; }
+    case "yas": { const n = Math.min(110, Math.max(0, (parseInt(w.yas) || (v > 0 ? 17 : 1)) + +v)); w.yas = String(n); formKaydet(); $("#fYas").value = n; break; }
+    case "cins": w.cinsiyet = v; formKaydet(); b.parentElement.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); break;
+    case "ilgi": w.ilgi = toggle(w.ilgi, v); formKaydet(); { const y = scrollY; bulCiz(); scrollTo(0, y); } break;
+    case "ilgiEkle": ilgiEkle(); break;
+    case "tarz": w.tarz = toggle(w.tarz, v); formKaydet(); b.classList.toggle("on"); break;
+    case "tur": w.turler = toggle(w.turler, v); formKaydet(); b.classList.toggle("on"); break;
+    case "acil": w.acil = !w.acil; formKaydet(); b.classList.toggle("on"); break;
+    case "ara": if (!w.kime) { adim = 0; bulCiz(); toast("Önce kime alacağını seç"); break; } ara(false); scrollTo(0, 0); break;
+    case "daha": ara(true); break;
+    case "filtre": sonuc.filtre = v; sonucCiz(); break;
+    case "listePaylas": if (sonuc?.fikirler.length) paylas(`${etiketYap(sonuc.istek)} için hediye fikirleri:\n\n` + sonuc.fikirler.map((f, n) => `${n + 1}. ${f.ad}${f.fiyat ? ` (${f.fiyat})` : ""}`).join("\n") + `\n\n${location.origin}`); break;
+    case "detay": detayAc(k, +i); break;
+    case "fav": { const f = fikirAl(k, +i); if (!f) break; favDegis(f, k === "s" ? etiketYap(sonuc.istek) : f.etiket); ciz(); break; }
+    case "favD": { const f = fikirAl(acik.k, acik.i); if (!f) break; const a = { ...acik }; favDegis(f, a.k === "s" ? etiketYap(sonuc.istek) : f.etiket);
+      if (a.k === "f" && !favMi(f)) { sheetKapat(); } else detayAc(a.k, a.k === "f" ? favs.findIndex(x => kucuk(x.ad) === kucuk(f.ad)) : a.i); ciz(); break; }
+    case "kart": kartAc(); break;
+    case "detayGeri": kartNo++; detayAc(acik.k, acik.i); break;
+    case "ton": ton = v; b.parentElement.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); notYaz(); break;
+    case "notYeni": notYaz(); break;
+    case "notKopya": navigator.clipboard?.writeText($("#not").textContent).then(() => toast("Kopyalandı"), () => toast("Kopyalanamadı")); break;
+    case "notPaylas": paylas($("#not").textContent); break;
+    case "fikirPaylas": { const f = fikirAl(acik.k, acik.i); if (f) paylas(`${f.ad}${f.fiyat ? ` (${f.fiyat})` : ""}\n${f.neden || ""}\n\n${location.origin}`); break; }
+    case "aldim": { const f = fikirAl(acik.k, acik.i); const kid = acik.k === "s" ? sonuc.istek.kisiId : f.kisiId; const kisi = kisiler.find(x => x.id === kid); if (!f || !kisi) break;
+      kisi.alinan ||= [];
+      if (kisi.alinan.some(a => kucuk(a.ad) === kucuk(f.ad))) kisi.alinan = kisi.alinan.filter(a => kucuk(a.ad) !== kucuk(f.ad));
+      else { kisi.alinan.unshift({ ad: f.ad, tarih: new Date().toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" }) }); toast(`${kisi.ad} için not edildi`); }
+      kaydet(); detayAc(acik.k, acik.i); break; }
+    case "benzer": { const f = fikirAl(acik.k, acik.i); if (!f) break; sheetKapat();
+      const temel = acik?.k === "s" && sonuc ? sonuc.istek : { ...bosForm(), kime: f.kime || "Arkadaş", isim: f.isim || "", gun: f.gun || "" };
+      w = Object.assign(bosForm(), JSON.parse(JSON.stringify(temel))); w.not = `"${f.ad}" gibi fikirler istiyorum, ama aynısı olmasın.`; formKaydet(); git("bul"); ara(false); break; }
+    case "kapat": sheetKapat(); break;
+    case "kisiForm": kisiFormAc(id); break;
+    case "kCins": b.parentElement.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); break;
+    case "kisiKaydet": {
+      const ad = $("#kAd").value.trim(); if (!ad) { toast("Bir ad yaz"); $("#kAd").focus(); break; }
+      const veri = { ad: ad.slice(0, 30), kime: $("#kKime").value, dogum: $("#kDogum").value, cinsiyet: $("#kCins .on")?.dataset.v || "",
+        ilgi: $("#kIlgi").value.split(",").map(x => x.trim()).filter(Boolean).slice(0, 15), not: $("#kNot").value.trim() };
+      const eski = kisiler.find(x => x.id === id);
+      if (eski) Object.assign(eski, veri); else kisiler.push({ id: yeniId(), alinan: [], ...veri });
+      kaydet(); sheetKapat(); toast("Kaydedildi"); ciz(); break; }
+    case "kisiDetay": kisiDetayAc(id); break;
+    case "kisiAra": { const kisi = kisiler.find(x => x.id === id); sheetKapat(); if (kisi) { yeniArama(kisidenForm(kisi)); adim = 2; bulCiz(); } break; }
+    case "kisiSil": { const kisi = kisiler.find(x => x.id === id); if (kisi && confirm(`${kisi.ad} silinsin mi?`)) { kisiler = kisiler.filter(x => x.id !== id); kaydet(); sheetKapat(); ciz(); } break; }
+    case "alinanSil": { const kisi = kisiler.find(x => x.id === id); if (kisi) { kisi.alinan.splice(+i, 1); kaydet(); kisiDetayAc(id); } break; }
+  }
 });
-favCiz();
 
-document.querySelector(".tabs").onclick = e => {
-  const b = e.target.closest("button"); if (!b) return;
-  document.querySelectorAll(".tabs button").forEach(x => x.classList.toggle("on", x === b));
-  $("#bul").hidden = b.dataset.tab !== "bul"; $("#kayit").hidden = b.dataset.tab !== "kayit";
-  scrollTo({ top: 0, behavior: "smooth" });
-};
-
-// --- Kart notu ---
-let kartHedef = null, ton = "duygusal", kartNo = 0;
-$("#ton").innerHTML = TON.map(([v, l]) => `<button data-v="${v}">${l}</button>`).join("");
-const tonCiz = () => $("#ton").querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.v === ton));
-$("#ton").onclick = e => { const b = e.target.closest("button"); if (!b) return; ton = b.dataset.v; tonCiz(); notYaz(); };
-document.addEventListener("click", e => {
-  const b = e.target.closest(".kartBtn"); if (!b) return;
-  const f = b.dataset.k === "s" ? fikirler[+b.dataset.i] : favs[+b.dataset.i]; if (!f) return;
-  const r = b.dataset.k === "s" ? sonIstek : (f.istek || {});
-  kartHedef = { hediye: f.ad, kime: r.kime || "sevdiğim biri", isim: r.isim || "", gun: r.gun || "" };
-  $("#kartAlt").textContent = `${f.emoji} ${f.ad} · ${etiket(r)}`;
-  tonCiz(); $("#sheet").classList.add("on"); notYaz();
-});
-async function notYaz() {
-  const no = ++kartNo; const el = $("#not");
-  el.innerHTML = `<div class="spin" style="margin:6px auto"></div>`;
-  try { const j = await api("/api/kart", { ...kartHedef, ton }); if (no === kartNo) el.textContent = j.mesaj; }
-  catch (e) { if (no === kartNo) el.innerHTML = `<span style="color:#9A2A2A;font-family:Nunito">${esc(e.message)}</span>`; }
-}
-$("#yeniNot").onclick = notYaz;
-$("#kopyala").onclick = async () => { try { await navigator.clipboard.writeText($("#not").textContent); toast("Kopyalandı 📋"); } catch { toast("Kopyalanamadı"); } };
-$("#paylasNot").onclick = () => paylas($("#not").textContent);
-$("#kapat").onclick = () => $("#sheet").classList.remove("on");
-$("#sheet").onclick = e => { if (e.target.id === "sheet") $("#sheet").classList.remove("on"); };
-
-// --- Telefona yükleme ---
+/* ---------- telefona yükleme ---------- */
 let istem = null;
-const yuklu = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
-const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
-addEventListener("beforeinstallprompt", e => { e.preventDefault(); istem = e; if (!yuklu) $("#install").style.display = "block"; });
-if (ios && !yuklu) $("#install").style.display = "block";
-$("#install").onclick = async () => {
-  if (istem) { istem.prompt(); await istem.userChoice; istem = null; $("#install").style.display = "none"; }
-  else toast("Safari'de Paylaş ⬆️ → Ana Ekrana Ekle");
-};
+addEventListener("beforeinstallprompt", e => { e.preventDefault(); istem = e; });
+async function yukle() {
+  if (istem) { istem.prompt(); await istem.userChoice; istem = null; return; }
+  sheetAc(`<div class="shead"><h3>Ana ekrana ekle</h3><button class="iconbtn" data-act="kapat" aria-label="Kapat">${ic("close")}</button></div>
+    <div class="list"><div class="row"><b style="width:22px">1</b><div class="t"><b>Safari'de Paylaş düğmesine bas</b><small>Alttaki kare ve yukarı ok simgesi</small></div></div>
+    <div class="row"><b style="width:22px">2</b><div class="t"><b>"Ana Ekrana Ekle"yi seç</b><small>Listeyi biraz aşağı kaydırman gerekebilir</small></div></div>
+    <div class="row"><b style="width:22px">3</b><div class="t"><b>"Ekle"ye bas</b><small>Ne Alsam artık ana ekranında</small></div></div></div>`);
+}
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+
+git("home");
 </script>
 </body>
 </html>

@@ -10,8 +10,17 @@ istersen yanına koyacağın **kart notunu** da yazsın.
 - Kullanım sınırı: `api/_limit.js` (kişi başına günde 25 fikir isteği, 30 kart notu; dakikada en fazla 6)
 - `sw.js` + `manifest.json` + ikonlar: telefona "yüklenebilmesi" için
 
-Özellikler: kişiye özel fikirler, Google Alışveriş'te tek dokunuşla arama, beğenilen fikirleri kaydetme,
-listeyi WhatsApp vb. ile paylaşma, kart notu yazma. Form ve kayıtlar telefonun kendisinde saklanır.
+Özellikler:
+- **Ana sayfa:** yaklaşan özel günler (Anneler Günü, Yılbaşı, kişilerin doğum günleri…), hızlı başlangıç, bütçeye göre arama, son aramalar
+- **Hediye bul:** 7 adımlı soru akışı (kime, hakkında, vesile, bütçe, ilgi alanları, tarz/tür/acil, not)
+- **Sonuçlar:** türe göre filtre, fiyata göre sıralama, Trendyol / Hepsiburada / Amazon / Google bağlantıları,
+  kart notu yazma, paylaşma, "benzerleri"
+- **Kişilerim:** sevdiklerini doğum günü ve ilgi alanlarıyla kaydet; "Bunu aldım" dediğin hediyeler bir daha önerilmez
+- **Kaydettiklerim:** beğenilen fikirler kişiye göre gruplu
+- Açık ve koyu tema; veriler sadece telefonun kendisinde saklanır
+
+> Not: Yapay zekâ istekleri şimdilik Dolapta Ne Var projesinin `/api/hediye` ve `/api/kart` servislerine gider
+> (Gemini anahtarı orada). Bu projeye kendi anahtarı eklenirse `index.html` içindeki `API_ADRESI` boş yapılabilir.
 
 ---
 
